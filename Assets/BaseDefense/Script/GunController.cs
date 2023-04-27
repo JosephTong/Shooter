@@ -35,6 +35,8 @@ public class GunController : MonoBehaviour
 
     private void Start()
     {
+        this.transform.position = new Vector3(7,-4.5f,0) + m_FieldCenter;
+        m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
         m_FieldCenterToCornerDistance = Mathf.Sqrt(m_FieldSize.y / 2 * m_FieldSize.y / 2 + m_FieldSize.x / 2 * m_FieldSize.x / 2);
         m_MainCameraStartPos = m_MainCamera.transform.position;
         m_AimBtn.onDown.AddListener(() =>
@@ -60,13 +62,18 @@ public class GunController : MonoBehaviour
 
             CrossHairOutOfBoundPrevention();
 
+            // aim to camera effect
             m_AimDirection = (m_CrossHair.position - m_FieldCenter).normalized;
             m_AimDistanceNormalized = Vector3.Distance(m_CrossHair.position, m_FieldCenter) /
                 m_FieldCenterToCornerDistance;
 
+            // aim to weapon effect
             m_MainCamera.transform.position = m_MainCameraStartPos + m_AimDirection * m_AimDistanceNormalized;
+            float gunScaleX = 0.1f * ((m_CrossHair.position.x - m_FieldCenter.x) / (m_FieldSize.x / 2));
+            m_GunModel.localScale = new Vector3(1 - gunScaleX, 1, 1);
 
-           // m_GunModel.localScale = new Vector3(1 - m_AimDirection.x *0.25f, 1, 1);
+            float gunRotationZ = -8 * (m_CrossHair.position.y - m_FieldCenter.y) / (m_FieldSize.y / 2);
+            m_GunModel.localEulerAngles = new Vector3(0, 0, gunRotationZ);
         }
     }
 

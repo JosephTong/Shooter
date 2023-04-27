@@ -795,13 +795,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238169342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7, y: -4.5, z: -0}
+  m_LocalPosition: {x: 7, y: -4.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 770695002}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1238169345
 MonoBehaviour:
@@ -818,8 +818,8 @@ MonoBehaviour:
   m_AimSensitivity: 0.5
   m_AimBtn: {fileID: 2001144654}
   m_CrossHair: {fileID: 472815224}
-  m_FieldSize: {x: 25, y: 12}
-  m_FieldCenter: {x: 0, y: 0, z: 0}
+  m_FieldSize: {x: 28, y: 13}
+  m_FieldCenter: {x: 0, y: 2, z: 0}
   m_MainCamera: {fileID: 822869636}
   m_GunModel: {fileID: 770695002}
 --- !u!1 &1372741081
@@ -1028,7 +1028,7 @@ RectTransform:
   - {fileID: 2001144653}
   - {fileID: 61383346}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1211,7 +1211,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1984709455
 GameObject:

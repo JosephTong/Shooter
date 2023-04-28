@@ -14,10 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: AK69
   Damage: 3
-  ClipSize: 15
+  ClipSize: 999
   IsSemiAuto: 1
-  FireRate: 5
+  FireRate: 7
   Accuracy: 100
   Recoil: 50
   Stability: 0
-  Handling: 59.7
+  Handling: 24.6
+  Phases:
+  - m_DragFunction:
+    - StartDragPosition: {x: 0, y: 0}
+      EndDragPosition: {x: 0, y: 0}
+      DragCursorSprite: {fileID: 0}
+      DragCursorSize: {x: 0, y: 0}
+      Result: 0
+    m_TapFunction:
+    - TapPosition: {x: 0, y: 0}
+      Result: 0
+    m_ExtraImages: []
+    m_MainGunSprite: {fileID: 0}
+  MainGunSize: {x: 0, y: 0}

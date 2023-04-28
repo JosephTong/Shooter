@@ -16,7 +16,7 @@ MonoBehaviour:
   Damage: 3
   ClipSize: 15
   IsSemiAuto: 1
-  FireRate: 1
+  FireRate: 5
   Accuracy: 100
   Recoil: 50
   Stability: 0

@@ -44,16 +44,20 @@ public class GunController : MonoBehaviour
     private float m_CurrentAmmo;
 
     [Header("Shooting")]
-    [SerializeField] private Button m_ShootBtn;
+    [SerializeField] private Button2D m_ShootBtn;
+    private float m_CurrentShootCoolDown = 0; // must be 0 or less to shoot 
+    private Coroutine m_SemiAutoShootCoroutine = null;
 
 
 
     private void Start()
     {
+        m_SemiAutoShootCoroutine = null;
         this.transform.position = new Vector3(7, -4.5f, 0) + m_FieldCenter;
         m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
         m_FieldCenterToCornerDistance = Mathf.Sqrt(m_FieldSize.y / 2 * m_FieldSize.y / 2 + m_FieldSize.x / 2 * m_FieldSize.x / 2);
         m_MainCameraStartPos = m_MainCamera.transform.position;
+
         m_AimBtn.onDown.AddListener(() =>
         {
             m_MousePreviousPos = Input.mousePosition;
@@ -65,25 +69,45 @@ public class GunController : MonoBehaviour
             m_AimDragMouseStartPos = Vector2.zero;
             m_MousePreviousPos = Vector3.zero;
         });
-        
+
         m_AimBtn.onExit.AddListener(() =>
         {
             m_AimDragMouseStartPos = Vector2.zero;
             m_MousePreviousPos = Vector3.zero;
         });
 
-        m_ShootBtn.onClick.AddListener(()=>{
-            OnClickShoot();
+        m_ShootBtn.onDown.AddListener(() =>
+        {
+            m_SemiAutoShootCoroutine = null;
+            if( m_SemiAutoShootCoroutine == null && m_SelectedGun.IsSemiAuto){
+                m_SemiAutoShootCoroutine = StartCoroutine( SemiAutoShoot() );
+                return;
+            }
+            Shoot();
+        });
+        m_ShootBtn.onUp.AddListener(() =>
+        {
+            if(m_SemiAutoShootCoroutine!= null){
+                StopCoroutine(m_SemiAutoShootCoroutine);
+                m_SemiAutoShootCoroutine = null;
+            }
         });
 
-        m_CurrentAmmo = m_SelectedGun.ClipSize;
-        SetAmmoText();
+        m_ShootBtn.onExit.AddListener(() =>
+        {
+            if(m_SemiAutoShootCoroutine!= null){
+                StopCoroutine(m_SemiAutoShootCoroutine);
+                m_SemiAutoShootCoroutine = null;
+            }
+        });
+
+        ChangeAmmoCount(m_SelectedGun.ClipSize, true);
     }
 
 
     private void Update()
     {
-
+        m_CurrentShootCoolDown -= Time.deltaTime;
 
         if (m_AimDragMouseStartPos != Vector2.zero)
         {
@@ -93,13 +117,16 @@ public class GunController : MonoBehaviour
             m_CrossHair.position = m_CrossHairDragStartPos + offset;
 
             // acc lose for moving
-            float mouseMoveAmound = Vector3.Distance(m_MousePreviousPos, Input.mousePosition) /  
-                ( Mathf.Sqrt( Screen.height * Screen.height + Screen.width * Screen.width ) /2 ) * 1000 ;
+            float mouseMoveAmound = Vector3.Distance(m_MousePreviousPos, Input.mousePosition) /
+                (Mathf.Sqrt(Screen.height * Screen.height + Screen.width * Screen.width) / 2) * 1000;
 
-            if(mouseMoveAmound==0){
+            if (mouseMoveAmound == 0)
+            {
                 // draging but not moving , gain accruacy over time
                 AccruacyGainOvertime();
-            }else{
+            }
+            else
+            {
                 m_CurrentAccruacy -= Time.deltaTime * mouseMoveAmound * (200 - m_SelectedGun.Stability);
                 m_MousePreviousPos = Input.mousePosition;
             }
@@ -119,7 +146,9 @@ public class GunController : MonoBehaviour
 
             float gunRotationZ = -5 * (m_CrossHair.position.y - m_FieldCenter.y) / (m_FieldSize.y / 2);
             m_GunModel.localEulerAngles = new Vector3(0, 0, gunRotationZ);
-        }else{
+        }
+        else
+        {
             AccruacyGainOvertime();
         }
         if (m_CurrentAccruacy < 0)
@@ -128,17 +157,42 @@ public class GunController : MonoBehaviour
         m_CrossHair.localScale = new Vector3((200 - m_CurrentAccruacy) / 100, (200 - m_CurrentAccruacy) / 100, (200 - m_CurrentAccruacy) / 100);
     }
 
-
-    private void OnClickShoot(){
-        m_CurrentAmmo --;
-        SetAmmoText();
+    private IEnumerator SemiAutoShoot(){
+        while (m_CurrentAmmo>0)
+        {        
+            Shoot();
+            yield return null;
+        }
     }
 
-    private void SetAmmoText(){
-        m_AmmoText.text = $"{m_CurrentAmmo} / { m_SelectedGun.ClipSize }";
+
+    private void Shoot()
+    {
+        if (m_CurrentShootCoolDown > 0)
+            return;
+
+        m_CurrentAccruacy -= m_SelectedGun.Recoil ;
+
+        m_CurrentShootCoolDown = 1 / m_SelectedGun.FireRate;
+        ChangeAmmoCount(-1, false);
     }
 
-    private void AccruacyGainOvertime(){
+    private void ChangeAmmoCount(float num, bool isSetAmmoCount = false)
+    {
+        if (isSetAmmoCount)
+        {
+            m_CurrentAmmo = num;
+        }
+        else
+        {
+            m_CurrentAmmo += num;
+        }
+        m_AmmoText.text = $"{m_CurrentAmmo} / {m_SelectedGun.ClipSize}";
+    }
+
+
+    private void AccruacyGainOvertime()
+    {
         if (m_CurrentAccruacy < m_SelectedGun.Accuracy)
         {
             m_CurrentAccruacy += Time.deltaTime * m_SelectedGun.Handling;

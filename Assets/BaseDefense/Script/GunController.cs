@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ExtendedButtons;
+using TMPro;
 
 public class GunController : MonoBehaviour
 {
@@ -34,8 +36,16 @@ public class GunController : MonoBehaviour
 
 
     [Header("Accracy")]
-    [SerializeField] private float m_CurrentAccruacy = 0;
+    private float m_CurrentAccruacy = 0;
     private Vector3 m_MousePreviousPos = Vector3.zero;
+
+    [Header("Ammo")]
+    [SerializeField] private TextMeshProUGUI m_AmmoText;
+    private float m_CurrentAmmo;
+
+    [Header("Shooting")]
+    [SerializeField] private Button m_ShootBtn;
+
 
 
     private void Start()
@@ -61,6 +71,13 @@ public class GunController : MonoBehaviour
             m_AimDragMouseStartPos = Vector2.zero;
             m_MousePreviousPos = Vector3.zero;
         });
+
+        m_ShootBtn.onClick.AddListener(()=>{
+            OnClickShoot();
+        });
+
+        m_CurrentAmmo = m_SelectedGun.ClipSize;
+        SetAmmoText();
     }
 
 
@@ -107,7 +124,18 @@ public class GunController : MonoBehaviour
         }
         if (m_CurrentAccruacy < 0)
             m_CurrentAccruacy = 0;
-        m_CrossHair.localScale = new Vector3((100 - m_CurrentAccruacy) / 100, (100 - m_CurrentAccruacy) / 100, (100 - m_CurrentAccruacy) / 100);
+
+        m_CrossHair.localScale = new Vector3((200 - m_CurrentAccruacy) / 100, (200 - m_CurrentAccruacy) / 100, (200 - m_CurrentAccruacy) / 100);
+    }
+
+
+    private void OnClickShoot(){
+        m_CurrentAmmo --;
+        SetAmmoText();
+    }
+
+    private void SetAmmoText(){
+        m_AmmoText.text = $"{m_CurrentAmmo} / { m_SelectedGun.ClipSize }";
     }
 
     private void AccruacyGainOvertime(){

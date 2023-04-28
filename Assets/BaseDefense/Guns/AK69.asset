@@ -15,7 +15,9 @@ MonoBehaviour:
   DisplayName: AK69
   Damage: 3
   ClipSize: 15
-  Accuracy: 50
+  IsSemiAuto: 1
+  FireRate: 1
+  Accuracy: 100
   Recoil: 50
-  Stability: 50
-  Handling: 50
+  Stability: 0
+  Handling: 59.7

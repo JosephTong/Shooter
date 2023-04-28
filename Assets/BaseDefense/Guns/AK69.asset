@@ -27,10 +27,10 @@ MonoBehaviour:
       EndDragPosition: {x: 0, y: 0}
       DragCursorSprite: {fileID: 0}
       DragCursorSize: {x: 0, y: 0}
-      Result: 0
+      Result: -1
     m_TapFunction:
     - TapPosition: {x: 0, y: 0}
-      Result: 0
+      Result: -1
     m_ExtraImages: []
     m_MainGunSprite: {fileID: 0}
   MainGunSize: {x: 0, y: 0}

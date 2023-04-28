@@ -48,10 +48,11 @@ namespace GunReloadScriptableNameSpace
     [System.Flags]
     public enum GunReloadActionResult
     {   
-        Cancel = 0 ,
-        GainOneAmmo ,
-        FullAmmoReloaded ,
-        ToNextPhase 
+        None ,
+        CancelReload = 1 << 1 ,
+        GainOneAmmo = 1 << 2 ,
+        FullAmmoReload = 1 << 3 ,
+        ToNextPhase = 1 << 4  
 
     }
 }
@@ -71,7 +72,7 @@ public class GunScriptable : ScriptableObject
     [Header("Max accuracy , 100 = always hit center")]
     [Range (0,100)]public float Accuracy = 50; 
 
-    [Header("Accuracy lose on shoot ( 15 recoil = 15 accruacy lose per shot )")]
+    [Header("Accuracy lose on shoot")]
     [Range (0,100)]public float Recoil = 50; 
 
     [Header("Accuracy lose on moving , the higher the stability , the less accruacy lose while moving")]

@@ -27,6 +27,7 @@ public class GunReloadController : MonoBehaviour
     [SerializeField] private Transform m_GrayWhileDragPanel; // gray out while draging
     [SerializeField] private Transform m_NotGrayWhileDragPanel; // NOT gray out while draging , for EndDragPrefab in ReloadScriptable
     private RectTransform m_DragImage; // mouse while dragging
+    private bool m_IsDraging = false;
     private GameObject m_EndDragImage;
     private GameObject m_DragArrow;
     private Sprite m_MainGunOldSprite; // incase canel drag and need to reset main gun image
@@ -82,6 +83,15 @@ public class GunReloadController : MonoBehaviour
         }
 
         GunReloadPhase currentGunReloadPhase = m_ReloadScriptable.ReloadPhases[m_CurReloadPhase];
+        // spawn UI
+        for (int i = 0; i < currentGunReloadPhase.ExtraImages.Count; i++)
+        {
+            SpawnUIObjectForReloadPhaseConfig extraItemConfig = new SpawnUIObjectForReloadPhaseConfig{
+                Prefab = currentGunReloadPhase.ExtraImages[i].ImagePrefab,
+                Position = currentGunReloadPhase.ExtraImages[i].Position
+            };
+            SpawnUIObjectForReloadPhase( extraItemConfig );
+        }
         for (int i = 0; i < currentGunReloadPhase.DragFunction.Count; i++)
         {
             SpawnDragItems(currentGunReloadPhase.DragFunction[i]);  
@@ -92,15 +102,7 @@ public class GunReloadController : MonoBehaviour
             SpawnTapItem(currentGunReloadPhase.TapFunction[i]);
         }
 
-        for (int i = 0; i < currentGunReloadPhase.ExtraImages.Count; i++)
-        {
-            SpawnUIObjectForReloadPhaseConfig extraItemConfig = new SpawnUIObjectForReloadPhaseConfig{
-                Prefab = currentGunReloadPhase.ExtraImages[i].ImagePrefab,
-                Position = currentGunReloadPhase.ExtraImages[i].Position
-            };
-            SpawnUIObjectForReloadPhase( extraItemConfig );
-        }
-        m_MainGunOldSprite = null;
+        m_MainGunOldSprite = m_MainGunImage.sprite;
     }
 
     
@@ -147,12 +149,13 @@ public class GunReloadController : MonoBehaviour
     }
 
     private void OnEnterEndDrag(GunReloadDragFunction dragFunction){
+        m_IsDraging = false;
         m_MainGunImage.sprite = dragFunction.MainGunSpriteOnEnd;
         ResultAction( dragFunction.ResultAction );
     }
 
     private void OnUpStartDrag(GunReloadDragFunction dragFunction){
-        
+        m_IsDraging = false;
         // remove arrow
         if(m_DragArrow != null){
             Destroy(m_DragArrow);
@@ -173,22 +176,15 @@ public class GunReloadController : MonoBehaviour
 
         // reset main gun image
         m_MainGunImage.sprite = m_MainGunOldSprite;
-        m_MainGunOldSprite = null;
     }
 
     private void OnDownStartDrag(GunReloadDragFunction dragFunction){
 
         // do not do anything if already draging
-        if(m_DragImage != null)
+        if(m_IsDraging)
             return;
 
-        if(dragFunction.DragCursorPrefab == null){
-            Debug.Log("Missing drag image for mouse");
-            return;
-        }
-
-        // record old main gun image incase cancel drag
-        m_MainGunOldSprite = m_MainGunImage.sprite;
+        m_IsDraging = true;
 
         // remove arrow
         if(m_DragArrow != null){

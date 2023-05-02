@@ -1,5 +1,6 @@
 ﻿#region UNITY_EDITOR
 
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.UI;
 using UnityEngine;
@@ -31,4 +32,5 @@ namespace ExtendedButtons.Editor
         }
     }
 }
+#endif
 #endregion

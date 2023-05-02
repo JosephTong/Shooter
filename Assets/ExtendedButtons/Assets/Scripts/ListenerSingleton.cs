@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
-
+#if UNITY_EDITOR
 namespace ExtendedButtons
 {
 
@@ -25,3 +25,4 @@ namespace ExtendedButtons
         }
     }
 }
+#endif

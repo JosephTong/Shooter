@@ -20,17 +20,5 @@ MonoBehaviour:
   Accuracy: 100
   Recoil: 50
   Stability: 0
-  Handling: 24.6
-  Phases:
-  - m_DragFunction:
-    - StartDragPosition: {x: 0, y: 0}
-      EndDragPosition: {x: 0, y: 0}
-      DragCursorSprite: {fileID: 0}
-      DragCursorSize: {x: 0, y: 0}
-      Result: -1
-    m_TapFunction:
-    - TapPosition: {x: 0, y: 0}
-      Result: -1
-    m_ExtraImages: []
-    m_MainGunSprite: {fileID: 0}
-  MainGunSize: {x: 0, y: 0}
+  Handling: 100
+  ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}

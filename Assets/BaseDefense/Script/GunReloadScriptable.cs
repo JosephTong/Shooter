@@ -28,8 +28,8 @@ namespace GunReloadScriptableNameSpace
     [System.Serializable]
     public class GunReloadTapFunction
     {
-        public Vector2 TapPosition;
-        public GameObject TapPrefab;
+        public Vector2 Position;
+        public GameObject Prefab;
         public Sprite MainGunSpriteOnEnd;
         public GunReloadActionResult ResultAction;
 
@@ -46,9 +46,9 @@ namespace GunReloadScriptableNameSpace
     [System.Serializable]
     public class GunReloadPhase
     {
-        public List<GunReloadDragFunction> m_DragFunction = new List<GunReloadDragFunction>();
-        public List<GunReloadTapFunction> m_TapFunction = new List<GunReloadTapFunction>();
-        public List<GunReloadExtraImage> m_ExtraImages = new List<GunReloadExtraImage>();
+        public List<GunReloadDragFunction> DragFunction = new List<GunReloadDragFunction>();
+        public List<GunReloadTapFunction> TapFunction = new List<GunReloadTapFunction>();
+        public List<GunReloadExtraImage> ExtraImages = new List<GunReloadExtraImage>();
         
     }
 
@@ -62,6 +62,7 @@ namespace GunReloadScriptableNameSpace
         FullAmmoReload = 1 << 3 ,
         ToNextPhase = 1 << 4 ,
         RefreshThisPhase = 1 << 5 , // for shotgun
+        SetClipAmmoToZero = 1 << 6 ,
 
 
     }

@@ -9,14 +9,17 @@ namespace GunReloadScriptableNameSpace
     public class GunReloadDragFunction
     {
         [Header ("Start Drag")]
+        public AudioClip StartDragSound;
         public GameObject StartDragPrefab;
         public Vector2 StartDragPosition;
         public Sprite MainGunSpriteOnStart;
 
         [Header ("Draging")]
+        public AudioClip CancelDragSound;
         public GameObject DragCursorPrefab;
 
         [Header ("End Drag")]
+        public AudioClip EndDragSound;
         public GameObject EndDragPrefab;
         public Vector2 EndDragPosition;
         public Sprite MainGunSpriteOnEnd;
@@ -28,6 +31,7 @@ namespace GunReloadScriptableNameSpace
     [System.Serializable]
     public class GunReloadTapFunction
     {
+        public AudioClip TapEndSound;
         public Vector2 Position;
         public GameObject Prefab;
         public Sprite MainGunSpriteOnEnd;

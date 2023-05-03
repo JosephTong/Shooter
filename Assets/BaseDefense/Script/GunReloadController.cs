@@ -32,6 +32,7 @@ public class GunReloadController : MonoBehaviour
     private GunReloadControllerConfig m_Config=null; 
 
 
+    [SerializeField] private AudioSource m_AudioPlayer;
     [SerializeField] private Image m_MainGunImage;
     //[SerializeField] private GameObject m_Gray;
     [SerializeField] private GameObject m_ArrowPrefab;
@@ -61,6 +62,8 @@ public class GunReloadController : MonoBehaviour
             }
         }
     }
+
+
 
     public void InIt(GunReloadControllerConfig config){
         m_Config = config;
@@ -145,6 +148,7 @@ public class GunReloadController : MonoBehaviour
     }
 
     private void OnClickTap(GunReloadTapFunction tapFunction){
+        m_AudioPlayer.PlayOneShot(tapFunction.TapEndSound);
         m_MainGunImage.sprite = tapFunction.MainGunSpriteOnEnd;
         ResultAction(tapFunction.ResultAction);
     }
@@ -168,6 +172,7 @@ public class GunReloadController : MonoBehaviour
     }
 
     private void OnEnterEndDrag(GunReloadDragFunction dragFunction){
+        m_AudioPlayer.PlayOneShot(dragFunction.EndDragSound);
         m_IsDraging = false;
         //m_Gray.SetActive(m_IsDraging);
         m_MainGunImage.sprite = dragFunction.MainGunSpriteOnEnd;
@@ -175,6 +180,8 @@ public class GunReloadController : MonoBehaviour
     }
 
     private void OnUpStartDrag(GunReloadDragFunction dragFunction){
+
+        m_AudioPlayer.PlayOneShot(dragFunction.CancelDragSound);
         m_IsDraging = false;
         //m_Gray.SetActive(m_IsDraging);
         // remove arrow
@@ -205,6 +212,7 @@ public class GunReloadController : MonoBehaviour
         if(m_IsDraging)
             return;
 
+        m_AudioPlayer.PlayOneShot(dragFunction.StartDragSound);
         m_IsDraging = true;
         //m_Gray.SetActive(m_IsDraging);
 

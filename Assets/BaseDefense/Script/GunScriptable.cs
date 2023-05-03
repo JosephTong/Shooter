@@ -12,6 +12,10 @@ public class GunScriptable : ScriptableObject
     public float Damage;
     public AudioClip ShootSound;
     public float ClipSize;
+    [Header("How strong the shake")]
+    [Range (1,25)]public float CameraShakeStrength = 2;
+    [Header("How many time the camera bounce back and forth in one shake")]
+    [Range (1,100)]public float CameraShakeAmount = 10;
     [Header("True if holding down shoot btn will shoot continuously")]
     public bool IsSemiAuto = true;
 

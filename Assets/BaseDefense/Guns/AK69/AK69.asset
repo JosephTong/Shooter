@@ -16,6 +16,8 @@ MonoBehaviour:
   Damage: 1.5
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   ClipSize: 69
+  CameraShakeStrength: 5
+  CameraShakeAmount: 20
   IsSemiAuto: 1
   FireRate: 7
   Accuracy: 35.8

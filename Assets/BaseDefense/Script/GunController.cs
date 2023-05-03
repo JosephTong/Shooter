@@ -29,8 +29,6 @@ public class GunController : MonoBehaviour
 
     [Header("Aim effect for camera")]
     [SerializeField] private Camera m_MainCamera;
-    [SerializeField] private float m_CameraShakeMagnitude = 1;
-    [SerializeField] private float m_CameraShakeRoughness = 1;
     private Vector3 m_MainCameraStartPos;
     private Vector3 m_AimDirection = Vector3.zero;
     private float m_AimDistanceNormalized = 0;
@@ -215,7 +213,7 @@ public class GunController : MonoBehaviour
             return;
 
         // shake camera
-        CameraShaker.Instance.ShakeOnce(m_CameraShakeMagnitude,m_CameraShakeRoughness,0.1f,0.1f );
+        CameraShaker.Instance.ShakeOnce( m_SelectedGun.CameraShakeStrength , m_SelectedGun.CameraShakeAmount,0.1f,0.1f );
 
         m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.ShootSound);
         Vector3 accuracyOffset = new Vector3(

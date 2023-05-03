@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: AK69
   Damage: 3
-  ClipSize: 999
+  ClipSize: 69
   IsSemiAuto: 1
   FireRate: 7
   Accuracy: 100

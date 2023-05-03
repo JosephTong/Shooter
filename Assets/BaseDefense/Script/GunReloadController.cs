@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ExtendedButtons;
@@ -13,16 +14,26 @@ namespace GunReloadControllerNameSpase
         public GameObject Prefab;
         public Vector2 Position;
     }
+
+    public class GunReloadControllerConfig
+    {
+        public GunReloadScriptable ReloadScriptable;
+        public Action CancelReload;
+        public Action<int> GainAmmo;
+        public Action SetAmmoToFull;
+        public Action SetAmmoToZero;
+    }
 }
 
 public class GunReloadController : MonoBehaviour
 {
     [SerializeField] private GunReloadScriptable m_ReloadScriptable;
     [SerializeField] private bool m_IsPreview = false;
+    private GunReloadControllerConfig m_Config=null; 
 
 
     [SerializeField] private Image m_MainGunImage;
-    [SerializeField] private GameObject m_Gray;
+    //[SerializeField] private GameObject m_Gray;
     [SerializeField] private GameObject m_ArrowPrefab;
     [SerializeField] private Transform m_GrayWhileDragPanel; // gray out while draging
     [SerializeField] private Transform m_NotGrayWhileDragPanel; // NOT gray out while draging , for EndDragPrefab in ReloadScriptable
@@ -36,16 +47,24 @@ public class GunReloadController : MonoBehaviour
     private int m_CurReloadPhase = 0;
 
     private void Start() {
-        InIt();
+        if(m_IsPreview && m_ReloadScriptable != null)
+            InIt(new GunReloadControllerConfig{
+                ReloadScriptable = m_ReloadScriptable
+            });
     }
 
     private void Update() {
         if(m_DragImage != null){
             m_DragImage.position = Input.mousePosition;
+            if(Input.GetMouseButtonUp(0)){
+
+            }
         }
     }
 
-    public void InIt(){
+    public void InIt(GunReloadControllerConfig config){
+        m_Config = config;
+        m_ReloadScriptable = config.ReloadScriptable;
         m_CurReloadPhase = 0;
         m_MainGunImage.sprite = m_ReloadScriptable.StartMainGunImage;
         m_MainGunImage.rectTransform.sizeDelta = m_ReloadScriptable.MainGunSize;
@@ -144,18 +163,20 @@ public class GunReloadController : MonoBehaviour
         });
 
         startDragIcon.onUp.AddListener(()=>{
-            OnUpStartDrag(dragFunction);
+                OnUpStartDrag(dragFunction);
         });
     }
 
     private void OnEnterEndDrag(GunReloadDragFunction dragFunction){
         m_IsDraging = false;
+        //m_Gray.SetActive(m_IsDraging);
         m_MainGunImage.sprite = dragFunction.MainGunSpriteOnEnd;
         ResultAction( dragFunction.ResultAction );
     }
 
     private void OnUpStartDrag(GunReloadDragFunction dragFunction){
         m_IsDraging = false;
+        //m_Gray.SetActive(m_IsDraging);
         // remove arrow
         if(m_DragArrow != null){
             Destroy(m_DragArrow);
@@ -185,6 +206,7 @@ public class GunReloadController : MonoBehaviour
             return;
 
         m_IsDraging = true;
+        //m_Gray.SetActive(m_IsDraging);
 
         // remove arrow
         if(m_DragArrow != null){
@@ -250,7 +272,7 @@ public class GunReloadController : MonoBehaviour
                 Debug.Log("Cancel Reload");
             }else{
                 // cancel reload 
-
+                m_Config.CancelReload?.Invoke();
             }
         }
 
@@ -259,6 +281,7 @@ public class GunReloadController : MonoBehaviour
                 Debug.Log("Gain one ammo");
             }else{
                 // Gain one ammo 
+                m_Config.GainAmmo?.Invoke(1);
  
             }
         }
@@ -269,7 +292,8 @@ public class GunReloadController : MonoBehaviour
                 Debug.Log("Full Ammo Reload");
             }else{
                 // Full Ammo Reload
- 
+                m_Config.SetAmmoToFull?.Invoke();
+
             }
         }
 
@@ -284,7 +308,7 @@ public class GunReloadController : MonoBehaviour
                 Debug.Log("Set Clip Ammo To Zero");
             }else{
                 // Set Clip Ammo To Zero
- 
+                m_Config.SetAmmoToZero?.Invoke();
             }
 
         }

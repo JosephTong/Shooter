@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using ExtendedButtons;
 using TMPro;
+using GunReloadControllerNameSpase;
+using System.Linq;
 
 public class GunController : MonoBehaviour
 {
@@ -48,6 +50,11 @@ public class GunController : MonoBehaviour
     private float m_CurrentShootCoolDown = 0; // must be 0 or less to shoot 
     private Coroutine m_SemiAutoShootCoroutine = null;
 
+    [Header("Reload")]
+    [SerializeField] private Button m_ReloadBtn;
+    [SerializeField] private GunReloadController m_ReloadController;
+
+
 
 
     private void Start()
@@ -57,6 +64,18 @@ public class GunController : MonoBehaviour
         m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
         m_FieldCenterToCornerDistance = Mathf.Sqrt(m_FieldSize.y / 2 * m_FieldSize.y / 2 + m_FieldSize.x / 2 * m_FieldSize.x / 2);
         m_MainCameraStartPos = m_MainCamera.transform.position;
+
+        m_ReloadBtn.onClick.AddListener(()=>{
+            m_ReloadController.gameObject.SetActive(true);
+            GunReloadControllerConfig gunReloadConfig = new GunReloadControllerConfig{
+                ReloadScriptable = m_SelectedGun.ReloadScriptable,
+                GainAmmo = GainAmmo,
+                SetAmmoToFull = SetClipAmmoToFull,
+                SetAmmoToZero = SetClipAmmoToZero,
+                CancelReload = CancelReload
+            };
+            m_ReloadController.InIt(gunReloadConfig);
+        });
 
         m_AimBtn.onDown.AddListener(() =>
         {
@@ -157,6 +176,21 @@ public class GunController : MonoBehaviour
         m_CrossHair.localScale = new Vector3((200 - m_CurrentAccruacy) / 100, (200 - m_CurrentAccruacy) / 100, (200 - m_CurrentAccruacy) / 100);
     }
 
+    private void CancelReload(){
+        m_ReloadController.gameObject.SetActive(false);
+    }
+
+    private void GainAmmo(int changes){
+        ChangeAmmoCount(changes,false);
+    }
+
+    private void SetClipAmmoToZero(){
+        ChangeAmmoCount(0,true);
+    }
+
+    private void SetClipAmmoToFull(){
+        ChangeAmmoCount(m_SelectedGun.ClipSize,true);
+    }
     private IEnumerator SemiAutoShoot(){
         while (m_CurrentAmmo>0)
         {        
@@ -170,6 +204,29 @@ public class GunController : MonoBehaviour
     {
         if (m_CurrentShootCoolDown > 0)
             return;
+        
+        RaycastHit2D hit = Physics2D.Raycast(m_CrossHair.position, Vector2.zero);
+        if( hit )
+        {
+
+        }
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(m_CrossHair.position, Vector2.zero);
+        List<EnemyBodyPart> hitedEnemy = new List<EnemyBodyPart>();
+        for (int i = 0; i < hits.Length; i++)
+        {
+            hits[i].collider.TryGetComponent<EnemyBodyPart>(out var enemyBodyPart);         
+            if(enemyBodyPart != null){
+                hitedEnemy.Add(enemyBodyPart);
+                enemyBodyPart.OnHit(m_SelectedGun.Damage);
+                break;
+            }
+        }
+        if(hitedEnemy.Count>0){
+            var sortedEnemies = hitedEnemy.OrderBy(x => x.GetDistance()).ToList();
+            sortedEnemies[0].OnHit(m_SelectedGun.Damage);
+        }
+
 
         m_CurrentAccruacy -= m_SelectedGun.Recoil ;
 

@@ -231,7 +231,6 @@ MonoBehaviour:
   m_ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}
   m_IsPreview: 1
   m_MainGunImage: {fileID: 634703928}
-  m_Gray: {fileID: 1074394570}
   m_ArrowPrefab: {fileID: 5509025794714849235, guid: 612bbfcfa1b0c8d4381e9501a773d646, type: 3}
   m_GrayWhileDragPanel: {fileID: 553115515}
   m_NotGrayWhileDragPanel: {fileID: 791334839}
@@ -629,7 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.6862745}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

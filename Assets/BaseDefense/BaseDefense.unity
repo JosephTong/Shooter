@@ -1696,15 +1696,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71397377b591f7a498c1872640413657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SelectedGun: {fileID: 11400000, guid: 1cfa085abb5872848aaa28cea4af1ff1, type: 2}
+  m_SelectedGun: {fileID: 11400000, guid: 2d110c50545dab24eba04a0c199c2214, type: 2}
   m_AimSensitivity: 0.5
   m_AimBtn: {fileID: 2001144654}
   m_CrossHair: {fileID: 435163246}
   m_FieldSize: {x: 28, y: 13}
   m_FieldCenter: {x: 0, y: 2, z: 0}
   m_MainCamera: {fileID: 822869636}
-  m_CameraShakeMagnitude: 2
-  m_CameraShakeRoughness: 20
   m_GunModel: {fileID: 770695002}
   m_AmmoText: {fileID: 32751031}
   m_ShotPointPrefab: {fileID: 2777219341350663978, guid: d89ddb64ce56d6341ad8027477e45486, type: 3}
@@ -1724,7 +1722,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 0
   Mute: 0

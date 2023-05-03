@@ -6,6 +6,7 @@ using ExtendedButtons;
 using TMPro;
 using GunReloadControllerNameSpase;
 using System.Linq;
+using EZCameraShake;
 
 public class GunController : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class GunController : MonoBehaviour
 
     [Header("Aim effect for camera")]
     [SerializeField] private Camera m_MainCamera;
+    [SerializeField] private float m_CameraShakeMagnitude = 1;
+    [SerializeField] private float m_CameraShakeRoughness = 1;
     private Vector3 m_MainCameraStartPos;
     private Vector3 m_AimDirection = Vector3.zero;
     private float m_AimDistanceNormalized = 0;
@@ -210,7 +213,10 @@ public class GunController : MonoBehaviour
     {
         if (m_CurrentShootCoolDown > 0)
             return;
-        
+
+        // shake camera
+        CameraShaker.Instance.ShakeOnce(m_CameraShakeMagnitude,m_CameraShakeRoughness,0.1f,0.1f );
+
         m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.ShootSound);
         Vector3 accuracyOffset = new Vector3(
             Random.Range(-1f,1f) * ( 100 - m_CurrentAccruacy ) / 100 * 0.6f,

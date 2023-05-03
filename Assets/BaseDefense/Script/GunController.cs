@@ -46,6 +46,8 @@ public class GunController : MonoBehaviour
     private float m_CurrentAmmo;
 
     [Header("Shooting")]
+    [SerializeField] private GameObject m_ShotPointPrefab; // indicate where the shot land 
+    [SerializeField] private AudioSource m_ShootSoundPlayer;
     [SerializeField] private Button2D m_ShootBtn;
     private float m_CurrentShootCoolDown = 0; // must be 0 or less to shoot 
     private Coroutine m_SemiAutoShootCoroutine = null;
@@ -76,6 +78,10 @@ public class GunController : MonoBehaviour
             };
             m_ReloadController.InIt(gunReloadConfig);
         });
+
+
+
+
 
         m_AimBtn.onDown.AddListener(() =>
         {
@@ -205,13 +211,17 @@ public class GunController : MonoBehaviour
         if (m_CurrentShootCoolDown > 0)
             return;
         
-        RaycastHit2D hit = Physics2D.Raycast(m_CrossHair.position, Vector2.zero);
-        if( hit )
-        {
+        m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.ShootSound);
+        Vector3 accuracyOffset = new Vector3(
+            Random.Range(-1f,1f) * ( 100 - m_CurrentAccruacy ) / 100 * 0.6f,
+            Random.Range(-1f,1f) * ( 100 - m_CurrentAccruacy ) / 100 * 0.6f,
+            0
+        );
+        var shotPoint = Instantiate(m_ShotPointPrefab);
+        shotPoint.transform.position = m_CrossHair.position + accuracyOffset;
+        Destroy(shotPoint,1);
 
-        }
-
-        RaycastHit2D[] hits = Physics2D.RaycastAll(m_CrossHair.position, Vector2.zero);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(m_CrossHair.position + accuracyOffset, Vector2.zero);
         List<EnemyBodyPart> hitedEnemy = new List<EnemyBodyPart>();
         for (int i = 0; i < hits.Length; i++)
         {

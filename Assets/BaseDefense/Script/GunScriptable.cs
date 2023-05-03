@@ -10,6 +10,7 @@ public class GunScriptable : ScriptableObject
 {
     public string DisplayName;
     public float Damage;
+    public AudioClip ShootSound;
     public float ClipSize;
     [Header("True if holding down shoot btn will shoot continuously")]
     public bool IsSemiAuto = true;

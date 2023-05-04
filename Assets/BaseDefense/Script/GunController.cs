@@ -11,6 +11,7 @@ using EZCameraShake;
 public class GunController : MonoBehaviour
 {
     [SerializeField] private GunScriptable m_SelectedGun;
+    [SerializeField] private SpriteRenderer m_FPSImage;
 
     [Header("Drag to aim")]
     [SerializeField][Range(0.1f, 2)] private float m_AimSensitivity = 0.5f;
@@ -66,7 +67,7 @@ public class GunController : MonoBehaviour
     private void Start()
     {
         m_SemiAutoShootCoroutine = null;
-        this.transform.position = new Vector3(7, -4.5f, 0) + m_FieldCenter;
+        this.transform.position = new Vector3(8, -4.5f, 0) + m_FieldCenter;
         m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
         m_FieldCenterToCornerDistance = Mathf.Sqrt(m_FieldSize.y / 2 * m_FieldSize.y / 2 + m_FieldSize.x / 2 * m_FieldSize.x / 2);
         m_MainCameraStartPos = m_MainCamera.transform.position;
@@ -140,6 +141,7 @@ public class GunController : MonoBehaviour
         });
 
         ChangeAmmoCount(m_SelectedGun.ClipSize, true);
+        m_FPSImage.sprite = m_SelectedGun.FPSSprite;
     }
 
 
@@ -202,6 +204,7 @@ public class GunController : MonoBehaviour
 
         m_SemiAutoShootCoroutine = null;
         ChangeAmmoCount(m_SelectedGun.ClipSize, true);
+        m_FPSImage.sprite = m_SelectedGun.FPSSprite;
     }
 
     private void CancelReload(){

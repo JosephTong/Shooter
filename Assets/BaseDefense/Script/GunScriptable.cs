@@ -13,6 +13,7 @@ public class GunScriptable : ScriptableObject
     public int PelletPerShot = 1;
     public AudioClip ShootSound;
     public float ClipSize;
+    public Sprite FPSSprite;
     public AudioClip OutOfAmmoSound;
     [Header("How strong the shake")]
     [Range (1,25)]public float CameraShakeStrength = 2;

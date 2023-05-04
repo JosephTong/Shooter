@@ -7,7 +7,11 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float m_CurrentHp = 100;
     [SerializeField] private float m_MaxHp = 100;
-    [SerializeField] private Image m_HpBar;
+    [SerializeField] private Image m_HpBarFiller;
+    [SerializeField] private GameObject m_HpBarPrefab;
+    [SerializeField] private Transform m_HpBarPosition;
+    [SerializeField] private float m_HpBarStayTime = 2;
+    private float m_TotalHpBarStayTime = 0;
 
 
     [SerializeField][Range(1, 50)] private float m_MoveSpeed = 5;
@@ -72,8 +76,16 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    private void SpawnHpBar(Transform hpBarParent){
+        var hpBar = Instantiate(m_HpBarPrefab);
+        hpBar.transform.SetParent(hpBarParent);
+        m_TotalHpBarStayTime = m_HpBarStayTime ;
+        UpdateHpBar();
+    }
+
     private void UpdateHpBar(){
-        m_HpBar.fillAmount = m_CurrentHp / m_MaxHp;
+        //var canvasPos = Camera.main.WorldToScreenPoint(m_HpBarPosition.position);
+        m_HpBarFiller.fillAmount = m_CurrentHp / m_MaxHp;
     }
 
     public float GetDistance(){

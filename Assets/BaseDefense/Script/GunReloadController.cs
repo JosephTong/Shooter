@@ -2,29 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ExtendedButtons;
-using GunReloadControllerNameSpase;
 using GunReloadScriptableNameSpace;
+using BaseDefenseNameSpace;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GunReloadControllerNameSpase
-{
-    public class SpawnUIObjectForReloadPhaseConfig
-    {
-        public GameObject Prefab;
-        public Vector2 Position;
-    }
-
-    public class GunReloadControllerConfig
-    {
-        public GunReloadScriptable ReloadScriptable;
-        public Action CancelReload;
-        public Action<int> GainAmmo;
-        public Action SetAmmoToFull;
-        public Action SetAmmoToZero;
-        public Func<bool> IsFullClipAmmo;
-    }
-}
 
 public class GunReloadController : MonoBehaviour
 {
@@ -56,11 +38,10 @@ public class GunReloadController : MonoBehaviour
     }
 
     private void Update() {
+
+        // set drag image position same as mouse position 
         if(m_DragImage != null){
             m_DragImage.position = Input.mousePosition;
-            if(Input.GetMouseButtonUp(0)){
-
-            }
         }
     }
 

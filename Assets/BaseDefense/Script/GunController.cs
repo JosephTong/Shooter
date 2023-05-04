@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using ExtendedButtons;
 using TMPro;
-using GunReloadControllerNameSpase;
 using System.Linq;
 using EZCameraShake;
+using BaseDefenseNameSpace;
 
 public class GunController : MonoBehaviour
 {
@@ -154,6 +154,7 @@ public class GunController : MonoBehaviour
     {
         m_CurrentShootCoolDown -= Time.deltaTime;
 
+        // aim
         if (m_AimDragMouseStartPos != Vector2.zero)
         {
             m_AimDragMouseEndPos = Input.mousePosition;

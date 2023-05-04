@@ -174,7 +174,7 @@ public class GunController : MonoBehaviour
             }
             else
             {
-                m_CurrentAccruacy -= Time.deltaTime * mouseMoveAmound * (200 - m_SelectedGun.Stability);
+                m_CurrentAccruacy -= Time.deltaTime * mouseMoveAmound * (100 - m_SelectedGun.Stability);
                 m_MousePreviousPos = Input.mousePosition;
             }
 
@@ -286,7 +286,7 @@ public class GunController : MonoBehaviour
         
 
 
-        m_CurrentAccruacy -= m_SelectedGun.Recoil ;
+        m_CurrentAccruacy -= (100 - m_SelectedGun.RecoilControl );
 
         m_CurrentShootCoolDown = 1 / m_SelectedGun.FireRate;
         ChangeAmmoCount(-1, false);

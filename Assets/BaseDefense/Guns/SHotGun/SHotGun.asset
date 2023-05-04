@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SHotGun
   m_EditorClassIdentifier: 
   DisplayName: SHotGun
-  Damage: 2
-  PelletPerShot: 10
+  Damage: 1.5
+  PelletPerShot: 20
   ShootSound: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
   ClipSize: 8
   FPSSprite: {fileID: 21300000, guid: f843a4210af71fb4893d2e4394325a28, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
   IsSemiAuto: 0
   FireRate: 2.5
   Accuracy: 50
-  Recoil: 100
+  RecoilControl: 50
   Stability: 100
   Handling: 50
   ReloadScriptable: {fileID: 11400000, guid: 13b778b1d24a02048bc58b1731fc2d57, type: 2}

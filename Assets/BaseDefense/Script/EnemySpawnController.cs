@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnSystem : MonoBehaviour
+public class EnemySpawnController : MonoBehaviour
 {
     [SerializeField] private GameObject m_EnemyPrefab;
     [SerializeField] private Transform m_EnemyParent;

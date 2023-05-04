@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AK69
   m_EditorClassIdentifier: 
   DisplayName: AK69
-  Damage: 2
+  Damage: 3
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   ClipSize: 69
@@ -22,9 +22,9 @@ MonoBehaviour:
   CameraShakeStrength: 5
   CameraShakeAmount: 20
   IsSemiAuto: 1
-  FireRate: 7
-  Accuracy: 60
+  FireRate: 15
+  Accuracy: 25
   RecoilControl: 50
   Stability: 0
-  Handling: 44.2
+  Handling: 25
   ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}

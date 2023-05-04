@@ -62,7 +62,6 @@ public class GunController : MonoBehaviour
 
     [Header("Reload")]
     [SerializeField] private Button m_ReloadBtn;
-    [SerializeField] private GunReloadController m_ReloadController;
 
 
 
@@ -82,7 +81,6 @@ public class GunController : MonoBehaviour
         m_ReloadBtn.onClick.AddListener(()=>{
             if(IsFullClipAmmo())
                 return;
-            m_ReloadController.gameObject.SetActive(true);
             GunReloadControllerConfig gunReloadConfig = new GunReloadControllerConfig{
                 ReloadScriptable = m_SelectedGun.ReloadScriptable,
                 GainAmmo = GainAmmo,
@@ -91,7 +89,7 @@ public class GunController : MonoBehaviour
                 CancelReload = CancelReload,
                 IsFullClipAmmo = IsFullClipAmmo,
             };
-            m_ReloadController.InIt(gunReloadConfig);
+            BaseDefenseManager.GetInstance().StartReload(gunReloadConfig);
         });
 
 
@@ -217,7 +215,7 @@ public class GunController : MonoBehaviour
     }
 
     private void CancelReload(){
-        m_ReloadController.gameObject.SetActive(false);
+        BaseDefenseManager.GetInstance().CloseReloadPanel();
     }
 
     private void GainAmmo(int changes){

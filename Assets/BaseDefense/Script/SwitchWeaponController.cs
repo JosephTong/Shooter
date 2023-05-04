@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using ExtendedButtons;
 using UnityEngine;
-using UnityEngine.UI;
 using EZCameraShake;
 public class SwitchWeaponController : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class SwitchWeaponController : MonoBehaviour
     [SerializeField] private Transform m_CameraParent;
     [SerializeField] private CameraShaker m_CameraShaker;
     [SerializeField] private GameObject m_ShootPanel;
-    [SerializeField] private GunController m_GunController;
+    //[SerializeField] private GunController m_GunController;
     private float TimePassAfterlookDown = 0; // temporatory solution to accidently select shotgun when look down 
 
     private void Start() {
@@ -34,7 +33,7 @@ public class SwitchWeaponController : MonoBehaviour
     }    
     
     private void Update() {
-        if(Input.GetMouseButtonDown(0) && !m_ShootPanel.activeSelf && TimePassAfterlookDown>0.5f){
+        if(Input.GetMouseButtonDown(0) && !m_ShootPanel.activeSelf && TimePassAfterlookDown>0.1f){
             
             RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             for (int i = 0; i < hits.Length; i++)
@@ -51,6 +50,6 @@ public class SwitchWeaponController : MonoBehaviour
     }
 
     private void SwitchWeapon(GunScriptable gun){
-        m_GunController.SetSelectedGun(gun);
+        BaseDefenseManager.GetInstance().SwitchSelectedWeapon(gun);
     }
 }

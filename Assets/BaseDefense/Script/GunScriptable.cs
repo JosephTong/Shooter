@@ -10,8 +10,10 @@ public class GunScriptable : ScriptableObject
 {
     public string DisplayName;
     public float Damage;
+    public int PelletPerShot = 1;
     public AudioClip ShootSound;
     public float ClipSize;
+    public AudioClip OutOfAmmoSound;
     [Header("How strong the shake")]
     [Range (1,25)]public float CameraShakeStrength = 2;
     [Header("How many time the camera bounce back and forth in one shake")]
@@ -32,7 +34,7 @@ public class GunScriptable : ScriptableObject
     [Range (0,100)]public float Stability = 50;  
     
     [Header("Acuracy gain overtime")]
-    [Range (0,100)]public float Handling = 50; 
+    [Range (0.1f,100)]public float Handling = 50; 
 
 
     

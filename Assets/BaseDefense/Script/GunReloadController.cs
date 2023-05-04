@@ -22,6 +22,7 @@ namespace GunReloadControllerNameSpase
         public Action<int> GainAmmo;
         public Action SetAmmoToFull;
         public Action SetAmmoToZero;
+        public Func<bool> IsFullClipAmmo;
     }
 }
 
@@ -290,7 +291,13 @@ public class GunReloadController : MonoBehaviour
             }else{
                 // Gain one ammo 
                 m_Config.GainAmmo?.Invoke(1);
- 
+
+                // to next phase if ammo is full
+                if(m_Config.IsFullClipAmmo() && actionEnum != (actionEnum | GunReloadActionResult.CancelReload)
+                    && actionEnum != ( actionEnum | GunReloadActionResult.ToNextPhase )){
+                    actionEnum &= ~ GunReloadActionResult.RefreshThisPhase;
+                    ResultAction(GunReloadActionResult.ToNextPhase);
+                }
             }
         }
 

@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DisplayName: AK69
   Damage: 1.5
+  PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   ClipSize: 69
+  OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   CameraShakeStrength: 5
   CameraShakeAmount: 20
   IsSemiAuto: 1

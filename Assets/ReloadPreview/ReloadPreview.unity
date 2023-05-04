@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca89ebcb5c9d79429f616f057a5c397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ReloadScriptable: {fileID: 11400000, guid: 6aeec434a9a04114cbb6796231172f18, type: 2}
+  m_ReloadScriptable: {fileID: 11400000, guid: 13b778b1d24a02048bc58b1731fc2d57, type: 2}
   m_IsPreview: 1
   m_AudioPlayer: {fileID: 336182047}
   m_MainGunImage: {fileID: 634703928}
@@ -273,7 +273,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

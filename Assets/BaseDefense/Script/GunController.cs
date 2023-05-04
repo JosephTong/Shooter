@@ -14,6 +14,9 @@ public class GunController : MonoBehaviour
 
     [Header("Drag to aim")]
     [SerializeField][Range(0.1f, 2)] private float m_AimSensitivity = 0.5f;
+    [SerializeField][Range(1.1f, 5)] private float m_CrossHairMaxSize = 4f;
+    [SerializeField][Range(0.1f, 1f)] private float m_CrossHairMinSize = 0.5f;
+    [SerializeField][Range(0.1f, 5)] private float m_CrossHairRadius = 0.5f;
     [SerializeField] private Button2D m_AimBtn;
     [SerializeField] private Transform m_CrossHair;
     private Vector2 m_AimDragMouseStartPos = Vector2.zero;
@@ -69,13 +72,16 @@ public class GunController : MonoBehaviour
         m_MainCameraStartPos = m_MainCamera.transform.position;
 
         m_ReloadBtn.onClick.AddListener(()=>{
+            if(IsFullClipAmmo())
+                return;
             m_ReloadController.gameObject.SetActive(true);
             GunReloadControllerConfig gunReloadConfig = new GunReloadControllerConfig{
                 ReloadScriptable = m_SelectedGun.ReloadScriptable,
                 GainAmmo = GainAmmo,
                 SetAmmoToFull = SetClipAmmoToFull,
                 SetAmmoToZero = SetClipAmmoToZero,
-                CancelReload = CancelReload
+                CancelReload = CancelReload,
+                IsFullClipAmmo = IsFullClipAmmo,
             };
             m_ReloadController.InIt(gunReloadConfig);
         });
@@ -104,12 +110,18 @@ public class GunController : MonoBehaviour
 
         m_ShootBtn.onDown.AddListener(() =>
         {
-            m_SemiAutoShootCoroutine = null;
-            if( m_SemiAutoShootCoroutine == null && m_SelectedGun.IsSemiAuto){
-                m_SemiAutoShootCoroutine = StartCoroutine( SemiAutoShoot() );
-                return;
+            
+            if(m_CurrentAmmo<=0){
+                m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
+            }else{
+                m_SemiAutoShootCoroutine = null;
+                if( m_SemiAutoShootCoroutine == null && m_SelectedGun.IsSemiAuto){
+                    m_SemiAutoShootCoroutine = StartCoroutine( SemiAutoShoot() );
+                    return;
+                }
+                Shoot();
             }
-            Shoot();
+                
         });
         m_ShootBtn.onUp.AddListener(() =>
         {
@@ -180,7 +192,16 @@ public class GunController : MonoBehaviour
         if (m_CurrentAccruacy < 0)
             m_CurrentAccruacy = 0;
 
-        m_CrossHair.localScale = new Vector3((200 - m_CurrentAccruacy) / 100, (200 - m_CurrentAccruacy) / 100, (200 - m_CurrentAccruacy) / 100);
+        float targetCrossHairScale = Mathf.InverseLerp(100,0,m_CurrentAccruacy);
+        targetCrossHairScale = Mathf.Lerp(m_CrossHairMinSize,m_CrossHairMaxSize,targetCrossHairScale);
+        m_CrossHair.localScale = Vector3.one * targetCrossHairScale;
+    }
+
+    public void SetSelectedGun(GunScriptable gun){
+        m_SelectedGun = gun;
+
+        m_SemiAutoShootCoroutine = null;
+        ChangeAmmoCount(m_SelectedGun.ClipSize, true);
     }
 
     private void CancelReload(){
@@ -189,6 +210,10 @@ public class GunController : MonoBehaviour
 
     private void GainAmmo(int changes){
         ChangeAmmoCount(changes,false);
+    }
+
+    private bool IsFullClipAmmo(){
+        return m_CurrentAmmo >= m_SelectedGun.ClipSize;
     }
 
     private void SetClipAmmoToZero(){
@@ -216,30 +241,37 @@ public class GunController : MonoBehaviour
         CameraShaker.Instance.ShakeOnce( m_SelectedGun.CameraShakeStrength , m_SelectedGun.CameraShakeAmount,0.1f,0.1f );
 
         m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.ShootSound);
-        Vector3 accuracyOffset = new Vector3(
-            Random.Range(-1f,1f) * ( 100 - m_CurrentAccruacy ) / 100 * 0.6f,
-            Random.Range(-1f,1f) * ( 100 - m_CurrentAccruacy ) / 100 * 0.6f,
-            0
-        );
-        var shotPoint = Instantiate(m_ShotPointPrefab);
-        shotPoint.transform.position = m_CrossHair.position + accuracyOffset;
-        Destroy(shotPoint,1);
 
-        RaycastHit2D[] hits = Physics2D.RaycastAll(m_CrossHair.position + accuracyOffset, Vector2.zero);
-        List<EnemyBodyPart> hitedEnemy = new List<EnemyBodyPart>();
-        for (int i = 0; i < hits.Length; i++)
-        {
-            hits[i].collider.TryGetComponent<EnemyBodyPart>(out var enemyBodyPart);         
-            if(enemyBodyPart != null){
-                hitedEnemy.Add(enemyBodyPart);
-                enemyBodyPart.OnHit(m_SelectedGun.Damage);
-                break;
+
+
+        float targetCrossHairScale = Mathf.InverseLerp(100,0,m_CurrentAccruacy);
+        float targetRadiusScale = Mathf.Lerp(0,m_CrossHairMaxSize-m_CrossHairMinSize,targetCrossHairScale);
+        for (int j = 0; j < m_SelectedGun.PelletPerShot; j++)
+        {        
+            Vector3 accuracyOffset = new Vector3( 
+                Random.Range(-1f,1f) * targetRadiusScale * m_CrossHairRadius ,
+                Random.Range(-1f,1f) * targetRadiusScale * m_CrossHairRadius ,
+                0
+            );
+            var shotPoint = Instantiate(m_ShotPointPrefab);
+            shotPoint.transform.position = m_CrossHair.position + accuracyOffset;
+            Destroy(shotPoint,1);
+
+            RaycastHit2D[] hits = Physics2D.RaycastAll(m_CrossHair.position + accuracyOffset, Vector2.zero);
+            List<EnemyBodyPart> hitedEnemy = new List<EnemyBodyPart>();
+            for (int i = 0; i < hits.Length; i++)
+            {
+                hits[i].collider.TryGetComponent<EnemyBodyPart>(out var enemyBodyPart);         
+                if(enemyBodyPart != null){
+                    hitedEnemy.Add(enemyBodyPart);
+                }
+            }
+            if(hitedEnemy.Count>0){
+                var sortedEnemies = hitedEnemy.OrderBy(x => x.GetDistance()).ToList();
+                sortedEnemies[0].OnHit(m_SelectedGun.Damage);
             }
         }
-        if(hitedEnemy.Count>0){
-            var sortedEnemies = hitedEnemy.OrderBy(x => x.GetDistance()).ToList();
-            sortedEnemies[0].OnHit(m_SelectedGun.Damage);
-        }
+        
 
 
         m_CurrentAccruacy -= m_SelectedGun.Recoil ;
@@ -258,6 +290,10 @@ public class GunController : MonoBehaviour
         {
             m_CurrentAmmo += num;
         }
+        if(m_CurrentAmmo >m_SelectedGun.ClipSize){
+            m_CurrentAmmo =m_SelectedGun.ClipSize;
+        }
+
         m_AmmoText.text = $"{m_CurrentAmmo} / {m_SelectedGun.ClipSize}";
     }
 

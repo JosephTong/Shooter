@@ -1959,6 +1959,10 @@ MonoBehaviour:
   m_MainCamera: {fileID: 822869636}
   m_GunModel: {fileID: 770695002}
   m_AmmoText: {fileID: 32751031}
+  m_WeaponsToBeSwitch:
+  - {fileID: 933183127}
+  - {fileID: 1201579669}
+  - {fileID: 1819733538}
   m_ShotPointPrefab: {fileID: 2777219341350663978, guid: d89ddb64ce56d6341ad8027477e45486, type: 3}
   m_ShootSoundPlayer: {fileID: 1238169346}
   m_ShootBtn: {fileID: 61383350}

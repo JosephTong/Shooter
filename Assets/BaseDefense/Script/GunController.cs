@@ -13,6 +13,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private GunScriptable m_SelectedGun;
     [SerializeField] private SpriteRenderer m_FPSImage;
 
+
     [Header("Drag to aim")]
     [SerializeField][Range(0.1f, 2)] private float m_AimSensitivity = 0.5f;
     [SerializeField][Range(1.1f, 5)] private float m_CrossHairMaxSize = 4f;
@@ -48,7 +49,9 @@ public class GunController : MonoBehaviour
 
     [Header("Ammo")]
     [SerializeField] private TextMeshProUGUI m_AmmoText;
+    [SerializeField] private List<WeaponToBeSwitch> m_WeaponsToBeSwitch = new List<WeaponToBeSwitch>();
     private float m_CurrentAmmo;
+    private Dictionary<string,float> m_GunsClipAmmo = new Dictionary<string, float>(); // how many ammo left on gun when switching
 
     [Header("Shooting")]
     [SerializeField] private GameObject m_ShotPointPrefab; // indicate where the shot land 
@@ -71,6 +74,10 @@ public class GunController : MonoBehaviour
         m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
         m_FieldCenterToCornerDistance = Mathf.Sqrt(m_FieldSize.y / 2 * m_FieldSize.y / 2 + m_FieldSize.x / 2 * m_FieldSize.x / 2);
         m_MainCameraStartPos = m_MainCamera.transform.position;
+        foreach (var item in m_WeaponsToBeSwitch)
+        {
+            m_GunsClipAmmo.Add(item.m_Gun.DisplayName,item.m_Gun.ClipSize);
+        }
 
         m_ReloadBtn.onClick.AddListener(()=>{
             if(IsFullClipAmmo())
@@ -200,10 +207,12 @@ public class GunController : MonoBehaviour
     }
 
     public void SetSelectedGun(GunScriptable gun){
+        m_GunsClipAmmo[m_SelectedGun.DisplayName] = m_CurrentAmmo;
         m_SelectedGun = gun;
 
+        m_CurrentAccruacy = m_SelectedGun.Accuracy;
         m_SemiAutoShootCoroutine = null;
-        ChangeAmmoCount(m_SelectedGun.ClipSize, true);
+        ChangeAmmoCount(m_GunsClipAmmo[m_SelectedGun.DisplayName], true);
         m_FPSImage.sprite = m_SelectedGun.FPSSprite;
     }
 

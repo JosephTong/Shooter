@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using EZCameraShake;
 
 public class EnemyController : MonoBehaviour
 {
@@ -11,8 +12,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Transform m_HpBarWorldPosition;
     [SerializeField] private float m_HpBarStayTime = 2;
     private float m_TotalHpBarStayTime = 0;
-    private EnemyHpBar m_HpBar; // parent of hp bar
+    private HpBar m_HpBar; // parent of hp bar
 
+
+    [SerializeField] private float m_Damage = 350;
+    private float m_CurrentAttackDelay = 0;
+    private float m_AttackDelay = 1.5f;
 
     [SerializeField][Range(1, 50)] private float m_MoveSpeed = 5;
     [SerializeField][Range(0.1f, 10)] private float m_LeftRightSwayAmount = 3;
@@ -29,6 +34,7 @@ public class EnemyController : MonoBehaviour
     private void Start() {
         this.transform.localEulerAngles += Vector3.forward * m_LeftRightSwayAmount * Random.Range(-1f,1f);
         m_CurrentHp = m_MaxHp;
+        m_CurrentAttackDelay = m_AttackDelay;
         
     }
 
@@ -43,6 +49,11 @@ public class EnemyController : MonoBehaviour
         }
 
         if(m_CurrentDistance<=0){
+            m_CurrentAttackDelay -= Time.deltaTime;
+            if(m_CurrentAttackDelay <=0){
+                m_CurrentAttackDelay = m_AttackDelay;
+                BaseDefenseManager.GetInstance().OnWallHit(m_Damage);
+            }
             m_CurrentDistance = 0;
             this.transform.localScale = m_ScaleClosest * Vector3.one;
             this.transform.position = new Vector3(
@@ -86,7 +97,7 @@ public class EnemyController : MonoBehaviour
     private void SpawnHpBar(){
         var hpBar = Instantiate(m_HpBarPrefab);
         hpBar.transform.SetParent( BaseDefenseManager.GetInstance().EnemyHpBarParent );
-        m_HpBar = hpBar.GetComponent<EnemyHpBar>();
+        m_HpBar = hpBar.GetComponent<HpBar>();
         UpdateHpBar(true);
     }
 
@@ -97,9 +108,9 @@ public class EnemyController : MonoBehaviour
         m_HpBar.m_CanvasGroup.alpha = 1;
 
         m_HpBar.GetComponent<RectTransform>().localScale = Vector3.one * ( 0.25f + Mathf.InverseLerp(m_MaxDistance,0,m_CurrentDistance) * 0.75f );
-
-        var canvasPos = Camera.main.WorldToScreenPoint(m_HpBarWorldPosition.position);
-        m_HpBar.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(m_HpBarWorldPosition.position);
+        // lower the position according to distance
+        var canvasPos = Camera.main.WorldToScreenPoint(m_HpBarWorldPosition.position - Vector3.up * Mathf.InverseLerp(m_MaxDistance,0,m_CurrentDistance) * 0.6f);
+        m_HpBar.GetComponent<RectTransform>().position = canvasPos;
         m_HpBar.m_HpBarFiller.fillAmount = m_CurrentHp / m_MaxHp;
     }
 

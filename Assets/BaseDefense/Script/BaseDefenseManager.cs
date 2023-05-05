@@ -35,7 +35,12 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private Transform m_EnemyHpBarParent;
     public Transform EnemyHpBarParent { get { return m_EnemyHpBarParent; } }
 
-    public List<EnemyController> m_Enemies = new List<EnemyController>();
+    [Header("Wall")]
+    [SerializeField] private HpBar m_WallHpBar;
+    private float m_WallMaxHp = 8965;
+    private float m_WallCurrentHp = 8965;
+    private float m_TotalWallHpBarStayTime = 0;
+
 
     private void Awake() {
         if(m_Instance==null){
@@ -45,13 +50,33 @@ public class BaseDefenseManager : MonoBehaviour
         }
     }
 
+
     private void Start() {
 
         StartCoroutine(SpawnEnemy());
         m_QuitGameBtn.onClick.AddListener(()=>{
             Application.Quit();
         });
+        m_WallCurrentHp = m_WallMaxHp;
+        m_WallHpBar.m_HpBarFiller.fillAmount = m_WallCurrentHp / m_WallMaxHp;
     }
+    
+    private void FixedUpdate()
+    {
+        if(m_TotalWallHpBarStayTime>0){
+            m_TotalWallHpBarStayTime -= Time.deltaTime;
+        }else{
+            m_WallHpBar.m_CanvasGroup.alpha = 0;
+        }
+    }
+
+    public void OnWallHit(float damage){
+        m_WallHpBar.m_CanvasGroup.alpha = 1;
+        m_WallCurrentHp-=damage;
+        m_WallHpBar.m_HpBarFiller.fillAmount = m_WallCurrentHp / m_WallMaxHp;
+        m_TotalWallHpBarStayTime = 2;
+    }
+
 
 
     private IEnumerator SpawnEnemy(){

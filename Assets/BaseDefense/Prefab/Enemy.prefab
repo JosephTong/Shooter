@@ -52,6 +52,7 @@ MonoBehaviour:
   m_HpBarPrefab: {fileID: 8581663019046182776, guid: 255039f4d61f7bd49b39a64236034c41, type: 3}
   m_HpBarWorldPosition: {fileID: 1844650890913200985}
   m_HpBarStayTime: 2
+  m_Damage: 350
   m_MoveSpeed: 5
   m_LeftRightSwayAmount: 3
   m_LeftRightSwaySpeed: 5

@@ -6,8 +6,8 @@ using EZCameraShake;
 
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private WalkerEnemyScriptable m_WalkerScriptable;
     [Header("Hp")]
-    [SerializeField] private float m_MaxHp = 100;
     [SerializeField] private GameObject m_HpBarPrefab;
     [SerializeField] private Transform m_HpBarWorldPosition;
     [SerializeField] private float m_HpBarStayTime = 2;
@@ -16,12 +16,10 @@ public class EnemyController : MonoBehaviour
     private HpBar m_HpBar; // parent of hp bar
 
     [Header("Damage")]
-    [SerializeField] private float m_Damage = 350;
     private float m_CurrentAttackDelay = 0;
     private float m_AttackDelay = 1.5f;
 
     [Header("Movement")]
-    [SerializeField][Range(1, 50)] private float m_MoveSpeed = 5;
     [SerializeField] private float m_CurrentDistance = 100;
     [SerializeField] private float m_MaxDistance = 100;
     [SerializeField] private float m_YPosClosest = -9.5f;
@@ -30,7 +28,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float m_ScaleFarthest = 0.5f;
     [SerializeField] private AnimationCurve m_NormalizedMoveToScale;
 
-    
+    // TODO : 
     // left right sway , use animation instead of code in future
     [SerializeField][Range(0.1f, 10)] private float m_LeftRightSwayAmount = 3;
     [SerializeField][Range(1, 50)] private float m_LeftRightSwaySpeed = 5;
@@ -38,7 +36,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start() {
         this.transform.localEulerAngles += Vector3.forward * m_LeftRightSwayAmount * Random.Range(-1f,1f);
-        m_CurrentHp = m_MaxHp;
+        m_CurrentHp = m_WalkerScriptable.MaxHp;
         m_CurrentAttackDelay = m_AttackDelay;
         
     }
@@ -59,7 +57,7 @@ public class EnemyController : MonoBehaviour
             m_CurrentAttackDelay -= Time.deltaTime;
             if(m_CurrentAttackDelay <=0){
                 m_CurrentAttackDelay = m_AttackDelay;
-                BaseDefenseManager.GetInstance().OnWallHit(m_Damage);
+                BaseDefenseManager.GetInstance().OnWallHit(m_WalkerScriptable.Damage);
             }
 
 
@@ -73,7 +71,7 @@ public class EnemyController : MonoBehaviour
 
         }else{
             // move
-            m_CurrentDistance -= m_MoveSpeed * Time.deltaTime;
+            m_CurrentDistance -= m_WalkerScriptable.MoveSpeed * Time.deltaTime;
 
             this.transform.localScale = Vector3.Lerp( m_ScaleClosest * Vector3.one , m_ScaleFarthest * Vector3.one , 
                 m_NormalizedMoveToScale.Evaluate( m_CurrentDistance / m_MaxDistance) );
@@ -83,6 +81,7 @@ public class EnemyController : MonoBehaviour
                 this.transform.position.z
             );
 
+            // TODO : 
             // left right sway , use animation instead of code in future
             if (m_IsRotationCloseWise)
             {
@@ -123,7 +122,7 @@ public class EnemyController : MonoBehaviour
         // lower the position according to distance
         var canvasPos = Camera.main.WorldToScreenPoint(m_HpBarWorldPosition.position - Vector3.up * Mathf.InverseLerp(m_MaxDistance,0,m_CurrentDistance) * 0.6f);
         m_HpBar.GetComponent<RectTransform>().position = canvasPos;
-        m_HpBar.m_HpBarFiller.fillAmount = m_CurrentHp / m_MaxHp;
+        m_HpBar.m_HpBarFiller.fillAmount = m_CurrentHp / m_WalkerScriptable.MaxHp;
     }
 
     public float GetDistance(){

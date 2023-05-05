@@ -39,8 +39,8 @@ public class BaseDefenseManager : MonoBehaviour
 
     [Header("Wall")]
     [SerializeField] private HpBar m_WallHpBar;
-    private float m_WallMaxHp = 8965;
-    private float m_WallCurrentHp = 8965;
+    private float m_WallMaxHp = 1000;
+    private float m_WallCurrentHp = 1000;
     private float m_TotalWallHpBarStayTime = 0;
 
 

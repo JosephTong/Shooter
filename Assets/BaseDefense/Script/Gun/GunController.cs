@@ -259,6 +259,9 @@ public class GunController : MonoBehaviour
         float targetRadiusScale = Mathf.Lerp(0,m_CrossHairMaxSize-m_CrossHairMinSize,targetCrossHairScale);
         for (int j = 0; j < m_SelectedGun.PelletPerShot; j++)
         {        
+
+            // random in a square
+            // TODO : change to in cricle in futurr
             Vector3 accuracyOffset = new Vector3( 
                 Random.Range(-1f,1f) * targetRadiusScale * m_CrossHairRadius ,
                 Random.Range(-1f,1f) * targetRadiusScale * m_CrossHairRadius ,

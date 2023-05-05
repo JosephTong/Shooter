@@ -32,7 +32,7 @@ public class EnemySpawnController : MonoBehaviour
     private void Update() {
         if(m_WaveCount>3){
             // player win
-            return;
+            //return;
         }
 
         if(m_VaildEnemies.Count<=0){
@@ -42,6 +42,7 @@ public class EnemySpawnController : MonoBehaviour
 
         m_TimePassed -= Time.deltaTime;
         if( m_TimePassed <=0 ){
+            Debug.Log($"Wave {m_WaveCount}");
             WaveHandler();
         }
     }

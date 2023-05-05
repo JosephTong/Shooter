@@ -33,6 +33,8 @@ public class SwitchWeaponController : MonoBehaviour
     }    
     
     private void Update() {
+
+        // select weapon
         if(Input.GetMouseButtonDown(0) && !m_ShootPanel.activeSelf && TimePassAfterlookDown>0.1f){
             
             RaycastHit2D[] hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);

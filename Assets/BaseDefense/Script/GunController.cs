@@ -162,7 +162,7 @@ public class GunController : MonoBehaviour
             Vector3 offset = m_AimSensitivity * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) / 15;
             m_CrossHair.position = m_CrossHairDragStartPos + offset;
 
-            // acc lose for moving
+            // accrucy lose for moving
             float mouseMoveAmound = Vector3.Distance(m_MousePreviousPos, Input.mousePosition) /
                 (Mathf.Sqrt(Screen.height * Screen.height + Screen.width * Screen.width) / 2) * 1000;
 

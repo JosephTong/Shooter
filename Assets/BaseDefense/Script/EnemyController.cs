@@ -6,22 +6,22 @@ using EZCameraShake;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private float m_CurrentHp = 100;
+    [Header("Hp")]
     [SerializeField] private float m_MaxHp = 100;
     [SerializeField] private GameObject m_HpBarPrefab;
     [SerializeField] private Transform m_HpBarWorldPosition;
     [SerializeField] private float m_HpBarStayTime = 2;
+    private float m_CurrentHp = 100;
     private float m_TotalHpBarStayTime = 0;
     private HpBar m_HpBar; // parent of hp bar
 
-
+    [Header("Damage")]
     [SerializeField] private float m_Damage = 350;
     private float m_CurrentAttackDelay = 0;
     private float m_AttackDelay = 1.5f;
 
+    [Header("Movement")]
     [SerializeField][Range(1, 50)] private float m_MoveSpeed = 5;
-    [SerializeField][Range(0.1f, 10)] private float m_LeftRightSwayAmount = 3;
-    [SerializeField][Range(1, 50)] private float m_LeftRightSwaySpeed = 5;
     [SerializeField] private float m_CurrentDistance = 100;
     [SerializeField] private float m_MaxDistance = 100;
     [SerializeField] private float m_YPosClosest = -9.5f;
@@ -29,6 +29,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float m_ScaleClosest = 5;
     [SerializeField] private float m_ScaleFarthest = 0.5f;
     [SerializeField] private AnimationCurve m_NormalizedMoveToScale;
+
+    
+    // left right sway , use animation instead of code in future
+    [SerializeField][Range(0.1f, 10)] private float m_LeftRightSwayAmount = 3;
+    [SerializeField][Range(1, 50)] private float m_LeftRightSwaySpeed = 5;
     private bool m_IsRotationCloseWise = true;
 
     private void Start() {
@@ -40,6 +45,7 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // hp bar stay visable
         if(m_TotalHpBarStayTime>0){
             m_TotalHpBarStayTime -= Time.deltaTime;
             UpdateHpBar(false);
@@ -49,11 +55,14 @@ public class EnemyController : MonoBehaviour
         }
 
         if(m_CurrentDistance<=0){
+            // attack wall
             m_CurrentAttackDelay -= Time.deltaTime;
             if(m_CurrentAttackDelay <=0){
                 m_CurrentAttackDelay = m_AttackDelay;
                 BaseDefenseManager.GetInstance().OnWallHit(m_Damage);
             }
+
+
             m_CurrentDistance = 0;
             this.transform.localScale = m_ScaleClosest * Vector3.one;
             this.transform.position = new Vector3(
@@ -61,7 +70,9 @@ public class EnemyController : MonoBehaviour
                 m_YPosClosest,
                 this.transform.position.z);
             this.transform.localEulerAngles = Vector3.zero;
+
         }else{
+            // move
             m_CurrentDistance -= m_MoveSpeed * Time.deltaTime;
 
             this.transform.localScale = Vector3.Lerp( m_ScaleClosest * Vector3.one , m_ScaleFarthest * Vector3.one , 
@@ -72,6 +83,7 @@ public class EnemyController : MonoBehaviour
                 this.transform.position.z
             );
 
+            // left right sway , use animation instead of code in future
             if (m_IsRotationCloseWise)
             {
                 this.transform.localEulerAngles += Vector3.forward * Time.deltaTime * m_LeftRightSwaySpeed;

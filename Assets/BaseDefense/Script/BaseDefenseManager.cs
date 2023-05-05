@@ -32,6 +32,8 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
     [SerializeField] private Button m_QuitGameBtn;
+
+    [Header("Enemy Hp Bars")]
     [SerializeField] private Transform m_EnemyHpBarParent;
     public Transform EnemyHpBarParent { get { return m_EnemyHpBarParent; } }
 
@@ -63,6 +65,7 @@ public class BaseDefenseManager : MonoBehaviour
     
     private void FixedUpdate()
     {
+        // wall hp bar stay time
         if(m_TotalWallHpBarStayTime>0){
             m_TotalWallHpBarStayTime -= Time.deltaTime;
         }else{

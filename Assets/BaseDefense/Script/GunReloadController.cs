@@ -13,18 +13,22 @@ public class GunReloadController : MonoBehaviour
     [SerializeField] private GunReloadScriptable m_ReloadScriptable;
     [SerializeField] private bool m_IsPreview = false;
     private GunReloadControllerConfig m_Config=null; 
-
-
     [SerializeField] private AudioSource m_AudioPlayer;
+
+    
     [SerializeField] private Image m_MainGunImage;
     //[SerializeField] private GameObject m_Gray;
+    [SerializeField] private Transform m_GrayWhileDragPanel; // gray out while draging // no use for now
+    [SerializeField] private Transform m_NotGrayWhileDragPanel; // NOT gray out while draging , for EndDragPrefab in ReloadScriptable // no use for now
+
+    [Header("Drag")]
     [SerializeField] private GameObject m_ArrowPrefab;
-    [SerializeField] private Transform m_GrayWhileDragPanel; // gray out while draging
-    [SerializeField] private Transform m_NotGrayWhileDragPanel; // NOT gray out while draging , for EndDragPrefab in ReloadScriptable
     private RectTransform m_DragImage; // mouse while dragging
     private bool m_IsDraging = false;
     private GameObject m_EndDragImage;
     private GameObject m_DragArrow;
+
+
     private Sprite m_MainGunOldSprite; // incase canel drag and need to reset main gun image
 
     private List<GameObject> m_AllSpawnedImage = new List<GameObject>();

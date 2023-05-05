@@ -2762,6 +2762,7 @@ MonoBehaviour:
   m_ReloadController: {fileID: 7275961}
   m_SwitchWeaponController: {fileID: 2097067216}
   m_QuitGameBtn: {fileID: 293644552}
+  m_EnemyHpBarParent: {fileID: 242040062}
   m_Enemies: []
 --- !u!1 &1794693717
 GameObject:

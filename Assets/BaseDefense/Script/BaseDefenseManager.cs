@@ -32,6 +32,8 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
     [SerializeField] private Button m_QuitGameBtn;
+    [SerializeField] private Transform m_EnemyHpBarParent;
+    public Transform EnemyHpBarParent { get { return m_EnemyHpBarParent; } }
 
     public List<EnemyController> m_Enemies = new List<EnemyController>();
 

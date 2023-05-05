@@ -7,11 +7,11 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float m_CurrentHp = 100;
     [SerializeField] private float m_MaxHp = 100;
-    [SerializeField] private Image m_HpBarFiller;
     [SerializeField] private GameObject m_HpBarPrefab;
-    [SerializeField] private Transform m_HpBarPosition;
+    [SerializeField] private Transform m_HpBarWorldPosition;
     [SerializeField] private float m_HpBarStayTime = 2;
     private float m_TotalHpBarStayTime = 0;
+    private EnemyHpBar m_HpBar; // parent of hp bar
 
 
     [SerializeField][Range(1, 50)] private float m_MoveSpeed = 5;
@@ -29,12 +29,19 @@ public class EnemyController : MonoBehaviour
     private void Start() {
         this.transform.localEulerAngles += Vector3.forward * m_LeftRightSwayAmount * Random.Range(-1f,1f);
         m_CurrentHp = m_MaxHp;
-        UpdateHpBar();
         
     }
 
     private void FixedUpdate()
     {
+        if(m_TotalHpBarStayTime>0){
+            m_TotalHpBarStayTime -= Time.deltaTime;
+            UpdateHpBar(false);
+        }else{
+            if(m_HpBar)
+                m_HpBar.m_CanvasGroup.alpha = 0;
+        }
+
         if(m_CurrentDistance<=0){
             m_CurrentDistance = 0;
             this.transform.localScale = m_ScaleClosest * Vector3.one;
@@ -76,16 +83,24 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    private void SpawnHpBar(Transform hpBarParent){
+    private void SpawnHpBar(){
         var hpBar = Instantiate(m_HpBarPrefab);
-        hpBar.transform.SetParent(hpBarParent);
-        m_TotalHpBarStayTime = m_HpBarStayTime ;
-        UpdateHpBar();
+        hpBar.transform.SetParent( BaseDefenseManager.GetInstance().EnemyHpBarParent );
+        m_HpBar = hpBar.GetComponent<EnemyHpBar>();
+        UpdateHpBar(true);
     }
 
-    private void UpdateHpBar(){
-        //var canvasPos = Camera.main.WorldToScreenPoint(m_HpBarPosition.position);
-        m_HpBarFiller.fillAmount = m_CurrentHp / m_MaxHp;
+    private void UpdateHpBar(bool shouldResetHpFadeOutTime){
+        if(shouldResetHpFadeOutTime)
+            m_TotalHpBarStayTime = m_HpBarStayTime ;
+        
+        m_HpBar.m_CanvasGroup.alpha = 1;
+
+        m_HpBar.GetComponent<RectTransform>().localScale = Vector3.one * ( 0.25f + Mathf.InverseLerp(m_MaxDistance,0,m_CurrentDistance) * 0.75f );
+
+        var canvasPos = Camera.main.WorldToScreenPoint(m_HpBarWorldPosition.position);
+        m_HpBar.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(m_HpBarWorldPosition.position);
+        m_HpBar.m_HpBarFiller.fillAmount = m_CurrentHp / m_MaxHp;
     }
 
     public float GetDistance(){
@@ -100,11 +115,18 @@ public class EnemyController : MonoBehaviour
             Destroy(this.gameObject);
             return;
         }
-        UpdateHpBar();
+
+        if(m_HpBar==null)
+        {
+            SpawnHpBar();   
+        }else{
+            UpdateHpBar(true);
+        }
     }
 
     private void OnDestroy()
     {
-
+        if(m_HpBar)
+            Destroy(m_HpBar.gameObject);
     }
 }

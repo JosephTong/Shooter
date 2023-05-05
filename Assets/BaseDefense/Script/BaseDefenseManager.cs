@@ -55,7 +55,7 @@ public class BaseDefenseManager : MonoBehaviour
 
     private void Start() {
 
-        StartCoroutine(SpawnEnemy());
+        //StartCoroutine(SpawnEnemy());
         m_QuitGameBtn.onClick.AddListener(()=>{
             Application.Quit();
         });
@@ -81,14 +81,14 @@ public class BaseDefenseManager : MonoBehaviour
     }
 
 
-
+/*
     private IEnumerator SpawnEnemy(){
         while (this.gameObject.activeSelf)
         {
             m_EnemySpawnController.SpawnEnemy();
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(10+ UnityEngine.Random.Range(-1f,1f) );
         }
-    }
+    }*/
 
     public static BaseDefenseManager GetInstance(){
         if(m_Instance==null){

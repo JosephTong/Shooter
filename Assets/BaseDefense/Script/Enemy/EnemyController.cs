@@ -6,7 +6,10 @@ using EZCameraShake;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private WalkerEnemyScriptable m_WalkerScriptable;
+    [SerializeField] private EnemyScriptable m_Scriptable;
+    [SerializeField] private Animator m_AnimatorForImage;
+    [SerializeField] private Animator m_AnimatorForHitBox;
+
     [Header("Hp")]
     [SerializeField] private GameObject m_HpBarPrefab;
     [SerializeField] private Transform m_HpBarWorldPosition;
@@ -36,8 +39,10 @@ public class EnemyController : MonoBehaviour
 
     private void Start() {
         this.transform.localEulerAngles += Vector3.forward * m_LeftRightSwayAmount * Random.Range(-1f,1f);
-        m_CurrentHp = m_WalkerScriptable.MaxHp;
+        m_CurrentHp = m_Scriptable.MaxHp;
         m_CurrentAttackDelay = m_AttackDelay;
+        m_AnimatorForImage.runtimeAnimatorController = m_Scriptable.AnimatorForImage;
+        m_AnimatorForHitBox.runtimeAnimatorController = m_Scriptable.AnimatorForHitBox;
         
     }
 
@@ -57,7 +62,7 @@ public class EnemyController : MonoBehaviour
             m_CurrentAttackDelay -= Time.deltaTime;
             if(m_CurrentAttackDelay <=0){
                 m_CurrentAttackDelay = m_AttackDelay;
-                BaseDefenseManager.GetInstance().OnWallHit(m_WalkerScriptable.Damage);
+                BaseDefenseManager.GetInstance().OnWallHit(m_Scriptable.Damage);
             }
 
 
@@ -71,7 +76,7 @@ public class EnemyController : MonoBehaviour
 
         }else{
             // move
-            m_CurrentDistance -= m_WalkerScriptable.MoveSpeed * Time.deltaTime;
+            m_CurrentDistance -= m_Scriptable.MoveSpeed * Time.deltaTime;
 
             this.transform.localScale = Vector3.Lerp( m_ScaleClosest * Vector3.one , m_ScaleFarthest * Vector3.one , 
                 m_NormalizedMoveToScale.Evaluate( m_CurrentDistance / m_MaxDistance) );
@@ -105,6 +110,10 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    public void SetScriptable(EnemyScriptable enemyScriptable){
+        m_Scriptable = enemyScriptable;
+    }
+
     private void SpawnHpBar(){
         var hpBar = Instantiate(m_HpBarPrefab);
         hpBar.transform.SetParent( BaseDefenseManager.GetInstance().EnemyHpBarParent );
@@ -122,7 +131,7 @@ public class EnemyController : MonoBehaviour
         // lower the position according to distance
         var canvasPos = Camera.main.WorldToScreenPoint(m_HpBarWorldPosition.position - Vector3.up * Mathf.InverseLerp(m_MaxDistance,0,m_CurrentDistance) * 0.6f);
         m_HpBar.GetComponent<RectTransform>().position = canvasPos;
-        m_HpBar.m_HpBarFiller.fillAmount = m_CurrentHp / m_WalkerScriptable.MaxHp;
+        m_HpBar.m_HpBarFiller.fillAmount = m_CurrentHp / m_Scriptable.MaxHp;
     }
 
     public float GetDistance(){

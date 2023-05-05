@@ -261,7 +261,7 @@ public class GunController : MonoBehaviour
         {        
 
             // random in a square
-            // TODO : change to in cricle in futurr
+            // TODO : change to in cricle in future
             Vector3 accuracyOffset = new Vector3( 
                 Random.Range(-1f,1f) * targetRadiusScale * m_CrossHairRadius ,
                 Random.Range(-1f,1f) * targetRadiusScale * m_CrossHairRadius ,

@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967e9543349118c4ba624738b61e5bc4, type: 3}
   m_Name: FastWalker
   m_EditorClassIdentifier: 
+  Prefab: {fileID: 4339766195583184542, guid: 81cbf7669c0ae5f42877a24c9b37a158, type: 3}
   MaxHp: 50
   Damage: 25
-  MoveSpeed: 10
+  MoveSpeed: 15
+  AnimatorForImage: {fileID: 9100000, guid: 4cb5fe8811a437e479de9e90e9ef954d, type: 2}
+  AnimatorForHitBox: {fileID: 9100000, guid: b233f068d87880f4f8385eae452ef8c7, type: 2}
+  TargetTotalHeatForSpawn: 0
+  HeatGainForSpawn: 2

@@ -253,7 +253,10 @@ public class GunController : MonoBehaviour
 
         m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.ShootSound);
 
-
+        // move cross hair up 
+        m_CrossHair.position += new Vector3(Random.Range(-0.5f,0.5f),Random.Range(0f,0.5f),0) 
+            *Mathf.Lerp ( 0, m_FieldSize.y/Camera.main.orthographicSize, (100 - m_SelectedGun.RecoilControl )/ 100 );
+        CrossHairOutOfBoundPrevention();
 
         float targetCrossHairScale = Mathf.InverseLerp(100,0,m_CurrentAccruacy);
         float targetRadiusScale = Mathf.Lerp(0,m_CrossHairMaxSize-m_CrossHairMinSize,targetCrossHairScale);

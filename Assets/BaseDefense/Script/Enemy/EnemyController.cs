@@ -41,8 +41,10 @@ public class EnemyController : MonoBehaviour
         this.transform.localEulerAngles += Vector3.forward * m_LeftRightSwayAmount * Random.Range(-1f,1f);
         m_CurrentHp = m_Scriptable.MaxHp;
         m_CurrentAttackDelay = m_AttackDelay;
+#if UNITY_EDITOR
         m_AnimatorForImage.runtimeAnimatorController = m_Scriptable.AnimatorForImage;
         m_AnimatorForHitBox.runtimeAnimatorController = m_Scriptable.AnimatorForHitBox;
+#endif
         
     }
 

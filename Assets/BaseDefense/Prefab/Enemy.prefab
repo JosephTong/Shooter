@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 1797143739541413263}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4cb5fe8811a437e479de9e90e9ef954d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d66a7c2fabcf44cb5d97d7ed13c428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WalkerScriptable: {fileID: 11400000, guid: 316246d8dca31814e9cfccdeb66dfa0e, type: 2}
+  m_Scriptable: {fileID: 0}
   m_AnimatorForImage: {fileID: 4715182636091034088}
   m_AnimatorForHitBox: {fileID: 7131774219778150348}
   m_HpBarPrefab: {fileID: 8581663019046182776, guid: 255039f4d61f7bd49b39a64236034c41, type: 3}
@@ -518,7 +518,7 @@ Animator:
   m_GameObject: {fileID: 5080417265127911677}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b233f068d87880f4f8385eae452ef8c7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

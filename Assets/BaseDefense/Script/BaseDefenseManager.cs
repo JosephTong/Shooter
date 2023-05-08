@@ -37,7 +37,8 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private GunController m_GunController;
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
-    [SerializeField] private Button m_QuitGameBtn;
+    [SerializeField] private Button m_OptionBtn;
+    [SerializeField] private GameObject m_OptionPanel;
 
     
     [SerializeField] private GameObject m_ReloadControllerPanel;
@@ -94,8 +95,8 @@ public class BaseDefenseManager : MonoBehaviour
     private void Start() {
 
         m_GameStageChangeFromReloadAction += CloseReloadPanel;
-        m_QuitGameBtn.onClick.AddListener(()=>{
-            Application.Quit();
+        m_OptionBtn.onClick.AddListener(()=>{
+            m_OptionPanel.SetActive(true);
         });
         m_WallCurrentHp = m_WallMaxHp;
         m_WallHpBar.m_HpBarFiller.fillAmount = m_WallCurrentHp / m_WallMaxHp;

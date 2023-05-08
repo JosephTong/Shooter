@@ -43,7 +43,9 @@ public class EnemyController : MonoBehaviour
         m_CurrentAttackDelay = m_AttackDelay;
 #if UNITY_EDITOR
         m_AnimatorForImage.runtimeAnimatorController = m_Scriptable.AnimatorForImage;
+        m_AnimatorForImage.speed = m_Scriptable.MoveSpeed/5;
         m_AnimatorForHitBox.runtimeAnimatorController = m_Scriptable.AnimatorForHitBox;
+        m_AnimatorForImage.speed = m_Scriptable.MoveSpeed/5;
 #endif
         
     }

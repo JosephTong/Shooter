@@ -16,7 +16,7 @@ MonoBehaviour:
   MaxHp: 100
   Damage: 33
   MoveSpeed: 3
-  AnimatorForImage: {fileID: 9100000, guid: 4cb5fe8811a437e479de9e90e9ef954d, type: 2}
+  AnimatorForImage: {fileID: 9100000, guid: 86772a20f2505d149bb44f713e434d16, type: 2}
   AnimatorForHitBox: {fileID: 9100000, guid: b233f068d87880f4f8385eae452ef8c7, type: 2}
   TargetTotalHeatForSpawn: 0
   HeatGainForSpawn: 2

@@ -24,7 +24,7 @@ MonoBehaviour:
   IsSemiAuto: 1
   FireRate: 5.5
   Accuracy: 100
-  RecoilControl: 75
+  RecoilControl: 85
   Stability: 95
   Handling: 100
   ReloadScriptable: {fileID: 11400000, guid: 6aeec434a9a04114cbb6796231172f18, type: 2}

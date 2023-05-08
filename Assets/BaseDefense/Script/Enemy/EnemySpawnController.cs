@@ -27,9 +27,10 @@ public class EnemySpawnController : MonoBehaviour
         m_WaveHeat = m_TotalHeat / 3;
         // filter out enemy type that need too much heat
         m_VaildEnemies = new List<EnemyScriptable>(m_AllEnemyTypes.Where(x=>x.TargetTotalHeatForSpawn<=m_TotalHeat).ToList());
+        BaseDefenseManager.GetInstance().m_UpdateAction += EnemySpawnUpdate;
     }
 
-    private void Update() {
+    public void EnemySpawnUpdate() {
         if(m_WaveCount>3){
             // player win
             //return;

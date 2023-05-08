@@ -68,6 +68,9 @@ public class GunController : MonoBehaviour
 
     private void Start()
     {
+        BaseDefenseManager.GetInstance().m_ShootUpdatreAction += UpdateCrossHair;
+        BaseDefenseManager.GetInstance().m_UpdateAction += ShootCoolDown;
+
         m_SemiAutoShootCoroutine = null;
         this.transform.position = new Vector3(8, -4.5f, 0) + m_FieldCenter;
         m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
@@ -81,12 +84,12 @@ public class GunController : MonoBehaviour
         m_ReloadBtn.onClick.AddListener(()=>{
             if(IsFullClipAmmo())
                 return;
+                
             GunReloadControllerConfig gunReloadConfig = new GunReloadControllerConfig{
                 ReloadScriptable = m_SelectedGun.ReloadScriptable,
                 GainAmmo = GainAmmo,
                 SetAmmoToFull = SetClipAmmoToFull,
                 SetAmmoToZero = SetClipAmmoToZero,
-                CancelReload = CancelReload,
                 IsFullClipAmmo = IsFullClipAmmo,
             };
             BaseDefenseManager.GetInstance().StartReload(gunReloadConfig);
@@ -149,11 +152,7 @@ public class GunController : MonoBehaviour
         m_FPSImage.sprite = m_SelectedGun.FPSSprite;
     }
 
-
-    private void Update()
-    {
-        m_CurrentShootCoolDown -= Time.deltaTime;
-
+    public void UpdateCrossHair(){
         // aim
         if (m_AimDragMouseStartPos != Vector2.zero)
         {
@@ -205,6 +204,13 @@ public class GunController : MonoBehaviour
         m_CrossHair.localScale = Vector3.one * targetCrossHairScale;
     }
 
+
+    private void ShootCoolDown()
+    {
+        // fire rate
+        m_CurrentShootCoolDown -= Time.deltaTime;
+    }
+
     public void SetSelectedGun(GunScriptable gun){
         m_GunsClipAmmo[m_SelectedGun.DisplayName] = m_CurrentAmmo;
         m_SelectedGun = gun;
@@ -214,11 +220,6 @@ public class GunController : MonoBehaviour
         ChangeAmmoCount(m_GunsClipAmmo[m_SelectedGun.DisplayName], true);
         m_FPSImage.sprite = m_SelectedGun.FPSSprite;
     }
-
-    private void CancelReload(){
-        BaseDefenseManager.GetInstance().CloseReloadPanel();
-    }
-
     private void GainAmmo(int changes){
         ChangeAmmoCount(changes,false);
     }
@@ -240,6 +241,8 @@ public class GunController : MonoBehaviour
             Shoot();
             yield return null;
         }
+        
+        m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
     }
 
 

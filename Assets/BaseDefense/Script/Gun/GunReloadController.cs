@@ -35,13 +35,18 @@ public class GunReloadController : MonoBehaviour
     private int m_CurReloadPhase = 0;
 
     private void Start() {
+        BaseDefenseManager.GetInstance().m_ReloadUpdateAction += UpdateDragImagePosition;
+        BaseDefenseManager.GetInstance().m_GameStageChangeToReloadAction += SetStartReloadPanel;
+
         if(m_IsPreview && m_ReloadScriptable != null)
-            InIt(new GunReloadControllerConfig{
+            StartReload(new GunReloadControllerConfig{
                 ReloadScriptable = m_ReloadScriptable
             });
+
+        BaseDefenseManager.GetInstance().CloseReloadPanel();
     }
 
-    private void Update() {
+    private void UpdateDragImagePosition() {
 
         // set drag image position same as mouse position 
         if(m_DragImage != null){
@@ -49,19 +54,21 @@ public class GunReloadController : MonoBehaviour
         }
     }
 
-
-
-    public void InIt(GunReloadControllerConfig config){
-        m_Config = config;
-        m_ReloadScriptable = config.ReloadScriptable;
+    private void SetStartReloadPanel(){
+        m_ReloadScriptable = m_Config.ReloadScriptable;
         m_CurReloadPhase = 0;
         m_MainGunImage.sprite = m_ReloadScriptable.StartMainGunImage;
         m_MainGunImage.rectTransform.sizeDelta = m_ReloadScriptable.MainGunSize;
-
-        SetPhase();
+        SetReloadPhase();
     }
 
-    private void SetPhase(){
+    public void StartReload(GunReloadControllerConfig config){
+        m_Config = config;
+
+        BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Reload);
+    }
+
+    private void SetReloadPhase(){
         if(m_ReloadScriptable.ReloadPhases.Count<=m_CurReloadPhase){
             // out of phase , cancel reload 
             Debug.Log("Cancel Reload by out of phase");
@@ -266,7 +273,7 @@ public class GunReloadController : MonoBehaviour
                 Debug.Log("Cancel Reload");
             }else{
                 // cancel reload 
-                m_Config.CancelReload?.Invoke();
+                BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
             }
         }
 
@@ -300,7 +307,7 @@ public class GunReloadController : MonoBehaviour
         if(actionEnum == ( actionEnum | GunReloadActionResult.RefreshThisPhase ) ){
             // Refresh This Phase
             Debug.Log("Refresh This Phase");
-            SetPhase();   
+            SetReloadPhase();   
         }
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.SetClipAmmoToZero ) ){
@@ -317,7 +324,7 @@ public class GunReloadController : MonoBehaviour
             // To Next Phase
             Debug.Log("To Next Phase");
             ++m_CurReloadPhase;
-            SetPhase();
+            SetReloadPhase();
         }
 
     }

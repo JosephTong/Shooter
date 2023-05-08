@@ -23,8 +23,8 @@ MonoBehaviour:
   CameraShakeAmount: 20
   IsSemiAuto: 1
   FireRate: 15
-  Accuracy: 25
+  Accuracy: 45
   RecoilControl: 50
   Stability: 0
-  Handling: 25
+  Handling: 65
   ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}

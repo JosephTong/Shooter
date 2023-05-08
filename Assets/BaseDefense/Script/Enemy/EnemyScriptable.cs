@@ -9,10 +9,6 @@ public class EnemyScriptable : ScriptableObject
     [Range(0.1f,500)] public float MaxHp = 100;
     [Range(0.1f,100)] public float Damage = 33;
     [Range(1, 50)] public float MoveSpeed = 5;
-#if UNITY_EDITOR
-    public UnityEditor.Animations.AnimatorController AnimatorForImage;
-    public UnityEditor.Animations.AnimatorController AnimatorForHitBox;
-#endif
     [Range(0f, 100)]public float TargetTotalHeatForSpawn;
     [Range(0.1f, 50)]public float HeatGainForSpawn;
 }

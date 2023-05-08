@@ -19,11 +19,13 @@ public class GunController : MonoBehaviour
     [SerializeField][Range(1.1f, 5)] private float m_CrossHairMaxSize = 4f;
     [SerializeField][Range(0.1f, 1f)] private float m_CrossHairMinSize = 0.5f;
     [SerializeField][Range(0.1f, 5)] private float m_CrossHairRadius = 0.5f;
+    [SerializeField]private Transform m_CrossHairLight;
     [SerializeField] private Button2D m_AimBtn;
     [SerializeField] private Transform m_CrossHair;
     private Vector2 m_AimDragMouseStartPos = Vector2.zero;
     private Vector2 m_AimDragMouseEndPos = Vector2.zero;
     private Vector3 m_CrossHairDragStartPos;
+    
 
 
     // the area the player can shoot 
@@ -180,6 +182,9 @@ public class GunController : MonoBehaviour
 
             CrossHairOutOfBoundPrevention();
 
+            // light follow crossHair
+            m_CrossHairLight.position = m_CrossHair.position;
+
             // aim to camera effect
             m_AimDirection = (m_CrossHair.position - m_FieldCenter).normalized;
             m_AimDistanceNormalized = Vector3.Distance(m_CrossHair.position, m_FieldCenter) /
@@ -260,7 +265,11 @@ public class GunController : MonoBehaviour
         // move cross hair up 
         m_CrossHair.position += new Vector3(Random.Range(-0.5f,0.5f),Random.Range(0f,0.5f),0) 
             *Mathf.Lerp ( 0, m_FieldSize.y/Camera.main.orthographicSize, (100 - m_SelectedGun.RecoilControl )/ 100 );
+
         CrossHairOutOfBoundPrevention();
+
+        // light follow crossHair
+        m_CrossHairLight.position = m_CrossHair.position;
 
         float targetCrossHairScale = Mathf.InverseLerp(100,0,m_CurrentAccruacy);
         float targetRadiusScale = Mathf.Lerp(0,m_CrossHairMaxSize-m_CrossHairMinSize,targetCrossHairScale);

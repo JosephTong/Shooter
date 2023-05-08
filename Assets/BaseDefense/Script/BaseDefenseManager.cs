@@ -168,7 +168,7 @@ public class BaseDefenseManager : MonoBehaviour
         m_WallHpBar.m_CanvasGroup.alpha = 1;
         m_WallCurrentHp-=damage;
         m_WallHpBar.m_HpBarFiller.fillAmount = m_WallCurrentHp / m_WallMaxHp;
-        m_TotalWallHpBarStayTime = 2;
+        m_TotalWallHpBarStayTime = 4;
     }
 
 

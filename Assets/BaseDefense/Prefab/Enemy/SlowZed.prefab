@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -279,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d66a7c2fabcf44cb5d97d7ed13c428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Scriptable: {fileID: 0}
   m_Self: {fileID: 4339766195583184542}
   m_AnimatorForImage: {fileID: 4715182636091034088}
   m_AnimatorForHitBox: {fileID: 7131774219778150348}
@@ -394,7 +393,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.33333334}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

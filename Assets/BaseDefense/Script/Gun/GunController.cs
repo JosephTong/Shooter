@@ -55,7 +55,7 @@ public class GunController : MonoBehaviour
 
     [Header("Shooting")]
     [SerializeField] private GameObject m_ShotPointPrefab; // indicate where the shot land 
-    [SerializeField] private AudioSource m_ShootSoundPlayer;
+    [SerializeField] private AudioSource m_ShootAudioSource;
     [SerializeField] private Button2D m_ShootBtn;
     private float m_CurrentShootCoolDown = 0; // must be 0 or less to shoot 
     private Coroutine m_SemiAutoShootCoroutine = null;
@@ -70,6 +70,7 @@ public class GunController : MonoBehaviour
     {
         BaseDefenseManager.GetInstance().m_ShootUpdatreAction += UpdateCrossHair;
         BaseDefenseManager.GetInstance().m_UpdateAction += ShootCoolDown;
+        MainGameManager.GetInstance().AddNewAudioSource(m_ShootAudioSource);
 
         m_SemiAutoShootCoroutine = null;
         this.transform.position = new Vector3(8, -4.5f, 0) + m_FieldCenter;
@@ -121,7 +122,7 @@ public class GunController : MonoBehaviour
         {
             
             if(m_CurrentAmmo<=0){
-                m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
+                m_ShootAudioSource.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
             }else{
                 m_SemiAutoShootCoroutine = null;
                 if( m_SemiAutoShootCoroutine == null && m_SelectedGun.IsSemiAuto){
@@ -242,7 +243,7 @@ public class GunController : MonoBehaviour
             yield return null;
         }
         
-        m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
+        m_ShootAudioSource.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
     }
 
 
@@ -254,7 +255,7 @@ public class GunController : MonoBehaviour
         // shake camera
         CameraShaker.Instance.ShakeOnce( m_SelectedGun.CameraShakeStrength , m_SelectedGun.CameraShakeAmount,0.1f,0.1f );
 
-        m_ShootSoundPlayer.PlayOneShot(m_SelectedGun.ShootSound);
+        m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
 
         // move cross hair up 
         m_CrossHair.position += new Vector3(Random.Range(-0.5f,0.5f),Random.Range(0f,0.5f),0) 
@@ -358,5 +359,10 @@ public class GunController : MonoBehaviour
             // Down out of bound
             m_CrossHair.position = new Vector3(m_CrossHair.position.x, m_FieldCenter.y - m_FieldSize.y / 2, 0);
         }
+    }
+
+
+    private void OnDestroy() {
+        
     }
 }

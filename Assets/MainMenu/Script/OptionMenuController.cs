@@ -21,6 +21,7 @@ public class OptionMenuController : MonoBehaviour
 
         m_VolumeSlider.onValueChanged.AddListener((x)=>{
             MainGameManager.GetInstance().m_Volume = Mathf.Lerp(0.1f, 2f,m_VolumeSlider.normalizedValue);
+            MainGameManager.GetInstance().UpdateVolume();
         });
         
         

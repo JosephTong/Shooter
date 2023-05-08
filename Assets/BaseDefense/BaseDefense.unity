@@ -179,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}
   m_IsPreview: 0
-  m_AudioPlayer: {fileID: 488054940}
+  m_GunReloadAudioSource: {fileID: 488054940}
   m_MainGunImage: {fileID: 796377264}
   m_GrayWhileDragPanel: {fileID: 56885399}
   m_NotGrayWhileDragPanel: {fileID: 2067647623}
@@ -3555,7 +3555,7 @@ MonoBehaviour:
   - {fileID: 1201579669}
   - {fileID: 1819733538}
   m_ShotPointPrefab: {fileID: 2777219341350663978, guid: d89ddb64ce56d6341ad8027477e45486, type: 3}
-  m_ShootSoundPlayer: {fileID: 1238169346}
+  m_ShootAudioSource: {fileID: 1238169346}
   m_ShootBtn: {fileID: 61383350}
   m_ReloadBtn: {fileID: 482977486}
 --- !u!82 &1238169346

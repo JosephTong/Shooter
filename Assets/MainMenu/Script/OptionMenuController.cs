@@ -1,0 +1,39 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class OptionMenuController : MonoBehaviour
+{
+    [SerializeField] private Button m_ResumeBtn;
+    [SerializeField] private Button m_QuitGameBtn;
+
+    [SerializeField] private Slider m_AimSensitivitySlider;
+    [SerializeField] private Slider m_VolumeSlider;
+    [SerializeField] private GameObject m_OptionPanel;
+
+    void Start()
+    {
+        m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
+            MainGameManager.GetInstance().m_AimSensitivity = Mathf.Lerp(0.1f, 2f,m_AimSensitivitySlider.normalizedValue);
+        });
+
+        m_VolumeSlider.onValueChanged.AddListener((x)=>{
+            MainGameManager.GetInstance().m_Volume = Mathf.Lerp(0.1f, 2f,m_VolumeSlider.normalizedValue);
+        });
+        
+        
+        m_ResumeBtn.onClick.AddListener(()=>{
+            m_OptionPanel.SetActive(false);
+        });
+
+        
+        m_QuitGameBtn.onClick.AddListener(()=>{
+            Application.Quit();
+        });
+
+        
+        m_OptionPanel.SetActive(false);
+    }
+}

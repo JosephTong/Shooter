@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Scriptable: {fileID: 0}
+  m_Self: {fileID: 95147373059593710}
   m_AnimatorForImage: {fileID: 8936351074507780760}
   m_AnimatorForHitBox: {fileID: 6886809263307945148}
   m_HpBarPrefab: {fileID: 8581663019046182776, guid: 255039f4d61f7bd49b39a64236034c41, type: 3}

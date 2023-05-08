@@ -15,7 +15,7 @@ public class GunController : MonoBehaviour
 
 
     [Header("Drag to aim")]
-    [SerializeField][Range(0.1f, 2)] private float m_AimSensitivity = 0.5f;
+    //[SerializeField][Range(0.1f, 2)] private float m_AimSensitivity = 0.5f;
     [SerializeField][Range(1.1f, 5)] private float m_CrossHairMaxSize = 4f;
     [SerializeField][Range(0.1f, 1f)] private float m_CrossHairMinSize = 0.5f;
     [SerializeField][Range(0.1f, 5)] private float m_CrossHairRadius = 0.5f;
@@ -158,7 +158,7 @@ public class GunController : MonoBehaviour
         {
             m_AimDragMouseEndPos = Input.mousePosition;
 
-            Vector3 offset = m_AimSensitivity * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) / 15;
+            Vector3 offset = MainGameManager.GetInstance().m_AimSensitivity * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) / 15;
             m_CrossHair.position = m_CrossHairDragStartPos + offset;
 
             // accrucy lose for moving

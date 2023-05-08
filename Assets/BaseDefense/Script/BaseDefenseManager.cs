@@ -39,6 +39,9 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
     [SerializeField] private Button m_QuitGameBtn;
 
+    
+    [SerializeField] private GameObject m_ReloadControllerPanel;
+
     [Header("Enemy Hp Bars")]
     [SerializeField] private Transform m_EnemyHpBarParent;
     public Transform EnemyHpBarParent { get { return m_EnemyHpBarParent; } }
@@ -78,6 +81,13 @@ public class BaseDefenseManager : MonoBehaviour
         }else{
             Destroy(this);
         }
+    }
+
+    public static BaseDefenseManager GetInstance(){
+        if(m_Instance==null){
+            m_Instance = new GameObject().AddComponent<BaseDefenseManager>();
+        }
+        return m_Instance;
     }
 
 
@@ -161,20 +171,13 @@ public class BaseDefenseManager : MonoBehaviour
     }
 
 
-    public static BaseDefenseManager GetInstance(){
-        if(m_Instance==null){
-            m_Instance = new GameObject().AddComponent<BaseDefenseManager>();
-        }
-        return m_Instance;
-    }
-
     public void StartReload(GunReloadControllerConfig gunReloadConfig){
-        m_ReloadController.gameObject.SetActive(true);
+        m_ReloadControllerPanel.SetActive(true);
         m_ReloadController.StartReload( gunReloadConfig );
     }
 
     public void CloseReloadPanel(){
-        m_ReloadController.gameObject.SetActive(false);
+        m_ReloadControllerPanel.SetActive(false);
 
     }
 

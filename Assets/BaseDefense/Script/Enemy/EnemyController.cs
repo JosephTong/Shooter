@@ -6,7 +6,8 @@ using EZCameraShake;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private EnemyScriptable m_Scriptable;
+    private EnemyScriptable m_Scriptable;
+    [SerializeField] private GameObject m_Self;
     [SerializeField] private Animator m_AnimatorForImage;
     [SerializeField] private Animator m_AnimatorForHitBox;
 
@@ -143,7 +144,7 @@ public class EnemyController : MonoBehaviour
         m_CurrentHp -= changes;
         if (m_CurrentHp <= 0)
         {
-            Destroy(this.gameObject);
+            Destroy(m_Self);
             return;
         }
 

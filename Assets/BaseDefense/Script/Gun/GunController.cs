@@ -7,6 +7,7 @@ using TMPro;
 using System.Linq;
 using EZCameraShake;
 using BaseDefenseNameSpace;
+using UnityEngine.Rendering.Universal;
 
 public class GunController : MonoBehaviour
 {
@@ -15,31 +16,30 @@ public class GunController : MonoBehaviour
 
 
     [Header("Drag to aim")]
-    //[SerializeField][Range(0.1f, 2)] private float m_AimSensitivity = 0.5f;
-    [SerializeField][Range(1.1f, 5)] private float m_CrossHairMaxSize = 4f;
-    [SerializeField][Range(0.1f, 1f)] private float m_CrossHairMinSize = 0.5f;
-    [SerializeField][Range(0.1f, 5)] private float m_CrossHairRadius = 0.5f;
-    [SerializeField]private Transform m_CrossHairLight;
+    [SerializeField][Range(10f, 500f)] private float m_CrossHairMaxSize = 300f;
+    [SerializeField][Range(10f, 300f)] private float m_CrossHairMinSize = 50f;
     [SerializeField] private Button2D m_AimBtn;
-    [SerializeField] private Transform m_CrossHair;
+    [SerializeField] private RectTransform m_CrossHair;
+    [SerializeField] private Transform m_ShootDotParent;
     private Vector2 m_AimDragMouseStartPos = Vector2.zero;
     private Vector2 m_AimDragMouseEndPos = Vector2.zero;
     private Vector3 m_CrossHairDragStartPos;
+
+
+    [Header("CrossHair light")]
+    [SerializeField]private Transform m_CrossHairLight;
+    [SerializeField][Range(1f,10f)]private float m_CrossHairLightMinSize = 4;
+    [SerializeField]private Coroutine m_LightGainOnShootCoroutine = null;
     
 
 
-    // the area the player can shoot 
-    // prevent crosshair going out of bound
-    [Header("CrossHair out of bound prevention")]
-    [SerializeField] private Vector2Int m_FieldSize;
-    [SerializeField] private Vector3 m_FieldCenter;
-
     [Header("Aim effect for camera")]
     [SerializeField] private Camera m_MainCamera;
+    [SerializeField] private Vector3 m_FieldCenter;
     private Vector3 m_MainCameraStartPos;
     private Vector3 m_AimDirection = Vector3.zero;
     private float m_AimDistanceNormalized = 0;
-    private float m_FieldCenterToCornerDistance = 10;
+    private float m_ScreenCenterToCornerDistance = 10;
 
     [Header("Aim effect for gun")]
     [SerializeField] private Transform m_GunModel;
@@ -74,10 +74,13 @@ public class GunController : MonoBehaviour
         BaseDefenseManager.GetInstance().m_UpdateAction += ShootCoolDown;
         MainGameManager.GetInstance().AddNewAudioSource(m_ShootAudioSource);
 
+        // center crossHair 
+        m_CrossHair.position = new Vector3(Screen.width/2,Screen.height/2, 0);
+
         m_SemiAutoShootCoroutine = null;
         this.transform.position = new Vector3(8, -4.5f, 0) + m_FieldCenter;
         m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
-        m_FieldCenterToCornerDistance = Mathf.Sqrt(m_FieldSize.y / 2 * m_FieldSize.y / 2 + m_FieldSize.x / 2 * m_FieldSize.x / 2);
+        m_ScreenCenterToCornerDistance = Mathf.Sqrt(Screen.height / 2 * Screen.height / 2 + Screen.width / 2 * Screen.width / 2 );
         m_MainCameraStartPos = m_MainCamera.transform.position;
         foreach (var item in m_WeaponsToBeSwitch)
         {
@@ -153,6 +156,8 @@ public class GunController : MonoBehaviour
 
         ChangeAmmoCount(m_SelectedGun.ClipSize, true);
         m_FPSImage.sprite = m_SelectedGun.FPSSprite;
+        var crossHairworldPos = Camera.main.ScreenToWorldPoint(m_CrossHair.position);
+        m_CrossHairLight.position = crossHairworldPos - Vector3.forward * crossHairworldPos.z;
     }
 
     public void UpdateCrossHair(){
@@ -161,7 +166,7 @@ public class GunController : MonoBehaviour
         {
             m_AimDragMouseEndPos = Input.mousePosition;
 
-            Vector3 offset = MainGameManager.GetInstance().m_AimSensitivity * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) / 15;
+            Vector3 offset = MainGameManager.GetInstance().m_AimSensitivity * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) *3 ;
             m_CrossHair.position = m_CrossHairDragStartPos + offset;
 
             // accrucy lose for moving
@@ -183,19 +188,20 @@ public class GunController : MonoBehaviour
             CrossHairOutOfBoundPrevention();
 
             // light follow crossHair
-            m_CrossHairLight.position = m_CrossHair.position;
+            var crossHairworldPos = Camera.main.ScreenToWorldPoint(m_CrossHair.position);
+            m_CrossHairLight.position = crossHairworldPos - Vector3.forward * crossHairworldPos.z;
 
             // aim to camera effect
-            m_AimDirection = (m_CrossHair.position - m_FieldCenter).normalized;
-            m_AimDistanceNormalized = Vector3.Distance(m_CrossHair.position, m_FieldCenter) /
-                m_FieldCenterToCornerDistance;
+            m_AimDirection = (m_CrossHair.position - new Vector3( Screen.width , Screen.height ,0 ) ).normalized;
+            m_AimDistanceNormalized = Vector3.Distance(m_CrossHair.position, new Vector3( Screen.width , Screen.height ,0 )) /
+                m_ScreenCenterToCornerDistance;
+            m_MainCamera.transform.position = m_MainCameraStartPos + m_AimDirection * m_AimDistanceNormalized;
 
             // aim to weapon effect
-            m_MainCamera.transform.position = m_MainCameraStartPos + m_AimDirection * m_AimDistanceNormalized;
-            float gunScaleX = 0.1f * ((m_CrossHair.position.x - m_FieldCenter.x) / (m_FieldSize.x / 2));
+            float gunScaleX = 0.1f * ((m_CrossHair.position.x - Screen.width /2 ) / (Screen.width /2));
             m_GunModel.localScale = new Vector3(1 - gunScaleX, 1, 1);
 
-            float gunRotationZ = -5 * (m_CrossHair.position.y - m_FieldCenter.y) / (m_FieldSize.y / 2);
+            float gunRotationZ = -5 * (m_CrossHair.position.y - Screen.height /2) / (Screen.height /2);
             m_GunModel.localEulerAngles = new Vector3(0, 0, gunRotationZ);
         }
         else
@@ -205,9 +211,9 @@ public class GunController : MonoBehaviour
         if (m_CurrentAccruacy < 0)
             m_CurrentAccruacy = 0;
 
-        float targetCrossHairScale = Mathf.InverseLerp(100,0,m_CurrentAccruacy);
-        targetCrossHairScale = Mathf.Lerp(m_CrossHairMinSize,m_CrossHairMaxSize,targetCrossHairScale);
-        m_CrossHair.localScale = Vector3.one * targetCrossHairScale;
+        float targetCrossHairSize = Mathf.InverseLerp(100,0,m_CurrentAccruacy);
+        targetCrossHairSize= Mathf.Lerp(m_CrossHairMinSize,m_CrossHairMaxSize,targetCrossHairSize);
+        m_CrossHair.sizeDelta = Vector2.one * targetCrossHairSize;
     }
 
 
@@ -251,6 +257,18 @@ public class GunController : MonoBehaviour
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.OutOfAmmoSound);
     }
 
+    private IEnumerator CrossHairLightGainOnShoot(){
+        float timePass = 0; 
+        float lightFadeTime = 0.45f;
+        while (timePass<=1)
+        {
+            m_CrossHairLight.localScale = Vector3.one * Mathf.Lerp(m_SelectedGun.LightSizeOnShoot,m_CrossHairLightMinSize,timePass);
+            timePass += Time.deltaTime / lightFadeTime;
+            yield return null;
+        }
+        m_CrossHairLight.localScale = Vector3.one * m_CrossHairLightMinSize;
+    }
+
 
     private void Shoot()
     {
@@ -260,34 +278,46 @@ public class GunController : MonoBehaviour
         // shake camera
         CameraShaker.Instance.ShakeOnce( m_SelectedGun.CameraShakeStrength , m_SelectedGun.CameraShakeAmount,0.1f,0.1f );
 
+        // Light gain on shoot
+        if(m_LightGainOnShootCoroutine != null)
+            StopCoroutine(m_LightGainOnShootCoroutine);
+
+        m_LightGainOnShootCoroutine = StartCoroutine(CrossHairLightGainOnShoot());
+
+        // shoot sound
         m_ShootAudioSource.PlayOneShot(m_SelectedGun.ShootSound);
 
         // move cross hair up 
         m_CrossHair.position += new Vector3(Random.Range(-0.5f,0.5f),Random.Range(0f,0.5f),0) 
-            *Mathf.Lerp ( 0, m_FieldSize.y/Camera.main.orthographicSize, (100 - m_SelectedGun.RecoilControl )/ 100 );
+            *Mathf.Lerp ( 0, Screen.height / 100, (100 - m_SelectedGun.RecoilControl )/ 100 );
 
         CrossHairOutOfBoundPrevention();
 
         // light follow crossHair
-        m_CrossHairLight.position = m_CrossHair.position;
+        var crossHairworldPos = Camera.main.ScreenToWorldPoint(m_CrossHair.position);
+        m_CrossHairLight.position = crossHairworldPos - Vector3.forward * crossHairworldPos.z;
 
         float targetCrossHairScale = Mathf.InverseLerp(100,0,m_CurrentAccruacy);
-        float targetRadiusScale = Mathf.Lerp(0,m_CrossHairMaxSize-m_CrossHairMinSize,targetCrossHairScale);
+        float targetMaxRadius = Mathf.Lerp(0,m_CrossHairMaxSize/2-m_CrossHairMinSize/2,targetCrossHairScale);
         for (int j = 0; j < m_SelectedGun.PelletPerShot; j++)
-        {        
-
-            // random in a square
-            // TODO : change to in cricle in future
+        {       
+            // random center to point distance
+            float centerToPointDistance = Mathf.Lerp(0, targetMaxRadius, Random.Range(0,1f));
+            float randomAngle = Random.Range(0,360f);
             Vector3 accuracyOffset = new Vector3( 
-                Random.Range(-1f,1f) * targetRadiusScale * m_CrossHairRadius ,
-                Random.Range(-1f,1f) * targetRadiusScale * m_CrossHairRadius ,
+                Mathf.Sin(randomAngle*Mathf.Deg2Rad) * centerToPointDistance ,
+                Mathf.Cos(randomAngle*Mathf.Deg2Rad) * centerToPointDistance ,
                 0
             );
+
+            // spawn dot for player to see
             var shotPoint = Instantiate(m_ShotPointPrefab);
-            shotPoint.transform.position = m_CrossHair.position + accuracyOffset;
+            shotPoint.transform.SetParent(m_ShootDotParent);
+            var targetPosForPoint = Camera.main.ScreenToWorldPoint( m_CrossHair.position + accuracyOffset );
+            shotPoint.GetComponent<RectTransform>().position = m_CrossHair.position + accuracyOffset ; 
             Destroy(shotPoint,1);
 
-            RaycastHit2D[] hits = Physics2D.RaycastAll(m_CrossHair.position + accuracyOffset, Vector2.zero);
+            RaycastHit2D[] hits = Physics2D.RaycastAll( targetPosForPoint - Vector3.forward * targetPosForPoint.z, Vector2.zero);
             List<EnemyBodyPart> hitedEnemy = new List<EnemyBodyPart>();
             for (int i = 0; i < hits.Length; i++)
             {
@@ -297,8 +327,14 @@ public class GunController : MonoBehaviour
                 }
             }
             if(hitedEnemy.Count>0){
+                shotPoint.GetComponent<ShootDotController>().OnHit();
                 var sortedEnemies = hitedEnemy.OrderBy(x => x.GetDistance()).ToList();
                 sortedEnemies[0].OnHit(m_SelectedGun.Damage);
+                if(sortedEnemies[0].IsCrit()){
+                    shotPoint.GetComponent<ShootDotController>().OnCrit();
+                }
+            }else{
+                shotPoint.GetComponent<ShootDotController>().OnMiss();
             }
         }
         
@@ -343,30 +379,30 @@ public class GunController : MonoBehaviour
 
     private void CrossHairOutOfBoundPrevention()
     {
-        if (m_CrossHair.position.x < m_FieldCenter.x - m_FieldSize.x / 2)
+        if (m_CrossHair.position.x < 0)
         {
             // Left out of bound
-            m_CrossHair.position = new Vector3(m_FieldCenter.x - m_FieldSize.x / 2, m_CrossHair.position.y, 0);
+            m_CrossHair.position = new Vector3(0, m_CrossHair.position.y, 0);
         }
 
-        if (m_CrossHair.position.x > m_FieldCenter.x + m_FieldSize.x / 2)
+        if (m_CrossHair.position.x > Screen.width)
         {
             // Right out of bound
-            m_CrossHair.position = new Vector3(m_FieldCenter.x + m_FieldSize.x / 2, m_CrossHair.position.y, 0);
+            m_CrossHair.position = new Vector3(Screen.width, m_CrossHair.position.y, 0);
         }
 
 
-        if (m_CrossHair.position.y > m_FieldCenter.y + m_FieldSize.y / 2)
+        if (m_CrossHair.position.y > Screen.height)
         {
             // Top out of bound
-            m_CrossHair.position = new Vector3(m_CrossHair.position.x, m_FieldCenter.y + m_FieldSize.y / 2, 0);
+            m_CrossHair.position = new Vector3(m_CrossHair.position.x, Screen.height, 0);
         }
 
 
-        if (m_CrossHair.position.y < m_FieldCenter.y - m_FieldSize.y / 2)
+        if (m_CrossHair.position.y < 0)
         {
             // Down out of bound
-            m_CrossHair.position = new Vector3(m_CrossHair.position.x, m_FieldCenter.y - m_FieldSize.y / 2, 0);
+            m_CrossHair.position = new Vector3(m_CrossHair.position.x, 0, 0);
         }
     }
 

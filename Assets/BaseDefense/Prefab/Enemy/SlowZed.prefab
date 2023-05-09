@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 4339766195583184540}
+  m_IsCrit: 1
   m_DamageMod: 3
 --- !u!1 &4339766195583184542
 GameObject:
@@ -442,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnemyController: {fileID: 4339766195583184540}
+  m_IsCrit: 0
   m_DamageMod: 1
 --- !u!1 &4828536880339009245
 GameObject:

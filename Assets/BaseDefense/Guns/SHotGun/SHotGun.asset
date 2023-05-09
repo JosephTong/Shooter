@@ -18,6 +18,7 @@ MonoBehaviour:
   ShootSound: {fileID: 8300000, guid: 7eaa10eaa57a54441bcd8c2866a26fd7, type: 3}
   ClipSize: 8
   FPSSprite: {fileID: 21300000, guid: f843a4210af71fb4893d2e4394325a28, type: 3}
+  LightSizeOnShoot: 15
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   CameraShakeStrength: 10
   CameraShakeAmount: 40

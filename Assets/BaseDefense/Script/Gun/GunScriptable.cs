@@ -14,6 +14,7 @@ public class GunScriptable : ScriptableObject
     public AudioClip ShootSound;
     public float ClipSize;
     public Sprite FPSSprite;
+    public float LightSizeOnShoot = 15;
     public AudioClip OutOfAmmoSound;
     [Header("How strong the shake")]
     [Range (1,25)]public float CameraShakeStrength = 2;

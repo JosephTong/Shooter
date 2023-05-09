@@ -7,7 +7,7 @@ public class MainGameManager : MonoBehaviour
     public static MainGameManager m_Instance = null;
     private List<AudioSource> m_AllAudioSource = new List<AudioSource>();
 
-    public float m_Volume = 1;
+    public float m_Volume = 0.75f;
     public float m_AimSensitivity = 0.5f;
 
     

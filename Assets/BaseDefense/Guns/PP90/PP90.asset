@@ -18,13 +18,14 @@ MonoBehaviour:
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
   ClipSize: 20
   FPSSprite: {fileID: 21300000, guid: 7232e5dcf09836646be2e58bd1ba6058, type: 3}
+  LightSizeOnShoot: 15
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   CameraShakeStrength: 4
   CameraShakeAmount: 10
   IsSemiAuto: 1
   FireRate: 5.5
-  Accuracy: 100
+  Accuracy: 85
   RecoilControl: 85
-  Stability: 95
-  Handling: 100
+  Stability: 85
+  Handling: 85
   ReloadScriptable: {fileID: 11400000, guid: 6aeec434a9a04114cbb6796231172f18, type: 2}

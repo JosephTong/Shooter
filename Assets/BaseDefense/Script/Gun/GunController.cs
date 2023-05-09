@@ -71,6 +71,8 @@ public class GunController : MonoBehaviour
     private void Start()
     {
         BaseDefenseManager.GetInstance().m_ShootUpdatreAction += UpdateCrossHair;
+        BaseDefenseManager.GetInstance().m_GameStageChangeToShootAction += ShowWeaponModel;
+        BaseDefenseManager.GetInstance().m_GameStageChangeFromShootAction += HideWeaponModel;
         BaseDefenseManager.GetInstance().m_UpdateAction += ShootCoolDown;
         MainGameManager.GetInstance().AddNewAudioSource(m_ShootAudioSource);
 
@@ -158,6 +160,14 @@ public class GunController : MonoBehaviour
         m_FPSImage.sprite = m_SelectedGun.FPSSprite;
         var crossHairworldPos = Camera.main.ScreenToWorldPoint(m_CrossHair.position);
         m_CrossHairLight.position = crossHairworldPos - Vector3.forward * crossHairworldPos.z;
+    }
+
+    private void HideWeaponModel(){
+        m_FPSImage.gameObject.SetActive(false);
+    }
+
+    private void ShowWeaponModel(){
+        m_FPSImage.gameObject.SetActive(true);
     }
 
     public void UpdateCrossHair(){

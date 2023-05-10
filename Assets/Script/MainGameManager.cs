@@ -27,6 +27,7 @@ public class MainGameManager : MonoBehaviour
     
     private const string TotalHeatHeader = " - Strong enemy will not spawn if Total heat is lower than the requirement\n"+
         " - High cap at 1000 \n"+
+        " - Low cap at 15 \n"+
         " - 25 seconds per wave \n"+ // EnemySpawnController >> m_TimePassed 
         " - Random select vaild enemy(s) until it reach Wave heat \n" +
         " - All selected enemy will spawn at the first 15 seconds \n"+
@@ -34,10 +35,10 @@ public class MainGameManager : MonoBehaviour
         " - To next day it player clear all 3 waves"; 
 
     [Header(TotalHeatHeader)]
-    [SerializeField][Range(0f,1000f)] private float m_TotalHeat = 35;
+    [SerializeField][Range(15f,1000f)] private float m_TotalHeat = 35;
 
-    [SerializeField] private FourResources m_OwnedResource;
-    [SerializeField] private int m_BotOwned = 10;
+    private FourResources m_OwnedResource;
+    private int m_BotOwned = 10;
 
     
     public static MainGameManager GetInstance(){
@@ -61,6 +62,9 @@ public class MainGameManager : MonoBehaviour
     public float GetHeat(){
         if(m_TotalHeat > 1000){
             m_TotalHeat = 1000;
+        }
+        if(m_TotalHeat <15){
+            m_TotalHeat = 15;
         }
         return m_TotalHeat;
     }

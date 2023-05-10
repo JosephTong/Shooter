@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: Forest
   m_EditorClassIdentifier: 
   DisplayName: Forest
-  Image: {fileID: 21300000, guid: d54a4f361097a7e43a7df62d4cdd366e, type: 3}
+  Icon: {fileID: 21300000, guid: d54a4f361097a7e43a7df62d4cdd366e, type: 3}
   Size: {x: 150, y: 150}
   Position: {x: -150, y: -150}
+  DetailImage: {fileID: 21300000, guid: 0dd44702c44226247a46ffa58f28d2b0, type: 3}
+  HeatGainOnLoot: 2
+  BaseSaftness: 95
+  SaftnessGainPreExtraBot: 10
   MinRawMaterial: 50
   MaxRawMaterial: 300
   MinScrapMaterial: 0
   MaxScrapMaterial: 10
   MinChemMaterial: 0
   MaxChemMaterial: 50
-  MinElectricMaterial: 0
-  MaxElectricMaterial: 10
+  MinElectronicMaterial: 0
+  MaxElectronicMaterial: 10

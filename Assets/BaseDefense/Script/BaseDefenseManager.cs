@@ -54,10 +54,15 @@ public class BaseDefenseManager : MonoBehaviour
     private float m_TotalWallHpBarStayTime = 0;
 
 
+
+
+    
+    #region UpdateAction
     public Action m_ShootUpdatreAction = null;
     public Action m_SwitchWeaponUpdateAction = null;
     public Action m_ReloadUpdateAction = null;
     public Action m_UpdateAction = null;
+    #endregion
 
     #region Change Game Stage From
     public Action m_GameStageChangeFromShootAction = null;

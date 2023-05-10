@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using LootLocationControllerNameSpace;
 
 public class LootMapController : MonoBehaviour
 {
@@ -12,9 +12,8 @@ public class LootMapController : MonoBehaviour
     [SerializeField] private GameObject m_LocaionPrefab;
     [SerializeField][Range(500f,3000f)] private float m_HeatAreaSize = 600;
     [SerializeField] private RectTransform m_HeatCutOut;
-    [SerializeField][Range(1,10)] private int m_BotCount = 3;
-    [SerializeField] private TMP_Text m_BotCountText;
     [SerializeField] private LootDetailsPanel m_LootDetailsPanel;
+
 
 
 
@@ -26,30 +25,33 @@ public class LootMapController : MonoBehaviour
 
             // position
             locationIcon.transform.SetParent(m_LocationParent);
-            if(locationIcon.TryGetComponent<RectTransform>(out var rectTransform)){
-                rectTransform.sizeDelta = m_AllLocation[i].Size;
 
-                rectTransform.localPosition = new Vector3(
-                        m_AllLocation[i].Position.x, 
-                        m_AllLocation[i].Position.y,
-                        0 
-                    );
+            if(locationIcon.TryGetComponent<LootLocationController>(out var lootLocationController)){
+
+                // random id
+                int id = Random.Range(0,999999);
+                while (DayTimeManager.GetInstance().IsLocationIdUsed(id))
+                {
+                    id = Random.Range(0,999999);
+                }
+                DayTimeManager.GetInstance().StoreLootLocationController(id,lootLocationController);
+
+                var scriptable = m_AllLocation[i];
+                var tmp = new LootLocationControllerConfig{
+                    Scriptable = scriptable,
+                    OnClick = ()=>{m_LootDetailsPanel.SetLootDeail(scriptable,id,
+                        DayTimeManager.GetInstance().GetLootLocationController(id).GetLootBotCount());},
+                    LootBotCount = 0
+                };
+                lootLocationController.Init(tmp);
+
             }
             
-            if(locationIcon.TryGetComponent<Image>(out var image)){
-                image.sprite = m_AllLocation[i].Icon;
-            }
-            var scriptable = m_AllLocation[i];
-
-            if(locationIcon.TryGetComponent<Button>(out var btn)){
-                btn.onClick.AddListener(()=>{
-                    m_LootDetailsPanel.SetLootDeail(scriptable);
-                });
-            }
         }
     }
 
     private void Update() {
         m_HeatCutOut.sizeDelta = Vector2.one * m_HeatAreaSize;
     }
+
 }

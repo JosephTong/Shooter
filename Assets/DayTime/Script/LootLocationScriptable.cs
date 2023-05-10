@@ -13,8 +13,8 @@ public class LootLocationScriptable : ScriptableObject
     [Header("Show in detail panel")]
     public Sprite DetailImage; // 4 x 3
     [Range(-20f,20f)]public float HeatGainOnLoot;
-    [Header("Total Saftness = BaseSaftness + SaftnessGainPreExtraBot * (Extra bot count ) \nExtra bot count = ( total bot in looing mission - 1 ) ( low cap at 0 )")]
-    [Range(0f,100f)]public float BaseSaftness = 75;
+    [Header("Total Safeness = BaseSafeness + SaftnessGainPreExtraBot * (Extra bot count ) \nExtra bot count = ( total bot in looing mission - 1 ) ( low cap at 0 )")]
+    [Range(0f,100f)]public float BaseSafeness = 75;
     [Range(-50f,50f)]public float SaftnessGainPreExtraBot = 10;
     [Header("Material ")]
     [Range(0f,1000f)]public float MinRawMaterial;

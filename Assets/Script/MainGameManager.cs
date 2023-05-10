@@ -10,10 +10,10 @@ namespace MainGameNameSpace
     [System.Serializable]
     public class FourResources
     {
-        public float Raw; 
-        public float Scrap;
-        public float Chem;
-        public float Electronic;
+        public float Raw=100; 
+        public float Scrap=100;
+        public float Chem=100;
+        public float Electronic=100;
     }
 }
 
@@ -34,9 +34,10 @@ public class MainGameManager : MonoBehaviour
         " - To next day it player clear all 3 waves"; 
 
     [Header(TotalHeatHeader)]
-    [SerializeField][Range(0f,1000f)] private float m_TotalHeat = 15;
+    [SerializeField][Range(0f,1000f)] private float m_TotalHeat = 35;
 
     [SerializeField] private FourResources m_OwnedResource;
+    [SerializeField] private int m_BotOwned = 10;
 
     
     public static MainGameManager GetInstance(){
@@ -69,6 +70,10 @@ public class MainGameManager : MonoBehaviour
         audioSource.volume = m_Volume;
         
         UpdateVolume();
+    }
+
+    public int GetOwnedBotCount(){
+        return m_BotOwned;
     }
 
     public void UpdateVolume(){

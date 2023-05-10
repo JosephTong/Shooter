@@ -1430,7 +1430,7 @@ RectTransform:
   - {fileID: 1837081326}
   - {fileID: 1744857540}
   m_Father: {fileID: 1020696793}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1497,10 +1497,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 881592121}
+  m_Children: []
   m_Father: {fileID: 1873753639}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3969,12 +3968,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 881592121}
-  m_RootOrder: 0
+  m_Father: {fileID: 1873753639}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: 0}
+  m_AnchoredPosition: {x: 316.66003, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &746472432
@@ -4937,7 +4936,6 @@ GameObject:
   - component: {fileID: 881592121}
   - component: {fileID: 881592124}
   - component: {fileID: 881592123}
-  - component: {fileID: 881592122}
   m_Layer: 5
   m_Name: BotCountText
   m_TagString: Untagged
@@ -4956,30 +4954,15 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 746472431}
-  m_Father: {fileID: 264700195}
-  m_RootOrder: 0
+  m_Children: []
+  m_Father: {fileID: 1873753639}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: 0}
-  m_SizeDelta: {x: 0, y: 75}
+  m_AnchoredPosition: {x: 65, y: 0}
+  m_SizeDelta: {x: 176.66, y: 75}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &881592122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 881592120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 0
 --- !u!114 &881592123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5034,7 +5017,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5328,7 +5311,7 @@ RectTransform:
   - {fileID: 1437879752}
   - {fileID: 1484914189}
   m_Father: {fileID: 1020696793}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5665,9 +5648,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1970536828}
-  - {fileID: 250487781}
   - {fileID: 1096044482}
   - {fileID: 936539363}
+  - {fileID: 250487781}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6247,7 +6230,7 @@ RectTransform:
   m_Children:
   - {fileID: 651752932}
   m_Father: {fileID: 1020696793}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -6800,7 +6783,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1738329038}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9899,8 +9882,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1225064967}
   - {fileID: 1748736290}
+  - {fileID: 1225064967}
   - {fileID: 532093909}
   - {fileID: 1232732314}
   m_Father: {fileID: 1970536828}
@@ -9935,8 +9918,6 @@ MonoBehaviour:
   m_LocaionPrefab: {fileID: 8461221234219185669, guid: d491a423e512f8748818900456d769e1, type: 3}
   m_HeatAreaSize: 600
   m_HeatCutOut: {fileID: 1748736290}
-  m_BotCount: 3
-  m_BotCountText: {fileID: 1203558977}
   m_LootDetailsPanel: {fileID: 936539364}
 --- !u!1 &1744857539
 GameObject:
@@ -10093,7 +10074,7 @@ RectTransform:
   m_Children:
   - {fileID: 233760011}
   m_Father: {fileID: 1738329038}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10695,6 +10676,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 823161562}
+  - {fileID: 746472431}
+  - {fileID: 881592121}
   - {fileID: 264700195}
   m_Father: {fileID: 1393116930}
   m_RootOrder: 1
@@ -11645,6 +11628,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973752850}
   m_CullTransparentMesh: 1
+--- !u!1 &1983538092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1983538093}
+  - component: {fileID: 1983538094}
+  m_Layer: 0
+  m_Name: DayTimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1983538093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983538092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1983538094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983538092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79873b3dabe181c45859ffc04fcd49d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BotCountText: {fileID: 1203558977}
 --- !u!1 &1985049836
 GameObject:
   m_ObjectHideFlags: 0

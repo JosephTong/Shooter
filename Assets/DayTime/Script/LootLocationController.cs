@@ -24,8 +24,10 @@ public class LootLocationController : MonoBehaviour
     [SerializeField] private GameObject m_LootBotPanret;
     [SerializeField] private TMP_Text m_LootBotCountText;
     private int m_LootBotCount = 0;
+    private LootLocationScriptable m_Scriptable ;
 
     public void Init(LootLocationControllerConfig config){
+        m_Scriptable = config.Scriptable;
         m_Self.localPosition = new Vector3(
                             config.Scriptable.Position.x, 
                             config.Scriptable.Position.y,

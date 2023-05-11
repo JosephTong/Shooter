@@ -6,6 +6,8 @@ using GunReloadScriptableNameSpace;
 using BaseDefenseNameSpace;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using MainGameNameSpace;
 
 
 public class GunReloadController : MonoBehaviour
@@ -14,7 +16,17 @@ public class GunReloadController : MonoBehaviour
     private GunReloadControllerConfig m_Config=null; 
     [SerializeField] private AudioSource m_GunReloadAudioSource;
 
+    [Header("Resources")]
+    [SerializeField] private CanvasGroup m_ResourceCanvasGroup;
+    [SerializeField] private AnimationCurve m_ResourceCanvasGroupFade;
+    [SerializeField] private TMP_Text m_Raw;
+    [SerializeField] private TMP_Text m_Scrap;
+    [SerializeField] private TMP_Text m_Chem;
+    [SerializeField] private TMP_Text m_Electronic;
+    [SerializeField] private TMP_Text m_Bot;
+    private Coroutine m_ResourceFadeCourtine = null;
     
+    [Header("Reload")]
     [SerializeField] private Image m_MainGunImage;
     //[SerializeField] private GameObject m_Gray;
     [SerializeField] private Transform m_GrayWhileDragPanel; // gray out while draging // no use for now
@@ -48,7 +60,38 @@ public class GunReloadController : MonoBehaviour
         }
     }
 
+    private void SetResourceUsedText(ResourcesRecord used){
+        m_ResourceCanvasGroup.alpha = 1;
+        var ownedResourceBefore = MainGameManager.GetInstance().GetOwnedResources();
+        m_Raw.text = $"{ownedResourceBefore.Raw } - ({used.Raw})";
+        m_Scrap.text =$"{ownedResourceBefore.Scrap} - ({used.Scrap})";
+        m_Chem.text =$"{ownedResourceBefore.Chem} - ({used.Chem})";
+        m_Electronic.text =$"{ownedResourceBefore.Electronic} - ({used.Electronic})";
+        m_Bot.text =$"{ownedResourceBefore.Bot} - ({used.Bot})";
+        if(m_ResourceFadeCourtine != null){
+            StopCoroutine(m_ResourceFadeCourtine);
+        }
+        if(this.isActiveAndEnabled)
+            m_ResourceFadeCourtine = StartCoroutine(ResourceGroupFadeOut());
+    }
+
+    private IEnumerator ResourceGroupFadeOut(){
+        float passedTime = 0;
+        float duration = 4;
+        while (passedTime < duration)
+        {
+            m_ResourceCanvasGroup.alpha = m_ResourceCanvasGroupFade.Evaluate (1-passedTime/duration) ;
+            passedTime += Time.deltaTime;
+            yield return null;
+        }
+        m_ResourceFadeCourtine = null;
+    }
+
     private void SetStartReloadPanel(){
+        if(m_ResourceFadeCourtine != null){
+            StopCoroutine(m_ResourceFadeCourtine);
+        }
+        m_ResourceCanvasGroup.alpha = 0;
         m_ReloadScriptable = m_Config.GunScriptable.ReloadScriptable;
         m_CurReloadPhase = 0;
         m_MainGunImage.sprite = m_ReloadScriptable.StartMainGunImage;
@@ -272,6 +315,7 @@ public class GunReloadController : MonoBehaviour
             // Gain one ammo 
             
             if(MainGameManager.GetInstance().GetOwnedResources().IsEnough(m_Config.GunScriptable.ResourceUseOnReloadOne)){
+                SetResourceUsedText(m_Config.GunScriptable.ResourceUseOnReloadOne);
                 MainGameManager.GetInstance().GetOwnedResources().Change(m_Config.GunScriptable.ResourceUseOnReloadOne.GetReverse());
                 m_Config.GainAmmo?.Invoke(1);
             }else{
@@ -293,6 +337,7 @@ public class GunReloadController : MonoBehaviour
         if(actionEnum == ( actionEnum | GunReloadActionResult.FullAmmoReload ) ){
             // Full Ammo Reload
             if(MainGameManager.GetInstance().GetOwnedResources().IsEnough(m_Config.GunScriptable.ResourceUseOnFullyReload)){
+                SetResourceUsedText(m_Config.GunScriptable.ResourceUseOnFullyReload);
                 MainGameManager.GetInstance().GetOwnedResources().Change(m_Config.GunScriptable.ResourceUseOnFullyReload.GetReverse());
                 m_Config.SetAmmoToFull?.Invoke();
             }else{

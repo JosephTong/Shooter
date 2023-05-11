@@ -51,13 +51,13 @@ public class LootResultPanel : MonoBehaviour
        float extraSafeness = scriptable.SaftnessGainPreExtraBot * Mathf.Max(0, (botCount-1) );
        float totalSafeness = scriptable.BaseSafeness + extraSafeness;
        m_Safeness.text = $"Safeness : {totalSafeness}%";
-       m_SendBot.text = $"SendBot : {botCount}";
+       m_SendBot.text = $"Send Bot : {botCount}";
 
         float safenessNeeded = Random.Range(0f,100f);
         bool isSuccess = safenessNeeded<=totalSafeness;
         string targetResultText = isSuccess?"Return with loots":"No one return";
 
-       m_ResultText.text = $"SendBot : {targetResultText}";
+       m_ResultText.text = $"Result : {targetResultText}";
        m_ResultText.color = isSuccess?Color.green:Color.red;
 
        ResourcesRecord ans = new ResourcesRecord();

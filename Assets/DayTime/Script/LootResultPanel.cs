@@ -28,9 +28,13 @@ public class LootResultPanel : MonoBehaviour
     [SerializeField] private TMP_Text m_SendBot;
     [SerializeField] private TMP_Text m_ResultText;
     [SerializeField] private LootResultResourcesText m_Gain;
-    [SerializeField] private LootResultResourcesText m_Owned;
+    [SerializeField] private Button m_NextBtn;
 
     private void Start() {
+        m_NextBtn.onClick.AddListener(()=>{
+            DayTimeManager.GetInstance().OnClickResultPanelNextBtn();
+        });
+
         m_Self.SetActive(false);
     }
 
@@ -49,6 +53,7 @@ public class LootResultPanel : MonoBehaviour
 
        m_ResultText.text = $"SendBot : {targetResultText}";
        m_ResultText.color = isSuccess?Color.green:Color.red;
+       
        if(isSuccess){
             float seedRandom = Random.Range(0f,1f);
             m_Gain.Raw.text = $"+{Mathf.Lerp(scriptable.MinRawMaterial,scriptable.MaxRawMaterial,seedRandom )}";
@@ -60,6 +65,8 @@ public class LootResultPanel : MonoBehaviour
             m_Gain.Electronic.text = $"+{Mathf.Lerp(scriptable.MinElectronicMaterial,scriptable.MaxElectronicMaterial,seedRandom )}";
             m_Gain.Bot.text = "+0";
             m_Gain.Heat.text = $"+{scriptable.HeatGainOnLoot}";
+
+            // TODO : sent resources changes to daytime manager , NOT main game manager , we need to know how much resourecs owed brefore chnages
        }else{
             m_Gain.Raw.text =  "+0";
             m_Gain.Scrap.text =  "+0";

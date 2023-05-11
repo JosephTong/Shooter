@@ -23,48 +23,45 @@ public class LootDetailsPanel : MonoBehaviour
     [SerializeField] private Button m_DecreaseBotBtn;
 
 
-    private int m_LocationId = 0;
-    private int m_NewSentBotCount = 0;
-
-    private int m_OriginalLootBotCount = 0; // loot bot count on a location before hand
-    private LootLocationScriptable m_LootLocationScriptable;
+    private int m_OriginalLootBotCount = 0; // loot bot count on a location before hand , used by cancel btn
+    private LootLocationController m_TargetLootLocationController;
 
     private void Start() {
         m_IncreaseBotBtn.onClick.AddListener(()=>{
             // GetTotalBotUsed() is the bot use count before any of this panel changes confirm
-            if( DayTimeManager.GetInstance().GetTotalBotUsed() + m_NewSentBotCount - m_OriginalLootBotCount >=
+            if( DayTimeManager.GetInstance().GetTotalBotUsed() >=
                   MainGameManager.GetInstance(). GetOwnedBotCount() ){
                 return;
             }
-            m_NewSentBotCount++;
+            m_TargetLootLocationController.SetLootBotCount(m_TargetLootLocationController.GetLootBotCount()+1);
             UpdateSentBotCount();
         });
 
         m_DecreaseBotBtn.onClick.AddListener(()=>{
-            if(m_NewSentBotCount<=0){
+            if(m_TargetLootLocationController.GetLootBotCount()<=0){
                 // low cap 0
                 return;
             }
-            m_NewSentBotCount--;
+            m_TargetLootLocationController.SetLootBotCount(m_TargetLootLocationController.GetLootBotCount()-1);
             UpdateSentBotCount();
         });
 
         m_ConfirmBtn.onClick.AddListener(OnClickConfirm);
 
         m_CancelBtn.onClick.AddListener(()=>{
+            m_TargetLootLocationController.SetLootBotCount(m_OriginalLootBotCount);
             m_Self.SetActive(false);
         });
 
         m_Self.SetActive(false);
     }
 
-    public void SetLootDeail(LootLocationScriptable scriptable, int locationId, int originalLootBotCount){
-        m_LootLocationScriptable = scriptable;
-        m_LocationId = locationId;
+    public void SetLootDeail(LootLocationController lootLocationController, int originalLootBotCount){
+        m_TargetLootLocationController = lootLocationController;
 
-        m_OriginalLootBotCount = originalLootBotCount;
-        m_NewSentBotCount = m_OriginalLootBotCount;
+        m_OriginalLootBotCount = originalLootBotCount; 
         m_Self.SetActive(true);
+        var scriptable = m_TargetLootLocationController.GetScriptable();
         string text = $"{scriptable.DisplayName}";
         m_LocationName.text = text;
 
@@ -86,31 +83,28 @@ public class LootDetailsPanel : MonoBehaviour
     }
 
     private void OnClickConfirm(){
-        DayTimeManager.GetInstance().GetLootLocationController(m_LocationId).SetLootBotCount(m_NewSentBotCount);
-        DayTimeManager.GetInstance().ChangeBotUsedCount( m_NewSentBotCount - m_OriginalLootBotCount );
-        // GetTotalBotUsed() is the bot use count before any of this panel changes confirm
-        DayTimeManager.GetInstance().SetUsedBotCountText( DayTimeManager.GetInstance().GetTotalBotUsed() + m_NewSentBotCount - m_OriginalLootBotCount );
         m_Self.SetActive(false);
     }
 
     private void UpdateSentBotCount(){
-        string text = $"x {m_NewSentBotCount}";
+        int sentLootBotCount = m_TargetLootLocationController.GetLootBotCount();
+        string text = $"x {sentLootBotCount}";
         m_BotCount.text = text;
 
-        if(m_NewSentBotCount <=0){
+        if(sentLootBotCount <=0){
             text = $"Sent at least one bot to start looting ";
             m_Saftness.text = text;
         }else{
-            text = $"Safeness : {m_LootLocationScriptable.BaseSafeness}%";
-            if(m_NewSentBotCount>1){
-                string symbol = m_LootLocationScriptable.SaftnessGainPreExtraBot>=0?"+":"";
-                text += $" {symbol}{m_LootLocationScriptable.SaftnessGainPreExtraBot *(m_NewSentBotCount-1) }%";
-                text += $" ({m_LootLocationScriptable.BaseSafeness+m_LootLocationScriptable.SaftnessGainPreExtraBot *(m_NewSentBotCount-1)}%)";
+            var scriptable = m_TargetLootLocationController.GetScriptable();
+            text = $"Safeness : {scriptable.BaseSafeness}%";
+            if(sentLootBotCount>1){
+                string symbol = scriptable.SaftnessGainPreExtraBot>=0?"+":"";
+                text += $" {symbol}{scriptable.SaftnessGainPreExtraBot *(sentLootBotCount-1) }%";
+                text += $" ({scriptable.BaseSafeness+scriptable.SaftnessGainPreExtraBot *(sentLootBotCount-1)}%)";
             }
             m_Saftness.text = text;
         }
 
-            // GetTotalBotUsed() is the bot use count before any of this panel changes confirm
-        DayTimeManager.GetInstance().SetUsedBotCountText( DayTimeManager.GetInstance().GetTotalBotUsed() + m_NewSentBotCount - m_OriginalLootBotCount );
+        DayTimeManager.GetInstance().SetUsedBotCountText( );
     }
 }

@@ -24,10 +24,10 @@ public class LootLocationController : MonoBehaviour
     [SerializeField] private GameObject m_LootBotPanret;
     [SerializeField] private TMP_Text m_LootBotCountText;
     private int m_LootBotCount = 0;
-    private LootLocationScriptable m_Scriptable ;
+    private LootLocationScriptable m_LootLocationScriptable ;
 
     public void Init(LootLocationControllerConfig config){
-        m_Scriptable = config.Scriptable;
+        m_LootLocationScriptable = config.Scriptable;
         m_Self.localPosition = new Vector3(
                             config.Scriptable.Position.x, 
                             config.Scriptable.Position.y,
@@ -46,6 +46,11 @@ public class LootLocationController : MonoBehaviour
         if(lootBotCount > 0){
             m_LootBotCountText.text = $"x {lootBotCount}";
         }
+        DayTimeManager.GetInstance().SetUsedBotCountText();
+    }
+
+    public LootLocationScriptable GetScriptable(){
+        return m_LootLocationScriptable;
     }
 
 

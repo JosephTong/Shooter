@@ -39,7 +39,7 @@ public class LootMapController : MonoBehaviour
                 var scriptable = m_AllLocation[i];
                 var tmp = new LootLocationControllerConfig{
                     Scriptable = scriptable,
-                    OnClick = ()=>{m_LootDetailsPanel.SetLootDeail(scriptable,id,
+                    OnClick = ()=>{m_LootDetailsPanel.SetLootDeail(lootLocationController,
                         DayTimeManager.GetInstance().GetLootLocationController(id).GetLootBotCount());},
                     LootBotCount = 0
                 };

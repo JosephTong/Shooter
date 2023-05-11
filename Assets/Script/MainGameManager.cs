@@ -15,7 +15,7 @@ namespace MainGameNameSpace
         public float Chem = 0;
         public float Electronic = 0;
         public int Bot = 0;
-        public float Heat = 0;
+        public float Heat = 15;
 
         public ResourcesRecord GetReverse(){
             var ans = new ResourcesRecord{
@@ -85,17 +85,17 @@ public class MainGameManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(this.gameObject);
-    }
-
-    private void Start() {
         m_OwnedResource = new ResourcesRecord{
             Raw = 5000,
             Scrap = 5000,
             Chem = 5000,
             Electronic = 5000,
             Bot = 10,
-            Heat = 35
+            Heat = 40
         };
+    }
+
+    private void Start() {
     }
 
     public float GetHeat(){

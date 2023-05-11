@@ -190,7 +190,7 @@ public class GunController : MonoBehaviour
             }
             else
             {
-                m_CurrentAccruacy -= Time.deltaTime * mouseMoveAmound * (100 - m_SelectedGun.Stability);
+                m_CurrentAccruacy -= Time.deltaTime * mouseMoveAmound * (100 - m_SelectedGun.Stability) *0.75f;
                 m_MousePreviousPos = Input.mousePosition;
             }
 

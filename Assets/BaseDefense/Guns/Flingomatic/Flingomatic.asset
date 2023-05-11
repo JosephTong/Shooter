@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flingomatic
   m_EditorClassIdentifier: 
   DisplayName: Flingomatic
-  Damage: 13
+  Damage: 17
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}
   ClipSize: 15
@@ -38,8 +38,8 @@ MonoBehaviour:
   CameraShakeAmount: 10
   IsSemiAuto: 0
   FireRate: 4
-  Accuracy: 75
-  RecoilControl: 50
-  Stability: 50
+  Accuracy: 95
+  RecoilControl: 100
+  Stability: 100
   Handling: 95
   ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}

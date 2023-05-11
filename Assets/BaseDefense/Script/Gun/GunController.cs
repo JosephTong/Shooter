@@ -94,7 +94,7 @@ public class GunController : MonoBehaviour
                 return;
                 
             GunReloadControllerConfig gunReloadConfig = new GunReloadControllerConfig{
-                ReloadScriptable = m_SelectedGun.ReloadScriptable,
+                GunScriptable = m_SelectedGun,
                 GainAmmo = GainAmmo,
                 SetAmmoToFull = SetClipAmmoToFull,
                 SetAmmoToZero = SetClipAmmoToZero,

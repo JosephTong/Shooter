@@ -17,6 +17,23 @@ namespace MainGameNameSpace
         public int Bot = 0;
         public float Heat = 0;
 
+        public ResourcesRecord GetReverse(){
+            var ans = new ResourcesRecord{
+                Raw = Raw * -1,
+                Scrap = Scrap * -1,
+                Chem = Chem * -1,
+                Electronic = Electronic * -1,
+                Bot = Bot * -1,
+                Heat = Heat * -1,
+            };
+            return ans;
+        }
+
+        public bool IsEnough(ResourcesRecord record){
+            return Raw >= record.Raw && Scrap >= record.Scrap && Chem >= record.Chem &&
+                 Electronic >= record.Electronic && Bot >= record.Bot && Heat >= record.Heat;
+        }
+
         public void Change(ResourcesRecord record){
             Raw += record.Raw;
             Scrap += record.Scrap;

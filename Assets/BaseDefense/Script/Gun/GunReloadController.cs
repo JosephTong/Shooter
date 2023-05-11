@@ -11,7 +11,6 @@ using UnityEngine.UI;
 public class GunReloadController : MonoBehaviour
 {
     [SerializeField] private GunReloadScriptable m_ReloadScriptable;
-    [SerializeField] private bool m_IsPreview = false;
     private GunReloadControllerConfig m_Config=null; 
     [SerializeField] private AudioSource m_GunReloadAudioSource;
 
@@ -38,11 +37,6 @@ public class GunReloadController : MonoBehaviour
         BaseDefenseManager.GetInstance().m_ReloadUpdateAction += UpdateDragImagePosition;
         BaseDefenseManager.GetInstance().m_GameStageChangeToReloadAction += SetStartReloadPanel;
 
-        if(m_IsPreview && m_ReloadScriptable != null)
-            StartReload(new GunReloadControllerConfig{
-                ReloadScriptable = m_ReloadScriptable
-            });
-
         BaseDefenseManager.GetInstance().CloseReloadPanel();
     }
 
@@ -55,7 +49,7 @@ public class GunReloadController : MonoBehaviour
     }
 
     private void SetStartReloadPanel(){
-        m_ReloadScriptable = m_Config.ReloadScriptable;
+        m_ReloadScriptable = m_Config.GunScriptable.ReloadScriptable;
         m_CurReloadPhase = 0;
         m_MainGunImage.sprite = m_ReloadScriptable.StartMainGunImage;
         m_MainGunImage.rectTransform.sizeDelta = m_ReloadScriptable.MainGunSize;
@@ -269,39 +263,42 @@ public class GunReloadController : MonoBehaviour
 
     private void ResultAction(GunReloadActionResult actionEnum){
         if(actionEnum == (actionEnum | GunReloadActionResult.CancelReload) ){
-            if(m_IsPreview){
-                Debug.Log("Cancel Reload");
-            }else{
-                // cancel reload 
-                BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
-            }
+            // cancel reload 
+            BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
+            
         }
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.GainOneAmmo ) ){
-            if(m_IsPreview){
-                Debug.Log("Gain one ammo");
-            }else{
-                // Gain one ammo 
+            // Gain one ammo 
+            
+            if(MainGameManager.GetInstance().GetOwnedResources().IsEnough(m_Config.GunScriptable.ResourceUseOnReloadOne)){
+                MainGameManager.GetInstance().GetOwnedResources().Change(m_Config.GunScriptable.ResourceUseOnReloadOne.GetReverse());
                 m_Config.GainAmmo?.Invoke(1);
-
-                // to next phase if ammo is full
-                if(m_Config.IsFullClipAmmo() && actionEnum != (actionEnum | GunReloadActionResult.CancelReload)
-                    && actionEnum != ( actionEnum | GunReloadActionResult.ToNextPhase )){
-                    actionEnum &= ~ GunReloadActionResult.RefreshThisPhase;
-                    ResultAction(GunReloadActionResult.ToNextPhase);
-                }
+            }else{
+                Debug.LogError("Not enough resourses for reloading");
+                BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
+                return ;
             }
+
+            // to next phase if ammo is full
+            if(m_Config.IsFullClipAmmo() && actionEnum != (actionEnum | GunReloadActionResult.CancelReload)
+                && actionEnum != ( actionEnum | GunReloadActionResult.ToNextPhase )){
+                actionEnum &= ~ GunReloadActionResult.RefreshThisPhase;
+                ResultAction(GunReloadActionResult.ToNextPhase);
+            }
+            
         }
 
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.FullAmmoReload ) ){
-            if(m_IsPreview){
-                Debug.Log("Full Ammo Reload");
-            }else{
-                // Full Ammo Reload
+            // Full Ammo Reload
+            if(MainGameManager.GetInstance().GetOwnedResources().IsEnough(m_Config.GunScriptable.ResourceUseOnFullyReload)){
+                MainGameManager.GetInstance().GetOwnedResources().Change(m_Config.GunScriptable.ResourceUseOnFullyReload.GetReverse());
                 m_Config.SetAmmoToFull?.Invoke();
-
+            }else{
+                Debug.LogError("Not enough resourses for reloading");
             }
+            
         }
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.RefreshThisPhase ) ){
@@ -311,12 +308,9 @@ public class GunReloadController : MonoBehaviour
         }
 
         if(actionEnum == ( actionEnum | GunReloadActionResult.SetClipAmmoToZero ) ){
-            if(m_IsPreview){
-                Debug.Log("Set Clip Ammo To Zero");
-            }else{
-                // Set Clip Ammo To Zero
-                m_Config.SetAmmoToZero?.Invoke();
-            }
+            // Set Clip Ammo To Zero
+            m_Config.SetAmmoToZero?.Invoke();
+            
 
         }
 

@@ -15,7 +15,7 @@ namespace BaseDefenseNameSpace
 
     public class GunReloadControllerConfig
     {
-        public GunReloadScriptable ReloadScriptable;
+        public GunScriptable GunScriptable;
         //public Action CancelReload;
         public Action<int> GainAmmo;
         public Action SetAmmoToFull;

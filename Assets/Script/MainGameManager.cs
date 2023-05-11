@@ -8,12 +8,23 @@ using MainGameNameSpace;
 namespace MainGameNameSpace
 {
     [System.Serializable]
-    public class FourResources
+    public class ResourcesRecord
     {
-        public float Raw=100; 
-        public float Scrap=100;
-        public float Chem=100;
-        public float Electronic=100;
+        public float Raw = 0;
+        public float Scrap = 0;
+        public float Chem = 0;
+        public float Electronic = 0;
+        public float Bot = 0;
+        public float Heat = 0;
+
+        public void Change(ResourcesRecord record){
+            Raw += record.Raw;
+            Scrap += record.Scrap;
+            Chem += record.Chem;
+            Electronic += record.Electronic;
+            Bot += record.Bot;
+            Heat += record.Heat;
+        }
     }
 }
 
@@ -35,9 +46,9 @@ public class MainGameManager : MonoBehaviour
         " - To next day it player clear all 3 waves"; 
 
     [Header(TotalHeatHeader)]
-    [SerializeField][Range(15f,1000f)] private float m_TotalHeat = 35;
+    //[SerializeField][Range(15f,1000f)] private float m_TotalHeat = 35;
 
-    private FourResources m_OwnedResource;
+    private ResourcesRecord m_OwnedResource = new ResourcesRecord();
     private int m_BotOwned = 10;
 
     
@@ -60,13 +71,13 @@ public class MainGameManager : MonoBehaviour
     }
 
     public float GetHeat(){
-        if(m_TotalHeat > 1000){
-            m_TotalHeat = 1000;
+        if(m_OwnedResource.Heat > 1000){
+            m_OwnedResource.Heat = 1000;
         }
-        if(m_TotalHeat <15){
-            m_TotalHeat = 15;
+        if(m_OwnedResource.Heat <15){
+            m_OwnedResource.Heat = 15;
         }
-        return m_TotalHeat;
+        return m_OwnedResource.Heat;
     }
 
     public void AddNewAudioSource(AudioSource audioSource){
@@ -94,6 +105,14 @@ public class MainGameManager : MonoBehaviour
         {
             m_AllAudioSource.RemoveAt(toBeRemove[i]-i);
         }
+    }
+
+    public void GainResources(ResourcesRecord gain){
+        m_OwnedResource.Change(gain);
+    }
+
+    public ResourcesRecord GetOwnedResources(){
+        return m_OwnedResource;
     }
 
 }

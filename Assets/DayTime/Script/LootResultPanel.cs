@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using LootResultPanelNameSpace;
+using MainGameNameSpace;
 
 namespace LootResultPanelNameSpace
 {
@@ -17,6 +18,7 @@ namespace LootResultPanelNameSpace
         public TMP_Text Bot;
         public TMP_Text Heat;
     }
+
 }
 
 public class LootResultPanel : MonoBehaviour
@@ -42,7 +44,7 @@ public class LootResultPanel : MonoBehaviour
         m_Self.SetActive(false);
     }
 
-    public void Init(LootLocationScriptable scriptable , int botCount){
+    public ResourcesRecord Init(LootLocationScriptable scriptable , int botCount){
         m_Self.SetActive(true);
         m_DetailImage.sprite = scriptable.DetailImage;
        m_LocationName.text = $"Location : {scriptable.DisplayName }";
@@ -57,22 +59,42 @@ public class LootResultPanel : MonoBehaviour
 
        m_ResultText.text = $"SendBot : {targetResultText}";
        m_ResultText.color = isSuccess?Color.green:Color.red;
+
+       ResourcesRecord ans = new ResourcesRecord();
        
        if(isSuccess){
             float seedRandom = Random.Range(0f,1f);
-            m_Gain.Raw.text = $"+{(int)Mathf.Lerp(scriptable.MinRawMaterial,scriptable.MaxRawMaterial,seedRandom )}";
+            ans.Raw = Mathf.Lerp(scriptable.MinRawMaterial,scriptable.MaxRawMaterial,seedRandom );
+            m_Gain.Raw.text = $"+{(int)ans.Raw}";
+
             seedRandom = Random.Range(0f,1f);
-            m_Gain.Scrap.text = $"+{(int)Mathf.Lerp(scriptable.MinScrapMaterial,scriptable.MaxScrapMaterial,seedRandom )}";
+            ans.Scrap = Mathf.Lerp(scriptable.MinScrapMaterial,scriptable.MaxScrapMaterial,seedRandom );
+            m_Gain.Scrap.text = $"+{(int)ans.Scrap}";
+
             seedRandom = Random.Range(0f,1f);
-            m_Gain.Chem.text = $"+{(int)Mathf.Lerp(scriptable.MinChemMaterial,scriptable.MaxChemMaterial,seedRandom )}";
+            ans.Chem = Mathf.Lerp(scriptable.MinChemMaterial,scriptable.MaxChemMaterial,seedRandom );
+            m_Gain.Chem.text = $"+{(int)ans.Chem}";
+
             seedRandom = Random.Range(0f,1f);
-            m_Gain.Electronic.text = $"+{(int)Mathf.Lerp(scriptable.MinElectronicMaterial,scriptable.MaxElectronicMaterial,seedRandom )}";
+            ans.Electronic = Mathf.Lerp(scriptable.MinElectronicMaterial,scriptable.MaxElectronicMaterial,seedRandom );
+            m_Gain.Electronic.text = $"+{(int)ans.Electronic}";
+
+            ans.Bot = 0;
             m_Gain.Bot.text = "+0";
+
+            ans.Heat = scriptable.HeatGainOnLoot;
             string heatText = scriptable.HeatGainOnLoot>=0 ? "+":"";
             m_Gain.Heat.text = heatText + $"{scriptable.HeatGainOnLoot}";
 
             // TODO : sent resources changes to daytime manager , NOT main game manager , we need to know how much resourecs owed brefore chnages
        }else{
+            ans.Raw = 0;
+            ans.Scrap = 0;
+            ans.Chem = 0;
+            ans.Electronic = 0;
+            ans.Bot = botCount*-1;
+            ans.Heat = 0;
+
             m_Gain.Raw.text =  "+0";
             m_Gain.Scrap.text =  "+0";
             m_Gain.Chem.text =  "+0";
@@ -80,5 +102,7 @@ public class LootResultPanel : MonoBehaviour
             m_Gain.Bot.text = $"-{botCount}";
             m_Gain.Heat.text = $"+0";
        }
+
+       return ans;
     }
 }

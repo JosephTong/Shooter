@@ -21,10 +21,10 @@ MonoBehaviour:
   BaseSafeness: 95
   SaftnessGainPreExtraBot: 5
   MinRawMaterial: 0
-  MaxRawMaterial: 5
+  MaxRawMaterial: 50
   MinScrapMaterial: 0
-  MaxScrapMaterial: 5
+  MaxScrapMaterial: 50
   MinChemMaterial: 0
-  MaxChemMaterial: 5
+  MaxChemMaterial: 50
   MinElectronicMaterial: 0
-  MaxElectronicMaterial: 5
+  MaxElectronicMaterial: 50

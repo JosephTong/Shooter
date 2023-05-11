@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using LootResultPanelNameSpace;
 using MainGameNameSpace;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TotalResourcePanel : MonoBehaviour
@@ -13,6 +14,9 @@ public class TotalResourcePanel : MonoBehaviour
     [SerializeField] private Button m_NextBtn;
 
     private void Start() {
+        m_NextBtn.onClick.AddListener(()=>{
+            SceneManager.LoadScene("BaseDefense");
+        });
         m_Self.SetActive(false);
     }
 

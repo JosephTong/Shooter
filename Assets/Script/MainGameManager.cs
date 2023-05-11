@@ -14,7 +14,7 @@ namespace MainGameNameSpace
         public float Scrap = 0;
         public float Chem = 0;
         public float Electronic = 0;
-        public float Bot = 0;
+        public int Bot = 0;
         public float Heat = 0;
 
         public void Change(ResourcesRecord record){
@@ -45,11 +45,11 @@ public class MainGameManager : MonoBehaviour
         " - Wave heat = TotalHeat / 3 \n" + // EnemySpawnController >> TotalWave
         " - To next day it player clear all 3 waves"; 
 
-    [Header(TotalHeatHeader)]
+    //[Header(TotalHeatHeader)]
     //[SerializeField][Range(15f,1000f)] private float m_TotalHeat = 35;
 
     private ResourcesRecord m_OwnedResource = new ResourcesRecord();
-    private int m_BotOwned = 10;
+    //private int m_BotOwned = 10;
 
     
     public static MainGameManager GetInstance(){
@@ -70,6 +70,17 @@ public class MainGameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    private void Start() {
+        m_OwnedResource = new ResourcesRecord{
+            Raw = 5000,
+            Scrap = 5000,
+            Chem = 5000,
+            Electronic = 5000,
+            Bot = 10,
+            Heat = 35
+        };
+    }
+
     public float GetHeat(){
         if(m_OwnedResource.Heat > 1000){
             m_OwnedResource.Heat = 1000;
@@ -88,7 +99,7 @@ public class MainGameManager : MonoBehaviour
     }
 
     public int GetOwnedBotCount(){
-        return m_BotOwned;
+        return m_OwnedResource.Bot;
     }
 
     public void UpdateVolume(){

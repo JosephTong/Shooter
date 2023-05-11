@@ -20,11 +20,11 @@ MonoBehaviour:
   HeatGainOnLoot: 10
   BaseSafeness: 65
   SaftnessGainPreExtraBot: 4
-  MinRawMaterial: 200
-  MaxRawMaterial: 600
-  MinScrapMaterial: 50
-  MaxScrapMaterial: 200
-  MinChemMaterial: 50
-  MaxChemMaterial: 200
-  MinElectronicMaterial: 50
-  MaxElectronicMaterial: 200
+  MinRawMaterial: 2000
+  MaxRawMaterial: 6000
+  MinScrapMaterial: 500
+  MaxScrapMaterial: 2000
+  MinChemMaterial: 500
+  MaxChemMaterial: 5000
+  MinElectronicMaterial: 500
+  MaxElectronicMaterial: 2000

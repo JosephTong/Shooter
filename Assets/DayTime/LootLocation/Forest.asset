@@ -18,13 +18,13 @@ MonoBehaviour:
   Position: {x: -150, y: -150}
   DetailImage: {fileID: 21300000, guid: 0dd44702c44226247a46ffa58f28d2b0, type: 3}
   HeatGainOnLoot: 2
-  BaseSaftness: 95
+  BaseSafeness: 75
   SaftnessGainPreExtraBot: 10
-  MinRawMaterial: 50
-  MaxRawMaterial: 300
+  MinRawMaterial: 500
+  MaxRawMaterial: 3000
   MinScrapMaterial: 0
-  MaxScrapMaterial: 10
+  MaxScrapMaterial: 100
   MinChemMaterial: 0
-  MaxChemMaterial: 50
+  MaxChemMaterial: 500
   MinElectronicMaterial: 0
-  MaxElectronicMaterial: 10
+  MaxElectronicMaterial: 100

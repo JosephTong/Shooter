@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using GunReloadScriptableNameSpace;
 using UnityEngine;
-
+using MainGameNameSpace;
 
 
 [CreateAssetMenu(fileName = "Gun", menuName = "Scriptable/Weapon", order = 1)]
@@ -14,6 +14,8 @@ public class GunScriptable : ScriptableObject
     public AudioClip ShootSound;
     public float ClipSize;
     public Sprite FPSSprite;
+    public ResourcesRecord ResourceUseOnFullyReload = new ResourcesRecord();
+    public ResourcesRecord ResourceUseOnReloadOne = new ResourcesRecord();
     public float LightSizeOnShoot = 15;
     public AudioClip OutOfAmmoSound;
     [Header("How strong the shake")]

@@ -32,14 +32,14 @@ MonoBehaviour:
     Electronic: 0
     Bot: 0
     Heat: 0
-  LightSizeOnShoot: 5
+  LightSizeGainOnShoot: 1
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   CameraShakeStrength: 2
   CameraShakeAmount: 10
   IsSemiAuto: 0
   FireRate: 4
-  Accuracy: 95
-  RecoilControl: 100
-  Stability: 100
-  Handling: 95
+  Accuracy: 75
+  RecoilControl: 50
+  Stability: 50
+  Handling: 100
   ReloadScriptable: {fileID: 11400000, guid: 5ba6b51ec7ba12145adfd52a54587c26, type: 2}

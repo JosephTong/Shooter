@@ -32,7 +32,7 @@ MonoBehaviour:
     Electronic: 0
     Bot: 0
     Heat: 0
-  LightSizeOnShoot: 15
+  LightSizeGainOnShoot: 6
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   CameraShakeStrength: 4
   CameraShakeAmount: 10

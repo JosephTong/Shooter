@@ -272,7 +272,7 @@ public class GunController : MonoBehaviour
         float lightFadeTime = 0.45f;
         while (timePass<=1)
         {
-            m_CrossHairLight.localScale = Vector3.one * Mathf.Lerp(m_SelectedGun.LightSizeOnShoot,m_CrossHairLightMinSize,timePass);
+            m_CrossHairLight.localScale = Vector3.one * Mathf.Lerp(m_CrossHairLightMinSize + m_SelectedGun.LightSizeGainOnShoot,m_CrossHairLightMinSize,timePass);
             timePass += Time.deltaTime / lightFadeTime;
             yield return null;
         }

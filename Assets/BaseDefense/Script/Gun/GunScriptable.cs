@@ -16,7 +16,7 @@ public class GunScriptable : ScriptableObject
     public Sprite FPSSprite;
     public ResourcesRecord ResourceUseOnFullyReload = new ResourcesRecord();
     public ResourcesRecord ResourceUseOnReloadOne = new ResourcesRecord();
-    public float LightSizeOnShoot = 15;
+    public float LightSizeGainOnShoot = 10;
     public AudioClip OutOfAmmoSound;
     [Header("How strong the shake")]
     [Range (1,25)]public float CameraShakeStrength = 2;

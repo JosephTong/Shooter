@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AK69
   m_EditorClassIdentifier: 
   DisplayName: AK69
+  DisplaySprite: {fileID: 21300000, guid: 401b79f2aec463c429d2e449f5412eae, type: 3}
   Damage: 3
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: d5391e1d16b5e05498f1d772f283514f, type: 3}
@@ -32,7 +33,7 @@ MonoBehaviour:
     Electronic: 0
     Bot: 0
     Heat: 0
-  LightSizeOnShoot: 15
+  LightSizeGainOnShoot: 10
   OutOfAmmoSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
   CameraShakeStrength: 5
   CameraShakeAmount: 20

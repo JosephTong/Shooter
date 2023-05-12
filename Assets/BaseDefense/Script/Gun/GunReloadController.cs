@@ -63,11 +63,11 @@ public class GunReloadController : MonoBehaviour
     private void SetResourceUsedText(ResourcesRecord used){
         m_ResourceCanvasGroup.alpha = 1;
         var ownedResourceBefore = MainGameManager.GetInstance().GetOwnedResources();
-        m_Raw.text = $"{ownedResourceBefore.Raw } - ({used.Raw})";
-        m_Scrap.text =$"{ownedResourceBefore.Scrap} - ({used.Scrap})";
-        m_Chem.text =$"{ownedResourceBefore.Chem} - ({used.Chem})";
-        m_Electronic.text =$"{ownedResourceBefore.Electronic} - ({used.Electronic})";
-        m_Bot.text =$"{ownedResourceBefore.Bot} - ({used.Bot})";
+        m_Raw.text = $"{ (int)ownedResourceBefore.Raw } - ({(int)used.Raw})";
+        m_Scrap.text =$"{(int)ownedResourceBefore.Scrap} - ({(int)used.Scrap})";
+        m_Chem.text =$"{(int)ownedResourceBefore.Chem} - ({(int)used.Chem})";
+        m_Electronic.text =$"{(int)ownedResourceBefore.Electronic} - ({(int)used.Electronic})";
+        m_Bot.text =$"{(int)ownedResourceBefore.Bot} - ({(int)used.Bot})";
         if(m_ResourceFadeCourtine != null){
             StopCoroutine(m_ResourceFadeCourtine);
         }

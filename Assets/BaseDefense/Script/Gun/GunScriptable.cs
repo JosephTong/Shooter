@@ -9,6 +9,8 @@ using MainGameNameSpace;
 public class GunScriptable : ScriptableObject
 {
     public string DisplayName;
+    [Header("For Weapon selection panel in DayTime scene")]
+    public Sprite DisplaySprite;
     public float Damage;
     public int PelletPerShot = 1;
     public AudioClip ShootSound;

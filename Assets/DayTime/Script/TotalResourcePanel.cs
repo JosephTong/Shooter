@@ -32,7 +32,7 @@ public class TotalResourcePanel : MonoBehaviour
         m_Before.Bot.text = $"{(int)ownedResource.Bot }";
         m_Before.Heat.text = $"{MainGameManager.GetInstance().GetHeat() }";
 
-        MainGameManager.GetInstance().GainResources( totalRescourseChanges);
+        MainGameManager.GetInstance().GainResources( totalRescourseChanges );
 
         
         // resource after changes

@@ -176,7 +176,7 @@ public class GunController : MonoBehaviour
         {
             m_AimDragMouseEndPos = Input.mousePosition;
 
-            Vector3 offset = MainGameManager.GetInstance().m_AimSensitivity * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) *3 ;
+            Vector3 offset = MainGameManager.GetInstance().GetAimSensitivity() * (m_AimDragMouseEndPos - m_AimDragMouseStartPos) *3 ;
             m_CrossHair.position = m_CrossHairDragStartPos + offset;
 
             // accrucy lose for moving

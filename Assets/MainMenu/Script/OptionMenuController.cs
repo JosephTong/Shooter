@@ -16,11 +16,11 @@ public class OptionMenuController : MonoBehaviour
     void Start()
     {
         m_AimSensitivitySlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().m_AimSensitivity = Mathf.Lerp(0.1f, 2f,m_AimSensitivitySlider.normalizedValue);
+            MainGameManager.GetInstance().SetAimSensitivity( Mathf.Lerp(0.1f, 2f,m_AimSensitivitySlider.normalizedValue) );
         });
 
         m_VolumeSlider.onValueChanged.AddListener((x)=>{
-            MainGameManager.GetInstance().m_Volume = Mathf.Lerp(0.1f, 2f,m_VolumeSlider.normalizedValue);
+            MainGameManager.GetInstance().SetVolume( Mathf.Lerp(0.1f, 2f,m_VolumeSlider.normalizedValue) );
             MainGameManager.GetInstance().UpdateVolume();
         });
         

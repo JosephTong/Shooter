@@ -13,7 +13,10 @@ public class DayTimeManager : MonoBehaviour
     [SerializeField] private TMP_Text m_BotCountText;
     [SerializeField] private LootResultPanel m_LootResultPanel;
     [SerializeField] private TotalResourcePanel m_TotalResourcePanel;
-    [SerializeField] private Button m_finializeBtn;
+    [SerializeField] private WeaponPanelController m_WeaponPanelController;
+
+    [SerializeField] private Button m_FinializeBtn;
+    [SerializeField] private Button m_WeaponPanelBtn;
     private int m_CurrentShowResultIndex = 0;
     private List<LootLocationController> m_AllLocationWithBot = new List<LootLocationController>();
     private ResourcesRecord m_TotalRescourseChanges = new ResourcesRecord();
@@ -38,7 +41,14 @@ public class DayTimeManager : MonoBehaviour
 
     private void Start() {
         DayTimeManager.GetInstance().SetUsedBotCountText();
-        m_finializeBtn.onClick.AddListener(()=>{
+
+        m_WeaponPanelBtn.onClick.AddListener(()=>{
+            m_WeaponPanelController.SetActive();
+        });
+
+        
+
+        m_FinializeBtn.onClick.AddListener(()=>{
             DayTimeManager.GetInstance().OnClickResultPanelNextBtn();
         });
     }

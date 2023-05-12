@@ -15,7 +15,7 @@ namespace MainGameNameSpace
         public float Chem = 0;
         public float Electronic = 0;
         public int Bot = 0;
-        public float Heat = 15;
+        public float Heat = 0;
 
         public ResourcesRecord GetReverse(){
             var ans = new ResourcesRecord{
@@ -49,9 +49,9 @@ public class MainGameManager : MonoBehaviour
 {
     public static MainGameManager m_Instance = null;
     private List<AudioSource> m_AllAudioSource = new List<AudioSource>();
-
-    public float m_Volume = 0.75f;
-    public float m_AimSensitivity = 0.5f;    
+ 
+    [SerializeField] private float m_Volume = 0.75f;
+    [SerializeField] private float m_AimSensitivity = 0.5f;    
     
     private const string TotalHeatHeader = " - Strong enemy will not spawn if Total heat is lower than the requirement\n"+
         " - High cap at 1000 \n"+
@@ -65,7 +65,7 @@ public class MainGameManager : MonoBehaviour
     //[Header(TotalHeatHeader)]
     //[SerializeField][Range(15f,1000f)] private float m_TotalHeat = 35;
 
-    private ResourcesRecord m_OwnedResource = new ResourcesRecord();
+    [SerializeField] private ResourcesRecord m_OwnedResource = new ResourcesRecord();
     //private int m_BotOwned = 10;
 
     
@@ -91,12 +91,27 @@ public class MainGameManager : MonoBehaviour
             Chem = 5000,
             Electronic = 5000,
             Bot = 10,
-            Heat = 40
+            Heat = 100
         };
     }
 
     private void Start() {
     }
+
+    public void SetAimSensitivity(float sensitivity){
+        m_AimSensitivity = sensitivity;
+    }
+
+    public void SetVolume(float volume){
+        m_Volume = volume;
+    }
+    public float GetVolume(){
+        return m_Volume;
+    }
+    public float GetAimSensitivity(){
+        return m_AimSensitivity;
+    }
+
 
     public float GetHeat(){
         if(m_OwnedResource.Heat > 1000){

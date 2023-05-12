@@ -47,7 +47,7 @@ public class GunReloadController : MonoBehaviour
 
     private void Start() {
         BaseDefenseManager.GetInstance().m_ReloadUpdateAction += UpdateDragImagePosition;
-        BaseDefenseManager.GetInstance().m_GameStageChangeToReloadAction += SetStartReloadPanel;
+        BaseDefenseManager.GetInstance().m_ChangeToReloadAction += SetStartReloadPanel;
 
         BaseDefenseManager.GetInstance().CloseReloadPanel();
     }

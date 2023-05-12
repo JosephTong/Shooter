@@ -8,6 +8,12 @@ using MainGameNameSpace;
 namespace MainGameNameSpace
 {
     [System.Serializable]
+    public class WeaponOwnership
+    {
+        public GunScriptable Gun;
+        public bool IsOwned = false;
+    }
+    [System.Serializable]
     public class ResourcesRecord
     {
         public float Raw = 0;
@@ -66,7 +72,7 @@ public class MainGameManager : MonoBehaviour
     //[SerializeField][Range(15f,1000f)] private float m_TotalHeat = 35;
 
     [SerializeField] private ResourcesRecord m_OwnedResource = new ResourcesRecord();
-    //private int m_BotOwned = 10;
+    [SerializeField] private List<WeaponOwnership> m_AllWeaponOwnership = new List<WeaponOwnership>();
 
     
     public static MainGameManager GetInstance(){
@@ -96,6 +102,7 @@ public class MainGameManager : MonoBehaviour
     }
 
     private void Start() {
+        
     }
 
     public void SetAimSensitivity(float sensitivity){

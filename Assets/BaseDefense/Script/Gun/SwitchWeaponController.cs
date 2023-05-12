@@ -19,8 +19,8 @@ public class SwitchWeaponController : MonoBehaviour
 
     private void Start() {
         BaseDefenseManager.GetInstance().m_SwitchWeaponUpdateAction += SwitchWeaponUpdate;
-        BaseDefenseManager.GetInstance().m_GameStageChangeToSwitchWeaponAction += ChangeGameStageToSwitchWeapon;
-        BaseDefenseManager.GetInstance().m_GameStageChangeFromSwitchWeaponAction += ChangeGameStageFromSwitchweapon;
+        BaseDefenseManager.GetInstance().m_ChangeToSwitchWeaponAction += ChangeGameStageToSwitchWeapon;
+        BaseDefenseManager.GetInstance().m_ChangeFromSwitchWeaponAction += ChangeGameStageFromSwitchweapon;
 
 
         m_LookDownBtn.onDown.AddListener(()=>{

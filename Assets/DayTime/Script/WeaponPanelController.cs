@@ -1,11 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class WeaponPanelController : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
+
+    [Header("Grid")]
+    [SerializeField] private GameObject m_WeaponGridPanel;
+    [SerializeField] private GameObject m_WeaponGridPrefab;
+    [SerializeField] private TMP_Text m_WeaponPageText;
+    [SerializeField] private Button m_LastPageBtn;
+    [SerializeField] private Button m_NextPageBtn;
+
+
+
+
+    [Header("Detail")]
+    [SerializeField] private GameObject m_WeaponDetailPanel;
     [SerializeField] private TMP_Text m_WeaponDisplayName;
     [SerializeField] private TMP_Text m_DamagePerPellet;
     [SerializeField] private TMP_Text m_PelletPerShot;
@@ -17,6 +31,14 @@ public class WeaponPanelController : MonoBehaviour
     [SerializeField] private TMP_Text m_Handling;
 
     private void Start(){
+        DayTimeManager.GetInstance().m_ChangeFromWeapon += ()=>{
+            m_Self.SetActive(false);
+            };
+
+        DayTimeManager.GetInstance().m_ChangeToWeapon += ()=>{
+            SetActive();
+            };
+
         ClearInfo();
         m_Self.SetActive(false);
     }
@@ -41,14 +63,14 @@ public class WeaponPanelController : MonoBehaviour
     }
 
     public void ClearInfo(){
-        m_WeaponDisplayName.text = "---";
-        m_DamagePerPellet.text = $"Damage per pellet : ---";
-        m_PelletPerShot.text = $"Pellet per shot: ---";
-        m_ClipSize.text = $"Clip size : ---";
-        m_FireRate.text = $"Fire Rate : ---";
-        m_Accuracy.text = $"Accuracy : ---";
-        m_RecoilControl.text = $"Recoil Control : ---";
-        m_Stability.text = $"Stability : ---";
-        m_Handling.text = $"Handling : ---";
+        m_WeaponDisplayName.text = "- - -";
+        m_DamagePerPellet.text = $"Damage per pellet : - - -";
+        m_PelletPerShot.text = $"Pellet per shot: - - -";
+        m_ClipSize.text = $"Clip size : - - -";
+        m_FireRate.text = $"Fire Rate : - - -";
+        m_Accuracy.text = $"Accuracy : - - -";
+        m_RecoilControl.text = $"Recoil Control : - - -";
+        m_Stability.text = $"Stability : - - -";
+        m_Handling.text = $"Handling : - - -";
     }
 }

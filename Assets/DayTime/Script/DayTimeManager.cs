@@ -4,24 +4,54 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Linq;
+using DayTimeNameSpace;
 using LootResultPanelNameSpace;
 using MainGameNameSpace;
+using System;
+
+namespace DayTimeNameSpace
+{
+    public enum DayTimeStage{
+        Loot,
+        Weapon
+    }
+}
+
 
 public class DayTimeManager : MonoBehaviour
 {
     public static DayTimeManager m_Instance = null;
+    private DayTimeStage m_GameStage = DayTimeStage.Loot;
     [SerializeField] private TMP_Text m_BotCountText;
+    [SerializeField] private Button m_FinializeBtn;
+    [SerializeField] private GameObject m_TopBar;
+
+    #region From
+    public Action m_ChangeFromLoot = null;
+    public Action m_ChangeFromWeapon = null;
+    #endregion
+
+    #region To
+    public Action m_ChangeToLoot = null;
+    public Action m_ChangeToWeapon = null;
+
+    #endregion
+
+
+    [Header("Loot")]
+    [SerializeField] private Button m_LootBtn;
     [SerializeField] private LootResultPanel m_LootResultPanel;
     [SerializeField] private TotalResourcePanel m_TotalResourcePanel;
-    [SerializeField] private WeaponPanelController m_WeaponPanelController;
-
-    [SerializeField] private Button m_FinializeBtn;
-    [SerializeField] private Button m_WeaponPanelBtn;
     private int m_CurrentShowResultIndex = 0;
     private List<LootLocationController> m_AllLocationWithBot = new List<LootLocationController>();
     private ResourcesRecord m_TotalRescourseChanges = new ResourcesRecord();
-
     private Dictionary<int,LootLocationController> m_AllSpawnedLootLocation = new Dictionary<int, LootLocationController>();
+    
+
+    [Header("Weapon")]
+    [SerializeField] private Button m_WeaponPanelBtn;
+    [SerializeField] private WeaponPanelController m_WeaponPanelController;
+
     public static DayTimeManager GetInstance(){
         if(m_Instance==null){
             m_Instance = new GameObject().AddComponent<DayTimeManager>();
@@ -41,16 +71,53 @@ public class DayTimeManager : MonoBehaviour
 
     private void Start() {
         DayTimeManager.GetInstance().SetUsedBotCountText();
+        ChangeGameStage(DayTimeStage.Loot);
 
         m_WeaponPanelBtn.onClick.AddListener(()=>{
-            m_WeaponPanelController.SetActive();
+            ChangeGameStage(DayTimeStage.Weapon);
+        });        
+        
+        m_LootBtn.onClick.AddListener(()=>{
+            ChangeGameStage(DayTimeStage.Loot);
         });
-
+        
         
 
         m_FinializeBtn.onClick.AddListener(()=>{
             DayTimeManager.GetInstance().OnClickResultPanelNextBtn();
         });
+    }
+
+        public void ChangeGameStage(DayTimeStage newStage){
+        switch (m_GameStage)
+        {
+            case DayTimeStage.Loot:
+                m_ChangeFromLoot?.Invoke();
+            break;
+            case DayTimeStage.Weapon:
+                m_ChangeFromWeapon?.Invoke();
+            break;
+            default:
+            break;
+        }
+
+        switch (newStage)
+        {
+            case DayTimeStage.Loot:
+                m_ChangeToLoot?.Invoke();
+            break;
+            case DayTimeStage.Weapon:
+                m_ChangeToWeapon?.Invoke();
+            break;
+            default:
+            break;
+        }
+
+        m_GameStage = newStage;
+    }
+
+    public void SetTopBar(bool isActive){
+        m_TopBar.SetActive(isActive);
     }
 
     public int GetTotalBotUsed(){

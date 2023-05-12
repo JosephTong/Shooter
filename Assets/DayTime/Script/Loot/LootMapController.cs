@@ -7,6 +7,8 @@ using LootLocationControllerNameSpace;
 
 public class LootMapController : MonoBehaviour
 {
+    [SerializeField] private GameObject m_Self;
+
     [SerializeField] private List<LootLocationScriptable> m_AllLocation = new List<LootLocationScriptable>();
     [SerializeField] private Transform m_LocationParent;
     [SerializeField] private GameObject m_LocaionPrefab;
@@ -14,9 +16,16 @@ public class LootMapController : MonoBehaviour
     [SerializeField] private LootDetailsPanel m_LootDetailsPanel;
 
 
-
-
     private void Start() {
+        DayTimeManager.GetInstance().m_ChangeFromLoot += ()=>{
+            m_Self.SetActive(false);
+        };
+
+        DayTimeManager.GetInstance().m_ChangeToLoot += ()=>{
+            m_Self.SetActive(true);
+        };
+
+
         m_HeatAreaSize = Mathf.Lerp(500f,3000f, MainGameManager.GetInstance().GetHeat() /1000f );
         for (int i = 0; i < m_AllLocation.Count; i++)
         {
@@ -48,6 +57,8 @@ public class LootMapController : MonoBehaviour
             }
             
         }
+        // TODO : spawn heat bg 
+        // TODO : Move by draging
     }
 
     private void Update() {

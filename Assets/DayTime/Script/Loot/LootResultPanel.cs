@@ -45,6 +45,7 @@ public class LootResultPanel : MonoBehaviour
     }
 
     public ResourcesRecord Init(LootLocationScriptable scriptable , int botCount){
+        DayTimeManager.GetInstance().SetTopBar(false);
         m_Self.SetActive(true);
         m_DetailImage.sprite = scriptable.DetailImage;
        m_LocationName.text = $"Location : {scriptable.DisplayName }";
@@ -86,7 +87,6 @@ public class LootResultPanel : MonoBehaviour
             string heatText = scriptable.HeatGainOnLoot>=0 ? "+":"";
             m_Gain.Heat.text = heatText + $"{scriptable.HeatGainOnLoot}";
 
-            // TODO : sent resources changes to daytime manager , NOT main game manager , we need to know how much resourecs owed brefore chnages
        }else{
             ans.Raw = 0;
             ans.Scrap = 0;

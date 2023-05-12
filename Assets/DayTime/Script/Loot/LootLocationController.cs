@@ -16,6 +16,8 @@ namespace LootLocationControllerNameSpace
     }
 }
 
+
+// the location icon prefab controller 
 public class LootLocationController : MonoBehaviour
 {
     [SerializeField] private RectTransform m_Self; 

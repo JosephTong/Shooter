@@ -9,6 +9,7 @@ public class LootDetailsPanel : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
     [SerializeField] private Image m_DetailImage; 
+
     [SerializeField] private TMP_Text m_HeatGain; 
     [SerializeField] private TMP_Text m_LocationName; 
     [SerializeField] private TMP_Text m_Raw; 
@@ -17,18 +18,19 @@ public class LootDetailsPanel : MonoBehaviour
     [SerializeField] private TMP_Text m_Electronic;
     [SerializeField] private TMP_Text m_Saftness;
     [SerializeField] private TMP_Text m_BotCount;
+
     [SerializeField] private Button m_ConfirmBtn;
     [SerializeField] private Button m_CancelBtn;
     [SerializeField] private Button m_IncreaseBotBtn;
     [SerializeField] private Button m_DecreaseBotBtn;
 
 
-    private int m_OriginalLootBotCount = 0; // loot bot count on a location before hand , used by cancel btn
+    private int m_OriginalLootBotCount = 0; // used by cancel btn
     private LootLocationController m_TargetLootLocationController;
 
     private void Start() {
         m_IncreaseBotBtn.onClick.AddListener(()=>{
-            // GetTotalBotUsed() is the bot use count before any of this panel changes confirm
+            // check if enough bot
             if( DayTimeManager.GetInstance().GetTotalBotUsed() >=
                   MainGameManager.GetInstance(). GetOwnedBotCount() ){
                 return;
@@ -38,8 +40,8 @@ public class LootDetailsPanel : MonoBehaviour
         });
 
         m_DecreaseBotBtn.onClick.AddListener(()=>{
+            // low cap 0
             if(m_TargetLootLocationController.GetLootBotCount()<=0){
-                // low cap 0
                 return;
             }
             m_TargetLootLocationController.SetLootBotCount(m_TargetLootLocationController.GetLootBotCount()-1);
@@ -50,6 +52,7 @@ public class LootDetailsPanel : MonoBehaviour
 
         m_CancelBtn.onClick.AddListener(()=>{
             m_TargetLootLocationController.SetLootBotCount(m_OriginalLootBotCount);
+            DayTimeManager.GetInstance().SetTopBar(true);
             m_Self.SetActive(false);
         });
 
@@ -57,6 +60,7 @@ public class LootDetailsPanel : MonoBehaviour
     }
 
     public void SetLootDeail(LootLocationController lootLocationController, int originalLootBotCount){
+        DayTimeManager.GetInstance().SetTopBar(false);
         m_TargetLootLocationController = lootLocationController;
 
         m_OriginalLootBotCount = originalLootBotCount; 
@@ -83,6 +87,7 @@ public class LootDetailsPanel : MonoBehaviour
     }
 
     private void OnClickConfirm(){
+        DayTimeManager.GetInstance().SetTopBar(true);
         m_Self.SetActive(false);
     }
 

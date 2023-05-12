@@ -6,7 +6,7 @@ using UnityEngine;
 public class LootLocationScriptable : ScriptableObject
 {
     public string DisplayName;
-    [Header("Show in map")]
+    [Header("Show in loot panel")]
     public Sprite Icon;
     public Vector2 Size = new Vector2(150f,150f);
     public Vector2 Position;

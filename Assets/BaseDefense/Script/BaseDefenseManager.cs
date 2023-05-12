@@ -65,15 +65,15 @@ public class BaseDefenseManager : MonoBehaviour
     #endregion
 
     #region Change Game Stage From
-    public Action m_GameStageChangeFromShootAction = null;
-    public Action m_GameStageChangeFromSwitchWeaponAction = null;
-    public Action m_GameStageChangeFromReloadAction = null;
+    public Action m_ChangeFromShootAction = null;
+    public Action m_ChangeFromSwitchWeaponAction = null;
+    public Action m_ChangeFromReloadAction = null;
     #endregion
 
     #region Change Game Stage To
-    public Action m_GameStageChangeToShootAction = null;
-    public Action m_GameStageChangeToSwitchWeaponAction = null;
-    public Action m_GameStageChangeToReloadAction = null;
+    public Action m_ChangeToShootAction = null;
+    public Action m_ChangeToSwitchWeaponAction = null;
+    public Action m_ChangeToReloadAction = null;
     #endregion
 
 
@@ -99,7 +99,7 @@ public class BaseDefenseManager : MonoBehaviour
 
     private void Start() {
 
-        m_GameStageChangeFromReloadAction += CloseReloadPanel;
+        m_ChangeFromReloadAction += CloseReloadPanel;
         m_OptionBtn.onClick.AddListener(()=>{
             m_OptionPanel.SetActive(true);
         });
@@ -139,13 +139,13 @@ public class BaseDefenseManager : MonoBehaviour
         switch (m_GameStage)
         {
             case BaseDefenseStage.Shoot:
-                m_GameStageChangeFromShootAction?.Invoke();
+                m_ChangeFromShootAction?.Invoke();
             break;
             case BaseDefenseStage.SwitchWeapon:
-                m_GameStageChangeFromSwitchWeaponAction?.Invoke();
+                m_ChangeFromSwitchWeaponAction?.Invoke();
             break;
             case BaseDefenseStage.Reload:
-                m_GameStageChangeFromReloadAction?.Invoke();
+                m_ChangeFromReloadAction?.Invoke();
             break;
             default:
             break;
@@ -154,13 +154,13 @@ public class BaseDefenseManager : MonoBehaviour
         switch (newStage)
         {
             case BaseDefenseStage.Shoot:
-                m_GameStageChangeToShootAction?.Invoke();
+                m_ChangeToShootAction?.Invoke();
             break;
             case BaseDefenseStage.SwitchWeapon:
-                m_GameStageChangeToSwitchWeaponAction?.Invoke();
+                m_ChangeToSwitchWeaponAction?.Invoke();
             break;
             case BaseDefenseStage.Reload:
-                m_GameStageChangeToReloadAction?.Invoke();
+                m_ChangeToReloadAction?.Invoke();
             break;
             default:
             break;

@@ -71,8 +71,8 @@ public class GunController : MonoBehaviour
     private void Start()
     {
         BaseDefenseManager.GetInstance().m_ShootUpdatreAction += UpdateCrossHair;
-        BaseDefenseManager.GetInstance().m_GameStageChangeToShootAction += ShowWeaponModel;
-        BaseDefenseManager.GetInstance().m_GameStageChangeFromShootAction += HideWeaponModel;
+        BaseDefenseManager.GetInstance().m_ChangeToShootAction += ShowWeaponModel;
+        BaseDefenseManager.GetInstance().m_ChangeFromShootAction += HideWeaponModel;
         BaseDefenseManager.GetInstance().m_UpdateAction += ShootCoolDown;
         MainGameManager.GetInstance().AddNewAudioSource(m_ShootAudioSource);
 

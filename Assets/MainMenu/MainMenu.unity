@@ -2136,6 +2136,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Volume: 0.75
   m_AimSensitivity: 0.5
+  m_OwnedResource:
+    Raw: 0
+    Scrap: 0
+    Chem: 0
+    Electronic: 0
+    Bot: 0
+    Heat: 0
+  m_WeaponOwnership:
+  - Gun: {fileID: 11400000, guid: a73eb6e0f56e0c942aa69cf1f18418c2, type: 2}
+    IsOwned: 1
+  - Gun: {fileID: 11400000, guid: 1cfa085abb5872848aaa28cea4af1ff1, type: 2}
+    IsOwned: 0
+  - Gun: {fileID: 11400000, guid: 2d110c50545dab24eba04a0c199c2214, type: 2}
+    IsOwned: 0
+  - Gun: {fileID: 11400000, guid: eba13c2066a5f004aaff924ef240f620, type: 2}
+    IsOwned: 0
 --- !u!1 &1527863666
 GameObject:
   m_ObjectHideFlags: 0

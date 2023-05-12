@@ -43,6 +43,7 @@ public class BaseDefenseManager : MonoBehaviour
     
     [SerializeField] private GameObject m_ReloadControllerPanel;
 
+
     [Header("Enemy Hp Bars")]
     [SerializeField] private Transform m_EnemyHpBarParent;
     public Transform EnemyHpBarParent { get { return m_EnemyHpBarParent; } }
@@ -98,6 +99,7 @@ public class BaseDefenseManager : MonoBehaviour
 
 
     private void Start() {
+        
 
         m_ChangeFromReloadAction += CloseReloadPanel;
         m_OptionBtn.onClick.AddListener(()=>{

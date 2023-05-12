@@ -12,6 +12,7 @@ namespace MainGameNameSpace
     {
         public GunScriptable Gun;
         public bool IsOwned = false;
+        public bool IsSelected = false;
     }
     [System.Serializable]
     public class ResourcesRecord
@@ -82,6 +83,10 @@ public class MainGameManager : MonoBehaviour
         return m_Instance;
     }
 
+    public List<WeaponOwnership> GetAllWeaponOwnership(){
+        return m_AllWeaponOwnership;
+    }
+
 
     private void Awake() {
         if(m_Instance==null){
@@ -97,7 +102,7 @@ public class MainGameManager : MonoBehaviour
             Chem = 5000,
             Electronic = 5000,
             Bot = 10,
-            Heat = 100
+            Heat = 35
         };
     }
 

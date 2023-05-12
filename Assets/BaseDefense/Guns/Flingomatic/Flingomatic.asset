@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Flingomatic
   m_EditorClassIdentifier: 
   DisplayName: Flingomatic
-  DisplaySprite: {fileID: 21300000, guid: 4b5442a8854c4304895d47a293b23fb7, type: 3}
+  DisplaySprite: {fileID: 21300000, guid: 02677ce304973034d9ebe003fb1c826f, type: 3}
   Damage: 14
   PelletPerShot: 1
   ShootSound: {fileID: 8300000, guid: 45af77417ec92764ca941bbdd71aeafe, type: 3}

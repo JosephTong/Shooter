@@ -27,9 +27,11 @@ public class GunController : MonoBehaviour
 
 
     [Header("CrossHair light")]
-    [SerializeField]private Transform m_CrossHairLight;
-    [SerializeField][Range(1f,10f)]private float m_CrossHairLightMinSize = 4;
-    [SerializeField]private Coroutine m_LightGainOnShootCoroutine = null;
+    [SerializeField] private Transform m_CrossHairLight;
+    [SerializeField][Range(1f,10f)] private float m_CrossHairLightMinSize = 4;
+    [SerializeField] private Coroutine m_LightGainOnShootCoroutine = null;
+    [SerializeField] private Color m_CrossHairBaseLightColor;
+    [SerializeField] private Color m_CrossHairShootLightColor;
     
 
 
@@ -296,14 +298,16 @@ public class GunController : MonoBehaviour
     }
 
     private IEnumerator CrossHairLightGainOnShoot(){
-        float timePass = 0; 
+        float timePassNormalized = 0; 
         float lightFadeTime = 0.45f;
-        while (timePass<=1)
+        while (timePassNormalized<=1)
         {
-            m_CrossHairLight.localScale = Vector3.one * Mathf.Lerp(m_CrossHairLightMinSize + m_SelectedGun.LightSizeGainOnShoot,m_CrossHairLightMinSize,timePass);
-            timePass += Time.deltaTime / lightFadeTime;
+            m_CrossHairLight.localScale = Vector3.one * Mathf.Lerp(m_CrossHairLightMinSize + m_SelectedGun.LightSizeGainOnShoot,m_CrossHairLightMinSize,timePassNormalized);
+            m_CrossHairLight.GetComponent<Light2D>().color = Color.Lerp( m_CrossHairShootLightColor , m_CrossHairBaseLightColor  , timePassNormalized );
+            timePassNormalized += Time.deltaTime / lightFadeTime;
             yield return null;
         }
+        m_CrossHairLight.GetComponent<Light2D>().color = m_CrossHairBaseLightColor;
         m_CrossHairLight.localScale = Vector3.one * m_CrossHairLightMinSize;
     }
 

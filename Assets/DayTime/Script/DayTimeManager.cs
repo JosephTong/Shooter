@@ -73,11 +73,6 @@ public class DayTimeManager : MonoBehaviour
     }
 
     private void Start() {
-        // remove when repair wall function added
-        MainGameManager.GetInstance().ChangeWallHp( MainGameManager.GetInstance().GetWallMaxHp() *0.5f );
-        
-        // remove when after battle function added
-        MainGameManager.GetInstance().GetOwnedResources().Change( new ResourcesRecord{Bot = 1} );
 
         
         DayTimeManager.GetInstance().SetUsedBotCountText();

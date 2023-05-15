@@ -39,6 +39,7 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
     [SerializeField] private BaseDefenseResultPanel m_BaseDefenseResultPanel;
+    [SerializeField] private BaseDefenseTimmyPanel m_BaseDefenseTimmyPanel;
     [SerializeField] private Button m_OptionBtn;
     [SerializeField] private GameObject m_OptionPanel;
 
@@ -134,6 +135,10 @@ public class BaseDefenseManager : MonoBehaviour
         }else{
             m_WallHpBar.m_CanvasGroup.alpha = 0;
         }
+    }
+
+    public void SetTimmyAssitancePanel(){
+        m_BaseDefenseTimmyPanel.Init();
     }
 
     public void ChangeGameStage(BaseDefenseStage newStage){

@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class BaseDefenseResultPanel : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
+    [SerializeField] private Image m_Bg;
 
     [SerializeField] private TMP_Text m_Title;
     [SerializeField] private Button m_NextBtn;
@@ -116,13 +117,14 @@ public class BaseDefenseResultPanel : MonoBehaviour
             if(isLose){
                 DamageReport();
             }else{
-                SceneManager.LoadScene("DayTime");
+                BaseDefenseManager.GetInstance().SetTimmyAssitancePanel();
             }
         });
     }
 
     private void DamageReport(){
         m_Title.text = "Damage Report";
+        m_Bg.color = Color.red;
 
         // Before
         m_Wall.gameObject.SetActive(false);
@@ -176,7 +178,7 @@ public class BaseDefenseResultPanel : MonoBehaviour
 
         m_NextBtn.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("DayTime");
+            BaseDefenseManager.GetInstance().SetTimmyAssitancePanel();
         });
     }
 }

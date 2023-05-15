@@ -25040,6 +25040,8 @@ MonoBehaviour:
   m_BotCountText: {fileID: 1203558977}
   m_FinializeBtn: {fileID: 1096044483}
   m_TopBar: {fileID: 1812719891}
+  m_OptionBtn: {fileID: 487858290}
+  m_OptionPanel: {fileID: 250487780}
   m_LootBtn: {fileID: 1280397899}
   m_LootResultPanel: {fileID: 923921123}
   m_TotalResourcePanel: {fileID: 1825705755}

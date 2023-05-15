@@ -25,6 +25,9 @@ public class DayTimeManager : MonoBehaviour
     [SerializeField] private TMP_Text m_BotCountText;
     [SerializeField] private Button m_FinializeBtn;
     [SerializeField] private GameObject m_TopBar;
+    [Header("Option")]
+    [SerializeField] private Button m_OptionBtn;
+    [SerializeField] private GameObject m_OptionPanel;
 
     #region From
     public Action m_ChangeFromLoot = null;
@@ -70,6 +73,13 @@ public class DayTimeManager : MonoBehaviour
     }
 
     private void Start() {
+        // remove when repair wall function added
+        MainGameManager.GetInstance().ChangeWallHp( MainGameManager.GetInstance().GetWallMaxHp() *0.5f );
+        
+        // remove when after battle function added
+        MainGameManager.GetInstance().GetOwnedResources().Change( new ResourcesRecord{Bot = 1} );
+
+        
         DayTimeManager.GetInstance().SetUsedBotCountText();
         ChangeGameStage(DayTimeStage.Loot);
 
@@ -85,6 +95,10 @@ public class DayTimeManager : MonoBehaviour
 
         m_FinializeBtn.onClick.AddListener(()=>{
             DayTimeManager.GetInstance().OnClickResultPanelNextBtn();
+        });
+
+        m_OptionBtn.onClick.AddListener(()=>{
+            m_OptionPanel.SetActive(true);
         });
     }
 

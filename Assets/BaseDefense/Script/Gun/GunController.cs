@@ -211,6 +211,11 @@ public class GunController : MonoBehaviour
 
     public void UpdateCrossHair()
     {
+        
+        if(BaseDefenseManager.GetInstance().GameStage == BaseDefenseStage.Result){
+            // game over already
+            return;
+        }
         // aim
         if (m_AimDragMouseStartPos != Vector2.zero)
         {

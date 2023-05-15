@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using BaseDefenseNameSpace;
 using Unity.Collections;
 using UnityEngine;
 
@@ -24,7 +25,13 @@ public class EnemySpawnController : MonoBehaviour
     }
 
     public void EnemySpawnUpdate() {
-        if(m_WaveCount>TotalWave ){
+        
+        if(BaseDefenseManager.GetInstance().GameStage == BaseDefenseStage.Result){
+            // game over already
+            return;
+        }
+
+        if(m_WaveCount>=TotalWave ){
             for (int i = 0; i < m_AllSpawnedEnemy.Count; i++)
             {
                 if(m_AllSpawnedEnemy[i] == null){
@@ -34,7 +41,7 @@ public class EnemySpawnController : MonoBehaviour
             }
             if(m_AllSpawnedEnemy.Count<=0){
                 // player win
-                
+                BaseDefenseManager.GetInstance().GameOver(false);
             }
             return;
         }

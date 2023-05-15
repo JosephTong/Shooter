@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 
 [System.Serializable]
-public class BaseDefenceResultPanelRowContent : MonoBehaviour
+public class BaseDefenseResultPanelRowContent : MonoBehaviour
 {
     public TMP_Text Title;
     public TMP_Text Before;

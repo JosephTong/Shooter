@@ -38,6 +38,7 @@ public class BaseDefenseManager : MonoBehaviour
     [SerializeField] private GunController m_GunController;
     [SerializeField] private GunReloadController m_ReloadController;
     [SerializeField] private SwitchWeaponController m_SwitchWeaponController;
+    [SerializeField] private BaseDefenseResultPanel m_BaseDefenseResultPanel;
     [SerializeField] private Button m_OptionBtn;
     [SerializeField] private GameObject m_OptionPanel;
 
@@ -169,11 +170,24 @@ public class BaseDefenseManager : MonoBehaviour
         m_GameStage = newStage;
     }
 
+    public void GameOver(bool isLose = false){
+        ChangeGameStage(BaseDefenseStage.Result);
+        m_BaseDefenseResultPanel.ShowResult(isLose);
+    }
+
     public void OnWallHit(float damage){
+        if(m_GameStage == BaseDefenseStage.Result){
+            // game over already
+            return;
+        }
         m_WallHpBar.m_CanvasGroup.alpha = 1;
         MainGameManager.GetInstance().ChangeWallHp(-damage);
-        m_WallHpBar.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetWallCurHp() / MainGameManager.GetInstance().GetWallMaxHp();
+        float wallCurHp = MainGameManager.GetInstance().GetWallCurHp();
+        m_WallHpBar.m_HpBarFiller.fillAmount =  wallCurHp / MainGameManager.GetInstance().GetWallMaxHp();
         m_TotalWallHpBarStayTime = 4;
+        
+        if(wallCurHp<=0)
+            GameOver(true);
     }
 
 

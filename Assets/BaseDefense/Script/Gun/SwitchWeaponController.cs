@@ -15,6 +15,7 @@ public class SwitchWeaponController : MonoBehaviour
     [SerializeField][Range(0.1f,1.5f)] private float m_LookDownTime = 0.3f;
     private float m_TimePassAfterLookDownNormalized = 0;
     private bool m_IsLookUp = false;
+    private Vector3 m_LooedDownCameraPos = new Vector3(0,-15.5f,0);
     
 
     private void Start() {
@@ -34,7 +35,7 @@ public class SwitchWeaponController : MonoBehaviour
 
             m_IsLookUp = true;
             m_TimePassAfterLookDownNormalized = 1;
-            m_CameraParent.position = new Vector3(0,-13.5f,0);
+            m_CameraParent.position = m_LooedDownCameraPos;
         });
 
         m_LookUpBtn.gameObject.SetActive(false);
@@ -86,7 +87,7 @@ public class SwitchWeaponController : MonoBehaviour
 
     private void LookingUp(){
         if(m_TimePassAfterLookDownNormalized>0 ){
-            m_CameraParent.position = Vector3.Lerp(new Vector3(0,0,0) , new Vector3(0,-13.5f,0) , m_TimePassAfterLookDownNormalized);
+            m_CameraParent.position = Vector3.Lerp(new Vector3(0,0,0) , m_LooedDownCameraPos , m_TimePassAfterLookDownNormalized);
             m_TimePassAfterLookDownNormalized-=Time.deltaTime/m_LookDownTime;
         }else{
             BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
@@ -95,7 +96,7 @@ public class SwitchWeaponController : MonoBehaviour
 
     private void LookingDown(){
         if(m_TimePassAfterLookDownNormalized<1 ){
-            m_CameraParent.position = Vector3.Lerp(new Vector3(0,0,0) , new Vector3(0,-13.5f,0) , m_TimePassAfterLookDownNormalized);
+            m_CameraParent.position = Vector3.Lerp(new Vector3(0,0,0) , m_LooedDownCameraPos , m_TimePassAfterLookDownNormalized);
             m_TimePassAfterLookDownNormalized+=Time.deltaTime/m_LookDownTime;
 
         }

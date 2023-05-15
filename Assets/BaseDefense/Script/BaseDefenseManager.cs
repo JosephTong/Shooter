@@ -26,7 +26,8 @@ namespace BaseDefenseNameSpace
     public enum BaseDefenseStage{
         Shoot,
         SwitchWeapon,
-        Reload
+        Reload,
+        Result
     }
 }
 

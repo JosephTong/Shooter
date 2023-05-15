@@ -14,6 +14,7 @@ public class EnemySpawnController : MonoBehaviour
     private float m_TimePassed = 0;
     private const int TotalWave = 3;
     private List<EnemyScriptable> m_VaildEnemies = new List<EnemyScriptable>();
+    private List<GameObject> m_AllSpawnedEnemy = new List<GameObject>();
 
     private void Start() {
         m_WaveHeat = MainGameManager.GetInstance().GetHeat() / TotalWave ;
@@ -24,12 +25,22 @@ public class EnemySpawnController : MonoBehaviour
 
     public void EnemySpawnUpdate() {
         if(m_WaveCount>TotalWave ){
-            // player win
-            //return;
+            for (int i = 0; i < m_AllSpawnedEnemy.Count; i++)
+            {
+                if(m_AllSpawnedEnemy[i] == null){
+                    m_AllSpawnedEnemy.RemoveAt(i);
+                    i--;
+                }
+            }
+            if(m_AllSpawnedEnemy.Count<=0){
+                // player win
+                
+            }
+            return;
         }
 
         if(m_VaildEnemies.Count<=0){
-            // no vaild enemy
+            // no vaild enemy to be spawn
             return;
         }
 
@@ -63,8 +74,9 @@ public class EnemySpawnController : MonoBehaviour
     public IEnumerator SpawnEnemy(float timeDelay, EnemyScriptable enemyScriptable){
         yield return new WaitForSeconds(timeDelay);
         var newEnemy = Instantiate(enemyScriptable.Prefab);
+        m_AllSpawnedEnemy.Add(newEnemy);
         newEnemy.transform.SetParent(m_EnemyParent);
-        newEnemy.transform.localPosition = new Vector3(Random.Range(-8,8),20,0);
+        newEnemy.transform.localPosition = new Vector3(Random.Range(-8,5),20,0);
         newEnemy.GetComponent<EnemyController>().SetScriptable(enemyScriptable);
     }
 

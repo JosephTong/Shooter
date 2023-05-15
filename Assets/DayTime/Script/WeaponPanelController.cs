@@ -77,6 +77,14 @@ public class WeaponPanelController : MonoBehaviour
         });
 
         m_ConfirmSelectWeaponBtn.onClick.AddListener(()=>{
+            // cannot use same weapon in 2 different slot
+            var CurSelectedWeaponList = MainGameManager.GetInstance().GetAllSelectedWeapon();
+            if(CurSelectedWeaponList.Contains(m_CurrentDetailWeapon) ){
+                // remove old one if 
+                int targetIndex = CurSelectedWeaponList.IndexOf(m_CurrentDetailWeapon);
+                MainGameManager.GetInstance().ChangeSelectedWeapon(targetIndex,null);
+            }
+
             MainGameManager.GetInstance().ChangeSelectedWeapon(m_CurrentSelectedSlotIndex, m_CurrentDetailWeapon);
             m_QuitSelectWeaponBtn.onClick?.Invoke();
         });
@@ -96,10 +104,28 @@ public class WeaponPanelController : MonoBehaviour
             m_AllWeaponSelectSlot[slotIndex].m_Btn.onClick.AddListener(()=>{
                 if(m_CurrentSelectedSlotIndex>=0 && m_CurrentSelectedSlotIndex<m_AllWeaponSelectSlot.Count )
                     m_AllWeaponSelectSlot[m_CurrentSelectedSlotIndex].BorderColorToggle(false);
+        
+                // cannot use same weapon in 2 different slot
+                var CurSelectedWeaponList = MainGameManager.GetInstance().GetAllSelectedWeapon();
+                if(CurSelectedWeaponList.Contains(m_CurrentDetailWeapon) ){
+                    // remove old one if 
+                    int targetIndex = CurSelectedWeaponList.IndexOf(m_CurrentDetailWeapon);
+                    m_AllWeaponSelectSlot[targetIndex].SetBorderRed();
+                }
+
 
                 m_CurrentSelectedSlotIndex = slotIndex;
                 m_AllWeaponSelectSlot[slotIndex].BorderColorToggle(true);
+        
             });
+        }
+
+        // cannot use same weapon in 2 different slot
+        var CurSelectedWeaponList = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        if(CurSelectedWeaponList.Contains(m_CurrentDetailWeapon) ){
+            // remove old one if 
+            int targetIndex = CurSelectedWeaponList.IndexOf(m_CurrentDetailWeapon);
+            m_AllWeaponSelectSlot[targetIndex].SetBorderRed();
         }
 
 
@@ -132,6 +158,14 @@ public class WeaponPanelController : MonoBehaviour
             }
         }
         
+        // cannot use same weapon in 2 different slot
+        var CurSelectedWeaponList = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        if(CurSelectedWeaponList.Contains(m_CurrentDetailWeapon) ){
+            // remove old one if 
+            int targetIndex = CurSelectedWeaponList.IndexOf(m_CurrentDetailWeapon);
+            m_AllWeaponSelectSlot[targetIndex].SetBorderRed();
+        }
+
     }
 
     public void SetInfo(GunScriptable gunScriptable){

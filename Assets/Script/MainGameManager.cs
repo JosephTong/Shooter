@@ -12,7 +12,6 @@ namespace MainGameNameSpace
     {
         public GunScriptable Gun;
         public bool IsOwned = false;
-        public bool IsSelected = false;
     }
     [System.Serializable]
     public class ResourcesRecord
@@ -58,7 +57,9 @@ public class MainGameManager : MonoBehaviour
     private List<AudioSource> m_AllAudioSource = new List<AudioSource>();
  
     [SerializeField] private float m_Volume = 0.75f;
-    [SerializeField] private float m_AimSensitivity = 0.5f;    
+    [SerializeField] private float m_AimSensitivity = 0.5f;  
+    
+    [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();  
     
     private const string TotalHeatHeader = " - Strong enemy will not spawn if Total heat is lower than the requirement\n"+
         " - High cap at 1000 \n"+
@@ -85,6 +86,10 @@ public class MainGameManager : MonoBehaviour
 
     public List<WeaponOwnership> GetAllWeaponOwnership(){
         return m_AllWeaponOwnership;
+    }
+
+    public List<GunScriptable> GetAllSelectedWeapon(){
+        return m_AllSelectedWeapon;
     }
 
 

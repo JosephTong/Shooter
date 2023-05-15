@@ -14,7 +14,7 @@ public class WeaponPanelController : MonoBehaviour
     [SerializeField] private TMP_Text m_WeaponPageText;
     [SerializeField] private Button m_LastPageBtn;
     [SerializeField] private Button m_NextPageBtn;
-    [SerializeField] private List<WeaponGrid> m_AllWeaponGrid = new List<WeaponGrid>();
+    [SerializeField] private List<WeaponDetailGrid> m_AllWeaponGrid = new List<WeaponDetailGrid>();
     private int m_PageIndex = 0;
 
 
@@ -23,7 +23,7 @@ public class WeaponPanelController : MonoBehaviour
     [Header("Detail")]
     [SerializeField] private GameObject m_WeaponDetailPanel;
     [SerializeField] private Button m_QuitWeaponDetailBtn;
-   // [SerializeField] private Button m_TryReloadBtn;
+    [SerializeField] private Button m_SelectWeaponBtn;
     [SerializeField] private Image m_WeaponDetailImage;
     [SerializeField] private TMP_Text m_WeaponDisplayName;
     [SerializeField] private TMP_Text m_DamagePerPellet;
@@ -35,6 +35,14 @@ public class WeaponPanelController : MonoBehaviour
     [SerializeField] private TMP_Text m_RecoilControl;
     [SerializeField] private TMP_Text m_Stability;
     [SerializeField] private TMP_Text m_Handling;
+
+
+    [Header("Select Weapon")]
+    [SerializeField] private GameObject m_WeaponSelectionPanel;
+    [SerializeField] private Button m_QuitSelectWeaponBtn;
+    [SerializeField] private Button m_ConfirmSelectWeaponBtn;
+    [SerializeField] private Image m_WeaponToBeSelectedImage;
+    [SerializeField] private List<WeaponSelectionSlot> m_AllWeaponSelectSlot = new List<WeaponSelectionSlot>();
 
 
 

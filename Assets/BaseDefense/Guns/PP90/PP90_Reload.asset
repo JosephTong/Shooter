@@ -44,8 +44,8 @@ MonoBehaviour:
       EndDragSound: {fileID: 8300000, guid: 0c08d8bb7fd92524da8a3f7cb8c86ee1, type: 3}
       EndDragPrefab: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
       EndDragPosition: {x: -50, y: 10}
-      MainGunSpriteOnEnd: {fileID: 21300000, guid: 13a7d4ea08cc181478619b245278959b, type: 3}
-      ResultAction: 10
+      MainGunSpriteOnEnd: {fileID: 21300000, guid: 19fee6b83a29ed345a7a4e1ab09be400, type: 3}
+      ResultAction: 24
     TapFunction:
     - TapEndSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       Position: {x: -400, y: 300}
@@ -55,3 +55,11 @@ MonoBehaviour:
     ExtraImages:
     - Position: {x: 400, y: 200}
       ImagePrefab: {fileID: 3865114204791723661, guid: fcbe4a5eadba8874583665f7b9e9731b, type: 3}
+  - DragFunction: []
+    TapFunction:
+    - TapEndSound: {fileID: 8300000, guid: 420d9443e7bf9204e970f16a4a74c196, type: 3}
+      Position: {x: -50, y: 10}
+      Prefab: {fileID: 732502505046357351, guid: a702d96a7c1fc9047bb62d3de4395eb3, type: 3}
+      MainGunSpriteOnEnd: {fileID: 21300000, guid: 19fee6b83a29ed345a7a4e1ab09be400, type: 3}
+      ResultAction: 2
+    ExtraImages: []

@@ -156,7 +156,8 @@ public class DayTimeManager : MonoBehaviour
     }
 
     public void SetUsedBotCountText(){
-        m_BotCountText.text = $"{GetTotalBotUsed()} / { MainGameManager.GetInstance().GetOwnedBotCount() }";
+        var totalBotCount = MainGameManager.GetInstance().GetOwnedBotCount();
+        m_BotCountText.text = $"{totalBotCount - GetTotalBotUsed()} / { totalBotCount }";
 
     }
 

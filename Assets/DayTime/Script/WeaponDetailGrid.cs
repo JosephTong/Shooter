@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class WeaponGrid : MonoBehaviour
+public class WeaponDetailGrid : MonoBehaviour
 {
     [SerializeField] private Image m_DisplayImage;
     [SerializeField] private TMP_Text m_WeaponName;

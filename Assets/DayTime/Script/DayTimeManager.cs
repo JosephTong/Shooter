@@ -120,6 +120,10 @@ public class DayTimeManager : MonoBehaviour
         m_TopBar.SetActive(isActive);
     }
 
+    public void SetWeaponDetailPanel(GunScriptable gunScriptable){
+        m_WeaponPanelController.SetInfo(gunScriptable);
+    }
+
     public int GetTotalBotUsed(){
         m_AllLocationWithBot = m_AllSpawnedLootLocation.Where(x=>x.Value.GetLootBotCount()>0).Select(x=>x.Value).ToList();
         int ans = 0;

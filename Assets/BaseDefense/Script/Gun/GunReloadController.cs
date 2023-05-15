@@ -13,6 +13,7 @@ using MainGameNameSpace;
 public class GunReloadController : MonoBehaviour
 {
     [SerializeField] private GunReloadScriptable m_ReloadScriptable;
+    [SerializeField] private bool m_IsTryReload = false;
     private GunReloadControllerConfig m_Config=null; 
     [SerializeField] private AudioSource m_GunReloadAudioSource;
 
@@ -46,6 +47,9 @@ public class GunReloadController : MonoBehaviour
     private int m_CurReloadPhase = 0;
 
     private void Start() {
+        if(m_IsTryReload){
+            return;
+        }
         BaseDefenseManager.GetInstance().m_ReloadUpdateAction += UpdateDragImagePosition;
         BaseDefenseManager.GetInstance().m_ChangeToReloadAction += SetStartReloadPanel;
 
@@ -102,6 +106,9 @@ public class GunReloadController : MonoBehaviour
     public void StartReload(GunReloadControllerConfig config){
         m_Config = config;
 
+        if(m_IsTryReload){
+            return;
+        }
         BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Reload);
     }
 
@@ -307,6 +314,10 @@ public class GunReloadController : MonoBehaviour
     private void ResultAction(GunReloadActionResult actionEnum){
         if(actionEnum == (actionEnum | GunReloadActionResult.CancelReload) ){
             // cancel reload 
+            
+            if(m_IsTryReload){
+                return;
+            }
             BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
             
         }
@@ -320,6 +331,9 @@ public class GunReloadController : MonoBehaviour
                 m_Config.GainAmmo?.Invoke(1);
             }else{
                 Debug.LogError("Not enough resourses for reloading");
+                if(m_IsTryReload){
+                    return;
+                }
                 BaseDefenseManager.GetInstance().ChangeGameStage(BaseDefenseStage.Shoot);
                 return ;
             }

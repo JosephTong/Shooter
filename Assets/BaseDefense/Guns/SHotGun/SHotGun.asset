@@ -41,6 +41,6 @@ MonoBehaviour:
   FireRate: 2.5
   Accuracy: 50
   RecoilControl: 50
-  Stability: 100
+  Stability: 50
   Handling: 50
   ReloadScriptable: {fileID: 11400000, guid: 13b778b1d24a02048bc58b1731fc2d57, type: 2}

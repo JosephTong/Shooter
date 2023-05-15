@@ -14,6 +14,7 @@ public class LootMapController : MonoBehaviour
     [SerializeField] private GameObject m_LocaionPrefab;
     [SerializeField] private float m_HeatAreaSize = 600;
     [SerializeField] private LootDetailsPanel m_LootDetailsPanel;
+    [SerializeField] private RectTransform m_HeatMask;
 
 
     private void Start() {
@@ -27,6 +28,8 @@ public class LootMapController : MonoBehaviour
 
 
         m_HeatAreaSize = Mathf.Lerp(500f,3000f, MainGameManager.GetInstance().GetHeat() /1000f );
+        m_HeatMask.sizeDelta = Vector2.one * m_HeatAreaSize;
+
         for (int i = 0; i < m_AllLocation.Count; i++)
         {
             var locationIcon = Instantiate(m_LocaionPrefab);

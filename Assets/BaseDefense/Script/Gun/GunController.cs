@@ -93,7 +93,7 @@ public class GunController : MonoBehaviour
         var allWeaponOwnership = MainGameManager.GetInstance().GetAllWeaponOwnership();
         for (int i = 0; i < allWeaponOwnership.Count; i++)
         {
-            if(allWeaponOwnership[i].IsSelected && allWeaponOwnership[i].IsOwned && allWeaponOwnership[i].Gun != m_ForceToUseWeapon){
+            if(allWeaponOwnership[i].IsSelected && allWeaponOwnership[i].IsOwned && allWeaponOwnership[i].Gun.DisplayName != m_ForceToUseWeapon.DisplayName){
                 m_AllWeaponSlot[soltIndex].m_Gun = allWeaponOwnership[i].Gun;
                 m_AllWeaponSlot[soltIndex].m_SpriteRenderer.sprite = allWeaponOwnership[i].Gun.DisplaySprite;
                 // TODO : unique id for each gun

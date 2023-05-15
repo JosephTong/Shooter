@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Flingomatic
   m_EditorClassIdentifier: 
   DisplayName: Flingomatic
+  Description: '+ Do NOT consume resource on reaload
+
+    - Low stopping power
+
+    -
+    Not semi auto'
   DisplaySprite: {fileID: 21300000, guid: 02677ce304973034d9ebe003fb1c826f, type: 3}
   Damage: 14
   PelletPerShot: 1

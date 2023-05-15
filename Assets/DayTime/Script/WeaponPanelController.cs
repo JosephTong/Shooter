@@ -35,6 +35,7 @@ public class WeaponPanelController : MonoBehaviour
     [SerializeField] private TMP_Text m_RecoilControl;
     [SerializeField] private TMP_Text m_Stability;
     [SerializeField] private TMP_Text m_Handling;
+    private GunScriptable m_CurrentDetailWeapon;
 
 
     [Header("Select Weapon")]
@@ -43,6 +44,8 @@ public class WeaponPanelController : MonoBehaviour
     [SerializeField] private Button m_ConfirmSelectWeaponBtn;
     [SerializeField] private Image m_WeaponToBeSelectedImage;
     [SerializeField] private List<WeaponSelectionSlot> m_AllWeaponSelectSlot = new List<WeaponSelectionSlot>();
+
+    private int m_CurrentSelectedSlotIndex=-1;
 
 
 
@@ -53,13 +56,30 @@ public class WeaponPanelController : MonoBehaviour
 
         DayTimeManager.GetInstance().m_ChangeToWeapon += ()=>{
             m_WeaponDetailPanel.SetActive(false);
+            m_WeaponSelectionPanel.SetActive(false);
             m_WeaponGridPanel.SetActive(true);
-            SetActive();
+            ClearInfo();
+            m_Self.SetActive(true);
             };
-/*
-        m_TryReloadBtn.onClick.AddListener(()=>{
 
-        });*/
+        m_SelectWeaponBtn.onClick.AddListener(()=>{
+            m_WeaponDetailPanel.SetActive(false);
+            m_WeaponGridPanel.SetActive(false);
+            m_WeaponSelectionPanel.SetActive(true);
+            SetSelectionPanel();
+        });
+
+        m_QuitSelectWeaponBtn.onClick.AddListener(()=>{
+            m_WeaponDetailPanel.SetActive(true);
+            m_WeaponSelectionPanel.SetActive(false);
+            m_WeaponGridPanel.SetActive(false);
+
+        });
+
+        m_ConfirmSelectWeaponBtn.onClick.AddListener(()=>{
+            MainGameManager.GetInstance().ChangeSelectedWeapon(m_CurrentSelectedSlotIndex, m_CurrentDetailWeapon);
+            m_QuitSelectWeaponBtn.onClick?.Invoke();
+        });
 
         m_QuitWeaponDetailBtn.onClick.AddListener(()=>{
             m_WeaponDetailPanel.SetActive(false);
@@ -68,6 +88,19 @@ public class WeaponPanelController : MonoBehaviour
 
         ClearInfo();
         m_Self.SetActive(false);
+
+        // Set Weapon select slot click function
+        for (int i = 0; i < m_AllWeaponSelectSlot.Count; i++)
+        {
+            var slotIndex = i;
+            m_AllWeaponSelectSlot[slotIndex].m_Btn.onClick.AddListener(()=>{
+                if(m_CurrentSelectedSlotIndex>=0 && m_CurrentSelectedSlotIndex<m_AllWeaponSelectSlot.Count )
+                    m_AllWeaponSelectSlot[m_CurrentSelectedSlotIndex].BorderColorToggle(false);
+
+                m_CurrentSelectedSlotIndex = slotIndex;
+                m_AllWeaponSelectSlot[slotIndex].BorderColorToggle(true);
+            });
+        }
 
 
         var allWeaponOwnership = MainGameManager.GetInstance().GetAllWeaponOwnership();
@@ -85,13 +118,24 @@ public class WeaponPanelController : MonoBehaviour
         }
     }
 
-    public void SetActive(){
-        ClearInfo();
-        m_Self.SetActive(true);
 
+    public void SetSelectionPanel(){
+        m_WeaponToBeSelectedImage.sprite = m_CurrentDetailWeapon.DisplaySprite;
+        var selectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
+        for (int i = 0; i < m_AllWeaponSelectSlot.Count; i++)
+        {
+            m_AllWeaponSelectSlot[i].BorderColorToggle(false);
+            if(selectedWeapon.Count>i && selectedWeapon[i] != null){
+                m_AllWeaponSelectSlot[i].m_WeaponImage.sprite = selectedWeapon[i].DisplaySprite;
+            }else{
+                m_AllWeaponSelectSlot[i].m_WeaponImage.sprite = null;
+            }
+        }
+        
     }
 
     public void SetInfo(GunScriptable gunScriptable){
+        m_CurrentDetailWeapon = gunScriptable;
         m_WeaponGridPanel.SetActive(false);
         m_WeaponDetailPanel.SetActive(true);
         m_WeaponDetailImage.sprite = gunScriptable.DisplaySprite;

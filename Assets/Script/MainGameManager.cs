@@ -23,8 +23,10 @@ namespace MainGameNameSpace
         public int Bot = 0;
         public float Heat = 0;
 
-        public ResourcesRecord GetReverse(){
-            var ans = new ResourcesRecord{
+        public ResourcesRecord GetReverse()
+        {
+            var ans = new ResourcesRecord
+            {
                 Raw = Raw * -1,
                 Scrap = Scrap * -1,
                 Chem = Chem * -1,
@@ -35,12 +37,14 @@ namespace MainGameNameSpace
             return ans;
         }
 
-        public bool IsEnough(ResourcesRecord record){
+        public bool IsEnough(ResourcesRecord record)
+        {
             return Raw >= record.Raw && Scrap >= record.Scrap && Chem >= record.Chem &&
                  Electronic >= record.Electronic && Bot >= record.Bot && Heat >= record.Heat;
         }
 
-        public void Change(ResourcesRecord record){
+        public void Change(ResourcesRecord record)
+        {
             Raw += record.Raw;
             Scrap += record.Scrap;
             Chem += record.Chem;
@@ -55,20 +59,20 @@ public class MainGameManager : MonoBehaviour
 {
     public static MainGameManager m_Instance = null;
     private List<AudioSource> m_AllAudioSource = new List<AudioSource>();
- 
+
     [SerializeField] private float m_Volume = 0.75f;
-    [SerializeField] private float m_AimSensitivity = 0.5f;  
-    
-    [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();  
-    
-    private const string TotalHeatHeader = " - Strong enemy will not spawn if Total heat is lower than the requirement\n"+
-        " - High cap at 1000 \n"+
-        " - Low cap at 15 \n"+
-        " - 25 seconds per wave \n"+ // EnemySpawnController >> m_TimePassed 
+    [SerializeField] private float m_AimSensitivity = 0.5f;
+
+    [SerializeField] private List<GunScriptable> m_AllSelectedWeapon = new List<GunScriptable>();
+
+    private const string TotalHeatHeader = " - Strong enemy will not spawn if Total heat is lower than the requirement\n" +
+        " - High cap at 1000 \n" +
+        " - Low cap at 15 \n" +
+        " - 25 seconds per wave \n" + // EnemySpawnController >> m_TimePassed 
         " - Random select vaild enemy(s) until it reach Wave heat \n" +
-        " - All selected enemy will spawn at the first 15 seconds \n"+
+        " - All selected enemy will spawn at the first 15 seconds \n" +
         " - Wave heat = TotalHeat / 3 \n" + // EnemySpawnController >> TotalWave
-        " - To next day it player clear all 3 waves"; 
+        " - To next day it player clear all 3 waves";
 
     //[Header(TotalHeatHeader)]
     //[SerializeField][Range(15f,1000f)] private float m_TotalHeat = 35;
@@ -76,32 +80,41 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private ResourcesRecord m_OwnedResource = new ResourcesRecord();
     [SerializeField] private List<WeaponOwnership> m_AllWeaponOwnership = new List<WeaponOwnership>();
 
-    
-    public static MainGameManager GetInstance(){
-        if(m_Instance==null){
+
+    public static MainGameManager GetInstance()
+    {
+        if (m_Instance == null)
+        {
             m_Instance = new GameObject().AddComponent<MainGameManager>();
         }
         return m_Instance;
     }
 
-    public List<WeaponOwnership> GetAllWeaponOwnership(){
+    public List<WeaponOwnership> GetAllWeaponOwnership()
+    {
         return m_AllWeaponOwnership;
     }
 
-    public List<GunScriptable> GetAllSelectedWeapon(){
+    public List<GunScriptable> GetAllSelectedWeapon()
+    {
         return m_AllSelectedWeapon;
     }
 
 
-    private void Awake() {
-        if(m_Instance==null){
+    private void Awake()
+    {
+        if (m_Instance == null)
+        {
             m_Instance = this;
-        }else{
+        }
+        else
+        {
             Destroy(this);
             return;
         }
         DontDestroyOnLoad(this.gameObject);
-        m_OwnedResource = new ResourcesRecord{
+        m_OwnedResource = new ResourcesRecord
+        {
             Raw = 5000,
             Scrap = 5000,
             Chem = 5000,
@@ -111,67 +124,90 @@ public class MainGameManager : MonoBehaviour
         };
     }
 
-    private void Start() {
-        
+    private void Start()
+    {
+
     }
 
-    public void SetAimSensitivity(float sensitivity){
+    public void ChangeSelectedWeapon(int slotIndex, GunScriptable newWeapon)
+    {
+        if (m_AllSelectedWeapon.Count > slotIndex && slotIndex >= 0)
+            m_AllSelectedWeapon[slotIndex] = newWeapon;
+    }
+
+
+    public void SetAimSensitivity(float sensitivity)
+    {
         m_AimSensitivity = sensitivity;
     }
 
-    public void SetVolume(float volume){
+    public void SetVolume(float volume)
+    {
         m_Volume = volume;
     }
-    public float GetVolume(){
+    public float GetVolume()
+    {
         return m_Volume;
     }
-    public float GetAimSensitivity(){
+    public float GetAimSensitivity()
+    {
         return m_AimSensitivity;
     }
 
 
-    public float GetHeat(){
-        if(m_OwnedResource.Heat > 1000){
+    public float GetHeat()
+    {
+        if (m_OwnedResource.Heat > 1000)
+        {
             m_OwnedResource.Heat = 1000;
         }
-        if(m_OwnedResource.Heat <15){
+        if (m_OwnedResource.Heat < 15)
+        {
             m_OwnedResource.Heat = 15;
         }
         return m_OwnedResource.Heat;
     }
 
-    public void AddNewAudioSource(AudioSource audioSource){
+    public void AddNewAudioSource(AudioSource audioSource)
+    {
         m_AllAudioSource.Add(audioSource);
         audioSource.volume = m_Volume;
-        
+
         UpdateVolume();
     }
 
-    public int GetOwnedBotCount(){
+    public int GetOwnedBotCount()
+    {
         return m_OwnedResource.Bot;
     }
 
-    public void UpdateVolume(){
+    public void UpdateVolume()
+    {
         List<int> toBeRemove = new List<int>();
         for (int i = 0; i < m_AllAudioSource.Count; i++)
         {
-            if(m_AllAudioSource[i] != null){
+            if (m_AllAudioSource[i] != null)
+            {
                 m_AllAudioSource[i].volume = m_Volume;
-            }else{
+            }
+            else
+            {
                 toBeRemove.Add(i);
             }
         }
         for (int i = 0; i < toBeRemove.Count; i++)
         {
-            m_AllAudioSource.RemoveAt(toBeRemove[i]-i);
+            m_AllAudioSource.RemoveAt(toBeRemove[i] - i);
         }
     }
 
-    public void GainResources(ResourcesRecord gain){
+    public void GainResources(ResourcesRecord gain)
+    {
         m_OwnedResource.Change(gain);
     }
 
-    public ResourcesRecord GetOwnedResources(){
+    public ResourcesRecord GetOwnedResources()
+    {
         return m_OwnedResource;
     }
 

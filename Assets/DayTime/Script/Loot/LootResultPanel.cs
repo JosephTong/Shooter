@@ -45,7 +45,6 @@ public class LootResultPanel : MonoBehaviour
     }
 
     public ResourcesRecord Init(LootLocationScriptable scriptable , int botCount){
-        DayTimeManager.GetInstance().SetTopBar(false);
         m_Self.SetActive(true);
         m_DetailImage.sprite = scriptable.DetailImage;
        m_LocationName.text = $"Location : {scriptable.DisplayName }";

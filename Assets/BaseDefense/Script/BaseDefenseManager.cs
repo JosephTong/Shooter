@@ -50,8 +50,6 @@ public class BaseDefenseManager : MonoBehaviour
 
     [Header("Wall")]
     [SerializeField] private HpBar m_WallHpBar;
-    private float m_WallMaxHp = 1000;
-    private float m_WallCurrentHp = 1000;
     private float m_TotalWallHpBarStayTime = 0;
 
 
@@ -105,8 +103,7 @@ public class BaseDefenseManager : MonoBehaviour
         m_OptionBtn.onClick.AddListener(()=>{
             m_OptionPanel.SetActive(true);
         });
-        m_WallCurrentHp = m_WallMaxHp;
-        m_WallHpBar.m_HpBarFiller.fillAmount = m_WallCurrentHp / m_WallMaxHp;
+        m_WallHpBar.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetWallCurHp() / MainGameManager.GetInstance().GetWallMaxHp();
     }
 
     private void Update() {
@@ -173,8 +170,8 @@ public class BaseDefenseManager : MonoBehaviour
 
     public void OnWallHit(float damage){
         m_WallHpBar.m_CanvasGroup.alpha = 1;
-        m_WallCurrentHp-=damage;
-        m_WallHpBar.m_HpBarFiller.fillAmount = m_WallCurrentHp / m_WallMaxHp;
+        MainGameManager.GetInstance().ChangeWallHp(-damage);
+        m_WallHpBar.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetWallCurHp() / MainGameManager.GetInstance().GetWallMaxHp();
         m_TotalWallHpBarStayTime = 4;
     }
 

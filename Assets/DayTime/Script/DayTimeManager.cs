@@ -139,6 +139,7 @@ public class DayTimeManager : MonoBehaviour
     }
 
     public void OnClickResultPanelNextBtn(){
+        DayTimeManager.GetInstance().SetTopBar(false);
         if(m_CurrentShowResultIndex>=m_AllLocationWithBot.Count){
             m_LootResultPanel.TurnOff();
             // show total resources changes

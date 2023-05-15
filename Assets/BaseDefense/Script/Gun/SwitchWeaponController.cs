@@ -75,7 +75,7 @@ public class SwitchWeaponController : MonoBehaviour
             for (int i = 0; i < hits.Length; i++)
             {
                 hits[i].collider.TryGetComponent<WeaponToBeSwitch>(out var weaponToBeSwitch);         
-                if(weaponToBeSwitch != null){
+                if(weaponToBeSwitch != null && weaponToBeSwitch.m_Gun != null ){
                     SwitchWeapon(weaponToBeSwitch.m_Gun);
                     m_LookUpBtn.onDown.Invoke();
                     return;

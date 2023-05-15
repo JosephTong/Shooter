@@ -68,9 +68,9 @@ public class MainGameManager : MonoBehaviour
     private const string TotalHeatHeader = " - Strong enemy will not spawn if Total heat is lower than the requirement\n" +
         " - High cap at 1000 \n" +
         " - Low cap at 15 \n" +
-        " - 25 seconds per wave \n" + // EnemySpawnController >> m_TimePassed 
+        " - 30 seconds per wave \n" + // EnemySpawnController >> m_TimePassed 
         " - Random select vaild enemy(s) until it reach Wave heat \n" +
-        " - All selected enemy will spawn at the first 15 seconds \n" +
+        " - All selected enemy will spawn within the first 20 seconds \n" +
         " - Wave heat = TotalHeat / 3 \n" + // EnemySpawnController >> TotalWave
         " - To next day it player clear all 3 waves";
 
@@ -79,6 +79,10 @@ public class MainGameManager : MonoBehaviour
 
     [SerializeField] private ResourcesRecord m_OwnedResource = new ResourcesRecord();
     [SerializeField] private List<WeaponOwnership> m_AllWeaponOwnership = new List<WeaponOwnership>();
+    [SerializeField][Range(2,4)] private int m_WeaponSlotOwned = 2;
+    
+    private float m_WallMaxHp = 1000;
+    private float m_WallCurrentHp = 1000;
 
 
     public static MainGameManager GetInstance()
@@ -127,6 +131,28 @@ public class MainGameManager : MonoBehaviour
     private void Start()
     {
 
+    }
+
+    public float GetWallCurHp(){
+        return m_WallCurrentHp;
+    }
+
+    public float GetWallMaxHp(){
+        return m_WallMaxHp;
+    }
+
+    public void ChangeWallHp(float changes){
+        m_WallCurrentHp += changes;
+        if(m_WallCurrentHp<0){
+            m_WallCurrentHp = 0;
+        }else if(m_WallCurrentHp>m_WallMaxHp){
+            m_WallCurrentHp = m_WallMaxHp;
+        }
+    }
+
+
+    public int GetWeaponSlotOwned(){
+        return m_WeaponSlotOwned;
     }
 
     public void ChangeSelectedWeapon(int slotIndex, GunScriptable newWeapon)

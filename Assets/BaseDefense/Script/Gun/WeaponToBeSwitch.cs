@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class WeaponToBeSwitch : MonoBehaviour
 {
-    public GunScriptable m_Gun;
+    public GunScriptable m_Gun = null;
     public SpriteRenderer m_SpriteRenderer;
 
 }

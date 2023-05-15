@@ -48,7 +48,7 @@ public class EnemySpawnController : MonoBehaviour
             var targetEnemyScriptable = m_VaildEnemies[randomIndex];  
 
             // select random spawn time 
-            float timeDelay = Random.Range(2f,15f);
+            float timeDelay = Random.Range(2f,20f);
             StartCoroutine( SpawnEnemy(timeDelay , targetEnemyScriptable) );
 
             // gain heat 
@@ -56,7 +56,7 @@ public class EnemySpawnController : MonoBehaviour
 
         }
 
-        m_TimePassed = 25;
+        m_TimePassed = 30;
         m_WaveCount ++;
     }
 

@@ -15,7 +15,7 @@ MonoBehaviour:
   DisplayName: Landfill
   Icon: {fileID: 21300000, guid: 46f6a8ef20fcfe24eb47f69ce8026964, type: 3}
   Size: {x: 150, y: 150}
-  Position: {x: -150, y: 150}
+  Position: {x: -125, y: 125}
   DetailImage: {fileID: 21300000, guid: 1c24f69656f718147860069349c3e42c, type: 3}
   HeatGainOnLoot: 2
   BaseSafeness: 75

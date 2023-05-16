@@ -2134,7 +2134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f220cfcc6db5f41956ce3d9c6aa423, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Volume: 0.75
+  m_Volume: 0.5
   m_AimSensitivity: 0.5
   m_AllSelectedWeapon:
   - {fileID: 11400000, guid: a73eb6e0f56e0c942aa69cf1f18418c2, type: 2}

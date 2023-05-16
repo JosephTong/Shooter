@@ -10,7 +10,7 @@ namespace GunReloadScriptableNameSpace
     {
         [Header ("Start Drag")]
         public AudioClip StartDragSound;
-        public GameObject StartDragPrefab;
+        public string StartDragUnderText;
         public Vector2 StartDragPosition;
         public Sprite MainGunSpriteOnStart;
 
@@ -20,7 +20,7 @@ namespace GunReloadScriptableNameSpace
 
         [Header ("End Drag")]
         public AudioClip EndDragSound;
-        public GameObject EndDragPrefab;
+        public string EndDragUnderText;
         public Vector2 EndDragPosition;
         public Sprite MainGunSpriteOnEnd;
 
@@ -33,7 +33,7 @@ namespace GunReloadScriptableNameSpace
     {
         public AudioClip TapEndSound;
         public Vector2 Position;
-        public GameObject Prefab;
+        public string UnderText;
         public Sprite MainGunSpriteOnEnd;
         public GunReloadActionResult ResultAction;
 

@@ -29,7 +29,8 @@ public class GunReloadController : MonoBehaviour
     
     [Header("Reload")]
     [SerializeField] private Image m_MainGunImage;
-    //[SerializeField] private GameObject m_Gray;
+    [SerializeField] private GameObject m_DragIcon;
+    [SerializeField] private GameObject m_TapIcon;
     [SerializeField] private Transform m_GrayWhileDragPanel; // gray out while draging // no use for now
     [SerializeField] private Transform m_NotGrayWhileDragPanel; // NOT gray out while draging , for EndDragPrefab in ReloadScriptable // no use for now
 
@@ -171,12 +172,16 @@ public class GunReloadController : MonoBehaviour
         spawnedUIObject.transform.SetParent(m_GrayWhileDragPanel);
         spawnedUIObject.GetComponent<RectTransform>().anchoredPosition = config.Position;
         m_AllSpawnedImage.Add(spawnedUIObject);
+        if(spawnedUIObject.TryGetComponent<ReloadIcon>(out var reloadIcon))
+            reloadIcon.m_UnderText.text = config.UnderText;
+
         return spawnedUIObject;
     }
 
     private void SpawnTapItem(GunReloadTapFunction tapFunction){
         SpawnUIObjectForReloadPhaseConfig config = new SpawnUIObjectForReloadPhaseConfig{
-            Prefab = tapFunction.Prefab,
+            UnderText = tapFunction.UnderText,
+            Prefab = m_TapIcon,
             Position = tapFunction.Position
         };
         Button tapBtn = SpawnUIObjectForReloadPhase( config ).GetComponent<Button>();
@@ -195,7 +200,8 @@ public class GunReloadController : MonoBehaviour
     private void SpawnDragItems(GunReloadDragFunction dragFunction){
         
         SpawnUIObjectForReloadPhaseConfig config = new SpawnUIObjectForReloadPhaseConfig{
-            Prefab = dragFunction.StartDragPrefab,
+            UnderText = dragFunction.StartDragUnderText,
+            Prefab = m_DragIcon,
             Position = dragFunction.StartDragPosition
         };
         Button2D startDragIcon = SpawnUIObjectForReloadPhase( config ).GetComponent<Button2D>();
@@ -299,7 +305,8 @@ public class GunReloadController : MonoBehaviour
 
         // Spawn end darg 
         SpawnUIObjectForReloadPhaseConfig dragEndConfig = new SpawnUIObjectForReloadPhaseConfig{
-            Prefab = dragFunction.EndDragPrefab,
+            UnderText = dragFunction.EndDragUnderText,
+            Prefab = m_DragIcon,
             Position = dragFunction.EndDragPosition
 
         };

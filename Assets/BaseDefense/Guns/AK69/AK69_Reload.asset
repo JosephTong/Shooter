@@ -19,50 +19,50 @@ MonoBehaviour:
     TapFunction:
     - TapEndSound: {fileID: 8300000, guid: b9e4aa6d490b15b43bec131793faea1b, type: 3}
       Position: {x: 0, y: 0}
-      Prefab: {fileID: 732502505046357351, guid: a702d96a7c1fc9047bb62d3de4395eb3, type: 3}
+      UnderText: Tap
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 401b79f2aec463c429d2e449f5412eae, type: 3}
       ResultAction: 16
     - TapEndSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       Position: {x: 400, y: 300}
-      Prefab: {fileID: 732502505046357351, guid: a702d96a7c1fc9047bb62d3de4395eb3, type: 3}
+      UnderText: Cancel Reload
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 401b79f2aec463c429d2e449f5412eae, type: 3}
       ResultAction: 2
     ExtraImages: []
   - DragFunction:
     - StartDragSound: {fileID: 8300000, guid: 93870fb2284ff844798583685be97981, type: 3}
-      StartDragPrefab: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
+      StartDragUnderText: Drag
       StartDragPosition: {x: 0, y: 0}
       MainGunSpriteOnStart: {fileID: 21300000, guid: 7a3aab28df5d27b4facb8922b9681900, type: 3}
       CancelDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       DragCursorPrefab: {fileID: 3604617937120447271, guid: cb07e955dd662984dbf2768a7d3d3b5e, type: 3}
       EndDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
-      EndDragPrefab: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
+      EndDragUnderText: 
       EndDragPosition: {x: -200, y: -300}
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 7a3aab28df5d27b4facb8922b9681900, type: 3}
       ResultAction: 80
     TapFunction:
     - TapEndSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       Position: {x: 400, y: 300}
-      Prefab: {fileID: 732502505046357351, guid: a702d96a7c1fc9047bb62d3de4395eb3, type: 3}
+      UnderText: Cancel Reload
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 401b79f2aec463c429d2e449f5412eae, type: 3}
       ResultAction: 2
     ExtraImages: []
   - DragFunction:
     - StartDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
-      StartDragPrefab: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
+      StartDragUnderText: Drag
       StartDragPosition: {x: -200, y: -300}
       MainGunSpriteOnStart: {fileID: 21300000, guid: 7a3aab28df5d27b4facb8922b9681900, type: 3}
       CancelDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       DragCursorPrefab: {fileID: 3604617937120447271, guid: cb07e955dd662984dbf2768a7d3d3b5e, type: 3}
       EndDragSound: {fileID: 8300000, guid: 0c08d8bb7fd92524da8a3f7cb8c86ee1, type: 3}
-      EndDragPrefab: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
+      EndDragUnderText: 
       EndDragPosition: {x: 0, y: 0}
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 401b79f2aec463c429d2e449f5412eae, type: 3}
       ResultAction: 24
     TapFunction:
     - TapEndSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       Position: {x: 400, y: 300}
-      Prefab: {fileID: 732502505046357351, guid: a702d96a7c1fc9047bb62d3de4395eb3, type: 3}
+      UnderText: Cancel Reload
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 401b79f2aec463c429d2e449f5412eae, type: 3}
       ResultAction: 2
     ExtraImages:
@@ -70,13 +70,13 @@ MonoBehaviour:
       ImagePrefab: {fileID: 3865114204791723661, guid: fcbe4a5eadba8874583665f7b9e9731b, type: 3}
   - DragFunction:
     - StartDragSound: {fileID: 8300000, guid: b9e4aa6d490b15b43bec131793faea1b, type: 3}
-      StartDragPrefab: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
+      StartDragUnderText: Drag
       StartDragPosition: {x: 0, y: 50}
       MainGunSpriteOnStart: {fileID: 21300000, guid: 401b79f2aec463c429d2e449f5412eae, type: 3}
       CancelDragSound: {fileID: 8300000, guid: c271bae3361868a4a8495a1337b8138b, type: 3}
       DragCursorPrefab: {fileID: 0}
       EndDragSound: {fileID: 8300000, guid: 420d9443e7bf9204e970f16a4a74c196, type: 3}
-      EndDragPrefab: {fileID: 5717008702138960773, guid: f184a7e33347f1942bf44fdd3b49abb7, type: 3}
+      EndDragUnderText: 
       EndDragPosition: {x: 200, y: 50}
       MainGunSpriteOnEnd: {fileID: 21300000, guid: 401b79f2aec463c429d2e449f5412eae, type: 3}
       ResultAction: 2

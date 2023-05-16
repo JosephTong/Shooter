@@ -11,6 +11,7 @@ namespace BaseDefenseNameSpace
     {
         public GameObject Prefab;
         public Vector2 Position;
+        public string UnderText;
     }
 
     public class GunReloadControllerConfig

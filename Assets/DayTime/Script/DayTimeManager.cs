@@ -43,6 +43,7 @@ public class DayTimeManager : MonoBehaviour
 
     [Header("Loot")]
     [SerializeField] private Button m_LootBtn;
+    [SerializeField] private LootMapController m_LootMapController;
     [SerializeField] private LootResultPanel m_LootResultPanel;
     [SerializeField] private TotalResourcePanel m_TotalResourcePanel;
     private int m_CurrentShowResultIndex = 0;
@@ -167,6 +168,11 @@ public class DayTimeManager : MonoBehaviour
         var totalBotCount = MainGameManager.GetInstance().GetOwnedBotCount();
         m_BotCountText.text = $"{totalBotCount - GetTotalBotUsed()} / { totalBotCount }";
 
+    }
+
+    
+    public float GetHeatRadius(){
+        return m_LootMapController.GetHeatRadius();
     }
 
     public void StoreLootLocationController(int id,LootLocationController lootLocationController){

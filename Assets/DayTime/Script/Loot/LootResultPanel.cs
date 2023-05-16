@@ -49,8 +49,15 @@ public class LootResultPanel : MonoBehaviour
         m_DetailImage.sprite = scriptable.DetailImage;
        m_LocationName.text = $"Location : {scriptable.DisplayName }";
        float extraSafeness = scriptable.SaftnessGainPreExtraBot * Mathf.Max(0, (botCount-1) );
-       float totalSafeness = scriptable.BaseSafeness + extraSafeness;
-       m_Safeness.text = $"Safeness : {totalSafeness}%";
+       float totalSafeness = scriptable.BaseSafeness + extraSafeness;            
+       
+       float toHomeDistance =Mathf.Sqrt(scriptable.Position.x * scriptable.Position.x + scriptable.Position.y * scriptable.Position.y);
+        float heatRadius = DayTimeManager.GetInstance().GetHeatRadius();
+        if(toHomeDistance >= heatRadius ){
+            // outside safe zoon
+            totalSafeness -=  (toHomeDistance - heatRadius)*0.25f ;
+        }
+       m_Safeness.text = $"Safeness : {(int)totalSafeness}%";
        m_SendBot.text = $"Send Bot : {botCount}";
 
         float safenessNeeded = Random.Range(0f,100f);

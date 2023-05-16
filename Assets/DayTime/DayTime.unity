@@ -24911,6 +24911,7 @@ MonoBehaviour:
   m_OptionBtn: {fileID: 487858290}
   m_OptionPanel: {fileID: 250487780}
   m_LootBtn: {fileID: 1280397899}
+  m_LootMapController: {fileID: 1738329039}
   m_LootResultPanel: {fileID: 923921123}
   m_TotalResourcePanel: {fileID: 1825705755}
   m_WeaponPanelBtn: {fileID: 1419672652}

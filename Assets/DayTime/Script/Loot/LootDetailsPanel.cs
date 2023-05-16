@@ -103,11 +103,31 @@ public class LootDetailsPanel : MonoBehaviour
         }else{
             var scriptable = m_TargetLootLocationController.GetScriptable();
             text = $"Safeness : {scriptable.BaseSafeness}%";
+
+
+
+            // safe on mutil bot sent
             if(sentLootBotCount>1){
                 string symbol = scriptable.SaftnessGainPreExtraBot>=0?"+":"";
                 text += $" {symbol}{scriptable.SaftnessGainPreExtraBot *(sentLootBotCount-1) }%";
-                text += $" ({scriptable.BaseSafeness+scriptable.SaftnessGainPreExtraBot *(sentLootBotCount-1)}%)";
             }
+
+            float toHomeDistance =Mathf.Sqrt(scriptable.Position.x * scriptable.Position.x + scriptable.Position.y * scriptable.Position.y);
+            float heatRadius = DayTimeManager.GetInstance().GetHeatRadius();
+            float heatDanger = 0;
+            bool IsOutsideSafeZoon = toHomeDistance >= heatRadius;
+            if( IsOutsideSafeZoon ){
+                // outside safe zoon
+                heatDanger = (toHomeDistance - heatRadius)*0.25f;
+                text += $" (-{(int)heatDanger}%)";
+            }
+
+            if(sentLootBotCount>1 || IsOutsideSafeZoon){
+                // show total safeness
+
+                text += $" ({ (int) (scriptable.BaseSafeness+scriptable.SaftnessGainPreExtraBot *(sentLootBotCount-1) - heatDanger ) }%)";
+            }
+
             m_Saftness.text = text;
         }
 

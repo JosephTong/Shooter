@@ -77,6 +77,10 @@ public class LootMapController : MonoBehaviour
         // TODO : Move by draging
     }
 
+    public float GetHeatRadius(){
+        return m_HeatAreaSize/2;
+    }
+
     private void Update() {
         
     }

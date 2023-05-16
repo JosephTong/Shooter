@@ -81,8 +81,8 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private List<WeaponOwnership> m_AllWeaponOwnership = new List<WeaponOwnership>();
     [SerializeField][Range(2,4)] private int m_WeaponSlotOwned = 2;
     
-    private float m_WallMaxHp = 100;
-    private float m_WallCurrentHp = 100;
+    private float m_WallMaxHp = 1000;
+    [SerializeField]private float m_WallCurrentHp = 1000;
 
 
     public static MainGameManager GetInstance()

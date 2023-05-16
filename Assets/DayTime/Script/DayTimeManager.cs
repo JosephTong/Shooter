@@ -73,9 +73,7 @@ public class DayTimeManager : MonoBehaviour
     }
 
     private void Start() {
-
-        
-        DayTimeManager.GetInstance().SetUsedBotCountText();
+        SetUsedBotCountText();
         ChangeGameStage(DayTimeStage.Loot);
 
         m_WeaponPanelBtn.onClick.AddListener(()=>{
@@ -89,7 +87,7 @@ public class DayTimeManager : MonoBehaviour
         
 
         m_FinializeBtn.onClick.AddListener(()=>{
-            DayTimeManager.GetInstance().OnClickResultPanelNextBtn();
+            OnClickResultPanelNextBtn();
         });
 
         m_OptionBtn.onClick.AddListener(()=>{
@@ -148,7 +146,7 @@ public class DayTimeManager : MonoBehaviour
     }
 
     public void OnClickResultPanelNextBtn(){
-        DayTimeManager.GetInstance().SetTopBar(false);
+        SetTopBar(false);
         if(m_CurrentShowResultIndex>=m_AllLocationWithBot.Count){
             m_LootResultPanel.TurnOff();
             // show total resources changes

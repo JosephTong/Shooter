@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// show after click on loot location
 
 public class LootDetailsPanel : MonoBehaviour
 {

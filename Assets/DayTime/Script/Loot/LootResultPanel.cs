@@ -63,6 +63,7 @@ public class LootResultPanel : MonoBehaviour
        ResourcesRecord ans = new ResourcesRecord();
        
        if(isSuccess){
+            // gain resource on success 
             float seedRandom = Random.Range(0f,1f);
             ans.Raw = Mathf.Lerp(scriptable.MinRawMaterial,scriptable.MaxRawMaterial,seedRandom );
             m_Gain.Raw.text = $"+{(int)ans.Raw}";
@@ -87,6 +88,7 @@ public class LootResultPanel : MonoBehaviour
             m_Gain.Heat.text = heatText + $"{scriptable.HeatGainOnLoot}";
 
        }else{
+            // lose bot on fail
             ans.Raw = 0;
             ans.Scrap = 0;
             ans.Chem = 0;

@@ -15,6 +15,11 @@ public class LootMapController : MonoBehaviour
     [SerializeField] private float m_HeatAreaSize = 600;
     [SerializeField] private LootDetailsPanel m_LootDetailsPanel;
     [SerializeField] private RectTransform m_HeatMask;
+    [SerializeField] private TMP_Text m_Raw;
+    [SerializeField] private TMP_Text m_Scrap;
+    [SerializeField] private TMP_Text m_Chem;
+    [SerializeField] private TMP_Text m_Electronic;
+    [SerializeField] private TMP_Text m_Heat;
 
 
     private void Start() {
@@ -26,7 +31,15 @@ public class LootMapController : MonoBehaviour
             m_Self.SetActive(true);
         };
 
+        // Set Resource
+        var ownedResources = MainGameManager.GetInstance().GetOwnedResources();
+        m_Raw.text = $" : {(int)(ownedResources.Raw)}";
+        m_Scrap.text = $" : {(int)(ownedResources.Scrap)}"; 
+        m_Chem.text = $" : {(int)(ownedResources.Chem)}"; 
+        m_Electronic.text = $" : {(int)(ownedResources.Electronic)}"; 
+        m_Heat.text = $" : {(int)(ownedResources.Heat)}"; 
 
+        // set heat area size
         m_HeatAreaSize = Mathf.Lerp(500f,3000f, MainGameManager.GetInstance().GetHeat() /1000f );
         m_HeatMask.sizeDelta = Vector2.one * m_HeatAreaSize;
 

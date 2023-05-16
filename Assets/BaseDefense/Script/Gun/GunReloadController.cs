@@ -52,6 +52,7 @@ public class GunReloadController : MonoBehaviour
         }
         BaseDefenseManager.GetInstance().m_ReloadUpdateAction += UpdateDragImagePosition;
         BaseDefenseManager.GetInstance().m_ChangeToReloadAction += SetStartReloadPanel;
+        MainGameManager.GetInstance().AddNewAudioSource(m_GunReloadAudioSource);
 
         BaseDefenseManager.GetInstance().CloseReloadPanel();
     }

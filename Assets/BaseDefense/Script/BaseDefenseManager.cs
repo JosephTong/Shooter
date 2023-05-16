@@ -100,12 +100,12 @@ public class BaseDefenseManager : MonoBehaviour
 
 
     private void Start() {
-        
-
         m_ChangeFromReloadAction += CloseReloadPanel;
         m_OptionBtn.onClick.AddListener(()=>{
             m_OptionPanel.SetActive(true);
         });
+        // set wall hp
+        m_WallHpBar.m_CanvasGroup.alpha = 0;
         m_WallHpBar.m_HpBarFiller.fillAmount = MainGameManager.GetInstance().GetWallCurHp() / MainGameManager.GetInstance().GetWallMaxHp();
     }
 

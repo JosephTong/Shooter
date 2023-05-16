@@ -10,7 +10,6 @@ public class WeaponPanelController : MonoBehaviour
 
     [Header("Grid")]
     [SerializeField] private GameObject m_WeaponGridPanel;
-    [SerializeField] private GameObject m_WeaponGridPrefab;
     [SerializeField] private TMP_Text m_WeaponPageText;
     [SerializeField] private Button m_LastPageBtn;
     [SerializeField] private Button m_NextPageBtn;
@@ -145,7 +144,8 @@ public class WeaponPanelController : MonoBehaviour
     }
 
 
-    public void SetSelectionPanel(){
+    private void SetSelectionPanel(){
+        // set selected weapon
         m_WeaponToBeSelectedImage.sprite = m_CurrentDetailWeapon.DisplaySprite;
         var selectedWeapon = MainGameManager.GetInstance().GetAllSelectedWeapon();
         for (int i = 0; i < m_AllWeaponSelectSlot.Count; i++)
@@ -186,7 +186,7 @@ public class WeaponPanelController : MonoBehaviour
 
     }
 
-    public void ClearInfo(){
+    private void ClearInfo(){
         m_WeaponDisplayName.text = "- - -";
         m_DamagePerPellet.text = $"Damage per pellet : - - -";
         m_PelletPerShot.text = $"Pellet per shot: - - -";

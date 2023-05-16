@@ -13,6 +13,8 @@ public class GunController : MonoBehaviour
 {
     private GunScriptable m_SelectedGun = null;
     [SerializeField] private SpriteRenderer m_FPSImage;
+    [SerializeField] private GameObject m_Self;
+    [SerializeField] private Vector3 m_GunFpsImagePos = new Vector3(8, -4.5f, 0);
 
 
     [Header("Drag to aim")]
@@ -115,7 +117,7 @@ public class GunController : MonoBehaviour
         m_CrossHair.position = new Vector3(Screen.width / 2, Screen.height / 2, 0);
 
         m_SemiAutoShootCoroutine = null;
-        this.transform.position = new Vector3(8, -4.5f, 0) + m_FieldCenter;
+        m_Self.transform.position = m_GunFpsImagePos + m_FieldCenter;
         m_MainCamera.transform.position = new Vector3(m_FieldCenter.x, m_FieldCenter.y, -10);
         m_ScreenCenterToCornerDistance = Mathf.Sqrt(Screen.height / 2 * Screen.height / 2 + Screen.width / 2 * Screen.width / 2);
         m_MainCameraStartPos = m_MainCamera.transform.position;

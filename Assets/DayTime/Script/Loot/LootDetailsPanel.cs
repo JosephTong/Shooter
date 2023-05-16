@@ -119,7 +119,7 @@ public class LootDetailsPanel : MonoBehaviour
             if( IsOutsideSafeZoon ){
                 // outside safe zoon
                 heatDanger = (toHomeDistance - heatRadius)*0.25f;
-                text += $" (-{(int)heatDanger}%)";
+                text += $" -{(int)heatDanger}%";
             }
 
             if(sentLootBotCount>1 || IsOutsideSafeZoon){

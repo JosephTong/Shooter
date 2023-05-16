@@ -47,6 +47,7 @@ public class BaseDefenseResultPanel : MonoBehaviour
     public void ShowResult(bool isLose)
     {
         m_Self.SetActive(true);
+        m_Heat.gameObject.SetActive(false);
 
         // before
         m_Wall.Before.text = ((int)m_BeforeBattleWallHp).ToString();
@@ -56,7 +57,7 @@ public class BaseDefenseResultPanel : MonoBehaviour
         m_Chem.Before.text = ((int)m_BeforeBattleResourceData.Chem).ToString();
         m_Electronic.Before.text = ((int)m_BeforeBattleResourceData.Electronic).ToString();
         m_Bot.Before.text = ((int)m_BeforeBattleResourceData.Bot).ToString();
-        m_Heat.Before.text = ((int)m_BeforeBattleResourceData.Heat).ToString();
+        //m_Heat.Before.text = ((int)m_BeforeBattleResourceData.Heat).ToString();
 
         // changes
         var afterBattleResourceData = MainGameManager.GetInstance().GetOwnedResources();
@@ -91,11 +92,11 @@ public class BaseDefenseResultPanel : MonoBehaviour
         textString = statValue >= 0 ? "+" : "";
         textString += ((int)statValue).ToString();
         m_Bot.Changes.text = textString;
-
+/*
         statValue = afterBattleResourceData.Heat - m_BeforeBattleResourceData.Heat;
         textString = statValue >= 0 ? "+" : "";
         textString += ((int)statValue).ToString();
-        m_Heat.Changes.text = textString;
+        m_Heat.Changes.text = textString;*/
 
 
 
@@ -107,7 +108,7 @@ public class BaseDefenseResultPanel : MonoBehaviour
         m_Chem.After.text = ((int)afterBattleResourceData.Chem).ToString();
         m_Electronic.After.text = ((int)afterBattleResourceData.Electronic).ToString();
         m_Bot.After.text = ((int)afterBattleResourceData.Bot).ToString();
-        m_Heat.After.text = ((int)afterBattleResourceData.Heat).ToString();
+        //m_Heat.After.text = ((int)afterBattleResourceData.Heat).ToString();
 
         m_NextBtn.onClick.RemoveAllListeners();
 
@@ -128,13 +129,15 @@ public class BaseDefenseResultPanel : MonoBehaviour
 
         // Before
         m_Wall.gameObject.SetActive(false);
+        m_Bot.gameObject.SetActive(false);
+        m_Heat.gameObject.SetActive(true);
         var afterBattleResourceData = MainGameManager.GetInstance().GetOwnedResources();
 
         m_Raw.Before.text = ((int)afterBattleResourceData.Raw).ToString();
         m_Scrap.Before.text = ((int)afterBattleResourceData.Scrap).ToString();
         m_Chem.Before.text = ((int)afterBattleResourceData.Chem).ToString();
         m_Electronic.Before.text = ((int)afterBattleResourceData.Electronic).ToString();
-        m_Bot.Before.text = ((int)afterBattleResourceData.Bot).ToString();
+        //m_Bot.Before.text = ((int)afterBattleResourceData.Bot).ToString();
         m_Heat.Before.text = ((int)afterBattleResourceData.Heat).ToString();
 
 
@@ -155,10 +158,10 @@ public class BaseDefenseResultPanel : MonoBehaviour
         seedRandom = Random.Range(0f, 0.5f);
         DamagedResource.Electronic = Mathf.Lerp(0, afterBattleResourceData.Electronic, seedRandom);
         m_Electronic.Changes.text = $"-{(int)DamagedResource.Electronic}";
-
+/*
         seedRandom = Random.Range(0f, 0.5f);
         DamagedResource.Bot = (int)Mathf.Lerp(0, afterBattleResourceData.Bot, seedRandom);
-        m_Bot.Changes.text =  $"-{(int)DamagedResource.Bot}";
+        m_Bot.Changes.text =  $"-{(int)DamagedResource.Bot}";*/
 
         DamagedResource.Heat = afterBattleResourceData.Heat * 0.25f;
         m_Heat.Changes.text =  $"-{(int)DamagedResource.Heat}";
@@ -171,7 +174,7 @@ public class BaseDefenseResultPanel : MonoBehaviour
         m_Scrap.After.text = ((int)afterBattleResourceData.Scrap).ToString();
         m_Chem.After.text = ((int)afterBattleResourceData.Chem).ToString();
         m_Electronic.After.text = ((int)afterBattleResourceData.Electronic).ToString();
-        m_Bot.After.text = ((int)afterBattleResourceData.Bot).ToString();
+        //m_Bot.After.text = ((int)afterBattleResourceData.Bot).ToString();
         m_Heat.After.text = ((int)afterBattleResourceData.Heat).ToString();
 
         m_NextBtn.onClick.RemoveAllListeners();

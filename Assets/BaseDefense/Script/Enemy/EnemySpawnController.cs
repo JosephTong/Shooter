@@ -16,6 +16,8 @@ public class EnemySpawnController : MonoBehaviour
     private const int TotalWave = 3;
     private List<EnemyScriptable> m_VaildEnemies = new List<EnemyScriptable>();
     private List<GameObject> m_AllSpawnedEnemy = new List<GameObject>();
+    private Coroutine m_LastSpawnEnemyCoroutine = null;
+    private float m_LastSpawnEnemyDelayTime = 0;
 
     private void Start() {
         m_WaveHeat = MainGameManager.GetInstance().GetHeat() / TotalWave ;
@@ -31,7 +33,7 @@ public class EnemySpawnController : MonoBehaviour
             return;
         }
 
-        if(m_WaveCount>=TotalWave ){
+        if(m_WaveCount>=TotalWave && m_LastSpawnEnemyCoroutine==null){
             for (int i = 0; i < m_AllSpawnedEnemy.Count; i++)
             {
                 if(m_AllSpawnedEnemy[i] == null){
@@ -39,6 +41,7 @@ public class EnemySpawnController : MonoBehaviour
                     i--;
                 }
             }
+            // on wave 3 and all enemy are killed and no enemy will be spawn
             if(m_AllSpawnedEnemy.Count<=0){
                 // player win
                 BaseDefenseManager.GetInstance().GameOver(false);
@@ -59,7 +62,9 @@ public class EnemySpawnController : MonoBehaviour
     }
     private void WaveHandler(){
         float totalHeatOfThisWave = 0;
-        while (totalHeatOfThisWave<m_WaveHeat)
+        m_LastSpawnEnemyCoroutine = null;
+        m_LastSpawnEnemyDelayTime = 0;
+        while (totalHeatOfThisWave<m_WaveHeat )
         {
             // select random enemy
             int randomIndex = Random.Range(0,m_VaildEnemies.Count);
@@ -67,18 +72,27 @@ public class EnemySpawnController : MonoBehaviour
 
             // select random spawn time 
             float timeDelay = Random.Range(2f,20f);
+            if(timeDelay>m_LastSpawnEnemyDelayTime){
+                m_LastSpawnEnemyDelayTime = timeDelay;
+            }
             StartCoroutine( SpawnEnemy(timeDelay , targetEnemyScriptable) );
 
             // gain heat 
             totalHeatOfThisWave += targetEnemyScriptable.HeatGainForSpawn;
 
         }
+        m_LastSpawnEnemyCoroutine = StartCoroutine(LastSpawnEnemyDelay(m_LastSpawnEnemyDelayTime));
 
         m_TimePassed = 30;
         m_WaveCount ++;
     }
 
-    public IEnumerator SpawnEnemy(float timeDelay, EnemyScriptable enemyScriptable){
+    private IEnumerator LastSpawnEnemyDelay(float waitTime){
+        yield return new WaitForSeconds(waitTime);
+        m_LastSpawnEnemyCoroutine = null;
+    }
+
+    private IEnumerator SpawnEnemy(float timeDelay, EnemyScriptable enemyScriptable){
         yield return new WaitForSeconds(timeDelay);
         var newEnemy = Instantiate(enemyScriptable.Prefab);
         m_AllSpawnedEnemy.Add(newEnemy);

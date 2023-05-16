@@ -77,7 +77,7 @@ public class SwitchWeaponController : MonoBehaviour
             {
                 hits[i].collider.TryGetComponent<WeaponToBeSwitch>(out var weaponToBeSwitch);         
                 if(weaponToBeSwitch != null && weaponToBeSwitch.m_Gun != null ){
-                    SwitchWeapon(weaponToBeSwitch.m_Gun);
+                    SwitchWeapon(weaponToBeSwitch.m_Gun,weaponToBeSwitch.m_SlotIndex);
                     m_LookUpBtn.onDown.Invoke();
                     return;
                 }
@@ -102,7 +102,7 @@ public class SwitchWeaponController : MonoBehaviour
         }
     }
 
-    private void SwitchWeapon(GunScriptable gun){
-        BaseDefenseManager.GetInstance().SwitchSelectedWeapon(gun);
+    private void SwitchWeapon(GunScriptable gun, int slotIndex){
+        BaseDefenseManager.GetInstance().SwitchSelectedWeapon(gun, slotIndex);
     }
 }

@@ -56,7 +56,7 @@ public class GunController : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] private TextMeshProUGUI m_AmmoText;
     private float m_CurrentAmmo = 0;
-    private Dictionary<string, float> m_GunsClipAmmo = new Dictionary<string, float>(); // how many ammo left on gun when switching
+    private Dictionary<int, float> m_GunsClipAmmo = new Dictionary<int, float>(); // how many ammo left on gun when switching
 
     [Header("Shooting")]
     [SerializeField] private GameObject m_ShotPointPrefab; // indicate where the shot land 
@@ -70,6 +70,7 @@ public class GunController : MonoBehaviour
 
     [Header("Switch Weapon")]
     [SerializeField] private List<WeaponToBeSwitch> m_AllWeaponSlot = new List<WeaponToBeSwitch>();
+    private int m_CurrentWeaponSlotIndex = 0;
 
 
 
@@ -87,15 +88,17 @@ public class GunController : MonoBehaviour
         int soltIndex = 0;
         for (int i = 0; i < allSelectedWeapon.Count; i++)
         {
+            int index = i;
             if (allSelectedWeapon[i] != null)
             {
                 m_AllWeaponSlot[soltIndex].m_Gun = allSelectedWeapon[i];
                 m_AllWeaponSlot[soltIndex].m_SpriteRenderer.sprite = allSelectedWeapon[i].DisplaySprite;
-                // TODO : unique id for each gun
-                m_GunsClipAmmo.Add(m_AllWeaponSlot[soltIndex].m_Gun.DisplayName, 0);
+                m_AllWeaponSlot[soltIndex].m_SlotIndex = index;
+                m_GunsClipAmmo.Add(i, 0);
             }else{
                 m_AllWeaponSlot[soltIndex].m_Gun = null;
                 m_AllWeaponSlot[soltIndex].m_SpriteRenderer.color = Color.clear;
+                m_AllWeaponSlot[soltIndex].m_SlotIndex = 0;
             }
             soltIndex++;
 
@@ -110,7 +113,15 @@ public class GunController : MonoBehaviour
         }
         else
         {
-            BaseDefenseManager.GetInstance().SwitchSelectedWeapon(m_AllWeaponSlot[0].m_Gun);
+            // select first usable gun
+            for (int i = 0; i < m_AllWeaponSlot.Count; i++)
+            {
+                if(m_AllWeaponSlot[i].m_Gun != null){
+                    BaseDefenseManager.GetInstance().SwitchSelectedWeapon(m_AllWeaponSlot[i].m_Gun,i);
+                    m_CurrentWeaponSlotIndex = i;
+                    break;
+                }
+            }
         }
 
         // center crossHair 
@@ -280,17 +291,17 @@ public class GunController : MonoBehaviour
         m_CurrentShootCoolDown -= Time.deltaTime;
     }
 
-    public void SetSelectedGun(GunScriptable gun)
+    public void SetSelectedGun(GunScriptable gun, int slotIndex)
     {
-        // TODO : give unique id to every gun
         if (m_SelectedGun != null)
-            m_GunsClipAmmo[m_SelectedGun.DisplayName] = m_CurrentAmmo;
+            m_GunsClipAmmo[m_CurrentWeaponSlotIndex] = m_CurrentAmmo;
 
         m_SelectedGun = gun;
+         m_CurrentWeaponSlotIndex = slotIndex;
 
         m_CurrentAccruacy = m_SelectedGun.Accuracy;
         m_SemiAutoShootCoroutine = null;
-        ChangeAmmoCount(m_GunsClipAmmo[m_SelectedGun.DisplayName], true);
+        ChangeAmmoCount(m_GunsClipAmmo[slotIndex], true);
         m_FPSImage.sprite = m_SelectedGun.FPSSprite;
     }
     private void GainAmmo(int changes)

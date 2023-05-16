@@ -206,7 +206,7 @@ public class BaseDefenseManager : MonoBehaviour
 
     }
 
-    public void SwitchSelectedWeapon(GunScriptable gun){
-        m_GunController.SetSelectedGun(gun);
+    public void SwitchSelectedWeapon(GunScriptable gun, int slotIndex){
+        m_GunController.SetSelectedGun(gun, slotIndex);
     }
 }

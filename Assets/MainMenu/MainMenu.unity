@@ -2159,6 +2159,7 @@ MonoBehaviour:
     IsOwned: 1
   m_WeaponSlotOwned: 2
   m_WallCurrentHp: 500
+  m_WallMaxHp: 1000
 --- !u!1 &1527863666
 GameObject:
   m_ObjectHideFlags: 0

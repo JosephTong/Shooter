@@ -60,9 +60,9 @@ public class DayTimeManager : MonoBehaviour
     [SerializeField] private Button m_WeaponPanelBtn;
     [SerializeField] private WeaponPanelController m_WeaponPanelController;
 
-    [Header("Base")]
-    [SerializeField] private Button m_BasePanelBtn;
-    [SerializeField] private DayTimeBasePanel m_DayTimeBasePanel;
+    [Header("Home")]
+    [SerializeField] private Button m_HomePanelBtn;
+    [SerializeField] private HomePanel m_HomePanel;
 
     public static DayTimeManager GetInstance(){
         if(m_Instance==null){
@@ -88,7 +88,7 @@ public class DayTimeManager : MonoBehaviour
         m_WeaponPanelBtn.onClick.AddListener(()=>{
             ChangeGameStage(DayTimeStage.Weapon);
         });  
-        m_BasePanelBtn.onClick.AddListener(()=>{
+        m_HomePanelBtn.onClick.AddListener(()=>{
             ChangeGameStage(DayTimeStage.Home);
         });      
         

@@ -7,7 +7,7 @@ using MainGameNameSpace;
 using LootResultPanelNameSpace;
 using System;
 
-public class DayTimeBasePanel : MonoBehaviour
+public class HomePanel : MonoBehaviour
 {
     [SerializeField] private GameObject m_Self;
     [Header("BaseContent")]
@@ -139,7 +139,7 @@ public class DayTimeBasePanel : MonoBehaviour
 
         m_FillImage.fillAmount = (m_CurValue + m_ValueChangesPerCount * m_DoCount ) / m_MaxValue;
         string symbol = m_ValueChangesPerCount<0?"":"+";
-        m_FillImageText.text = $"{m_CurValue} ({symbol}{m_ValueChangesPerCount * m_DoCount}) / {m_MaxValue}"; 
+        m_FillImageText.text = $"{(int)m_CurValue} ({symbol}{ (int) (m_ValueChangesPerCount * m_DoCount)}) / {(int)m_MaxValue}"; 
         
         var ownedResource = MainGameManager.GetInstance().GetOwnedResources();
         var cost = m_Cost.GetReverse();

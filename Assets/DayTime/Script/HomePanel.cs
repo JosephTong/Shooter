@@ -143,18 +143,18 @@ public class HomePanel : MonoBehaviour
         
         var ownedResource = MainGameManager.GetInstance().GetOwnedResources();
         var cost = m_Cost.GetReverse();
-        symbol = cost.Raw<0?"+":"";
-        m_ResourceTexts.Raw.text = $"{ownedResource.Raw} {symbol} ({cost.Raw* m_DoCount})";
-        symbol = cost.Scrap<0?"+":"";
-        m_ResourceTexts.Scrap.text = $"{ownedResource.Scrap} {symbol} ({cost.Scrap* m_DoCount})";
-        symbol = cost.Chem<0?"+":"";
-        m_ResourceTexts.Chem.text = $"{ownedResource.Chem} {symbol} ({cost.Chem* m_DoCount})";
-        symbol = cost.Electronic<0?"+":"";
-        m_ResourceTexts.Electronic.text = $"{ownedResource.Electronic} {symbol} ({cost.Electronic* m_DoCount})";
-        symbol = cost.Bot<0?"+":"";
-        m_ResourceTexts.Bot.text = $"{ownedResource.Bot} {symbol} ({cost.Bot* m_DoCount})";
-        symbol = cost.Heat<0?"+":"";
-        m_ResourceTexts.Heat.text = $"{ownedResource.Heat} {symbol} ({cost.Heat* m_DoCount})";
+        symbol = cost.Raw<0?"":"+";
+        m_ResourceTexts.Raw.text = $"{ownedResource.Raw} ({symbol}{cost.Raw* m_DoCount})";
+        symbol = cost.Scrap<0?"":"+";
+        m_ResourceTexts.Scrap.text = $"{ownedResource.Scrap} ({symbol}{cost.Scrap* m_DoCount})";
+        symbol = cost.Chem<0?"":"+";
+        m_ResourceTexts.Chem.text = $"{ownedResource.Chem} ({symbol}{cost.Chem* m_DoCount})";
+        symbol = cost.Electronic<0?"":"+";
+        m_ResourceTexts.Electronic.text = $"{ownedResource.Electronic} ({symbol}{cost.Electronic* m_DoCount})";
+        symbol = cost.Bot<0?"":"+";
+        m_ResourceTexts.Bot.text = $"{ownedResource.Bot} ({symbol}{cost.Bot* m_DoCount})";
+        symbol = cost.Heat<0?"":"+";
+        m_ResourceTexts.Heat.text = $"{ownedResource.Heat} ({symbol}{cost.Heat* m_DoCount})";
 
     }
     

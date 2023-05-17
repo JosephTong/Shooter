@@ -43,6 +43,18 @@ namespace MainGameNameSpace
                  Electronic >= record.Electronic && Bot >= record.Bot && Heat >= record.Heat;
         }
 
+        public ResourcesRecord Multiply(float multiplyBy){
+            return new ResourcesRecord{
+                Raw = Raw * multiplyBy,
+                Scrap = Scrap * multiplyBy,
+                Chem = Chem * multiplyBy,
+                Electronic = Electronic * multiplyBy,
+                Bot = (int) (Bot * multiplyBy),
+                Heat = Heat * multiplyBy,
+            };
+
+        }
+
         public void Change(ResourcesRecord record)
         {
             Raw += record.Raw;
@@ -81,8 +93,8 @@ public class MainGameManager : MonoBehaviour
     [SerializeField] private List<WeaponOwnership> m_AllWeaponOwnership = new List<WeaponOwnership>();
     [SerializeField][Range(2,4)] private int m_WeaponSlotOwned = 2;
     
-    private float m_WallMaxHp = 1000;
     [SerializeField]private float m_WallCurrentHp = 1000;
+    [SerializeField]private float m_WallMaxHp = 1000;
 
 
     public static MainGameManager GetInstance()

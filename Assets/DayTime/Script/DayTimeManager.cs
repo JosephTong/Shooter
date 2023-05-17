@@ -13,7 +13,8 @@ namespace DayTimeNameSpace
 {
     public enum DayTimeStage{
         Loot,
-        Weapon
+        Weapon,
+        Home,
     }
 }
 
@@ -25,6 +26,7 @@ public class DayTimeManager : MonoBehaviour
     [SerializeField] private TMP_Text m_BotCountText;
     [SerializeField] private Button m_FinializeBtn;
     [SerializeField] private GameObject m_TopBar;
+
     [Header("Option")]
     [SerializeField] private Button m_OptionBtn;
     [SerializeField] private GameObject m_OptionPanel;
@@ -32,11 +34,13 @@ public class DayTimeManager : MonoBehaviour
     #region From
     public Action m_ChangeFromLoot = null;
     public Action m_ChangeFromWeapon = null;
+    public Action m_ChangeFromHome = null;
     #endregion
 
     #region To
     public Action m_ChangeToLoot = null;
     public Action m_ChangeToWeapon = null;
+    public Action m_ChangeToHome = null;
 
     #endregion
 
@@ -55,6 +59,10 @@ public class DayTimeManager : MonoBehaviour
     [Header("Weapon")]
     [SerializeField] private Button m_WeaponPanelBtn;
     [SerializeField] private WeaponPanelController m_WeaponPanelController;
+
+    [Header("Base")]
+    [SerializeField] private Button m_BasePanelBtn;
+    [SerializeField] private DayTimeBasePanel m_DayTimeBasePanel;
 
     public static DayTimeManager GetInstance(){
         if(m_Instance==null){
@@ -79,7 +87,10 @@ public class DayTimeManager : MonoBehaviour
 
         m_WeaponPanelBtn.onClick.AddListener(()=>{
             ChangeGameStage(DayTimeStage.Weapon);
-        });        
+        });  
+        m_BasePanelBtn.onClick.AddListener(()=>{
+            ChangeGameStage(DayTimeStage.Home);
+        });      
         
         m_LootBtn.onClick.AddListener(()=>{
             ChangeGameStage(DayTimeStage.Loot);
@@ -105,6 +116,9 @@ public class DayTimeManager : MonoBehaviour
             case DayTimeStage.Weapon:
                 m_ChangeFromWeapon?.Invoke();
             break;
+            case DayTimeStage.Home:
+                m_ChangeFromHome?.Invoke();
+            break;
             default:
             break;
         }
@@ -116,6 +130,9 @@ public class DayTimeManager : MonoBehaviour
             break;
             case DayTimeStage.Weapon:
                 m_ChangeToWeapon?.Invoke();
+            break;
+            case DayTimeStage.Home:
+                m_ChangeToHome?.Invoke();
             break;
             default:
             break;

@@ -38,23 +38,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BorderFadeAmount: 10
+    - _BorderFadeAmount: 25
     - _CutOut: 10
     - _CutOut_1: 6.1
-    - _Emission: 1.5
-    - _FlowSpeed: 50
+    - _Emission: 1.53
+    - _FlowSpeed: -10
     - _FlowSpeed_1: 1
     - _FlowSpeed_2: 1
     - _FlowSpeed_3: 1
     - _FlowSpeed_4: 1
     - _FlowSpeed_5: 1
     - _IsCutOutCenter: 0
-    - _NoiseAngle: 0
-    - _NoiseDensity: 1
-    - _NoiseStrength: 0.707
+    - _NoiseAngle: 1
+    - _NoiseDensity: 1.56
+    - _NoiseStrength: 0.18
     - _SecondFlowSpeed: 5
     - _Size: 10
     - _TextureSize: 0.1
     m_Colors:
-    - _Color: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 1}
+    - _Color: {r: 0.10980392, g: 4, b: 0, a: 2}
   m_BuildTextureStacks: []

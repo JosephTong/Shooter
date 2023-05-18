@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Laser
-  m_Shader: {fileID: -6465566751694194690, guid: cd14d4ced2406064fbb266025066a156, type: 3}
+  m_Name: AnimeLineBG
+  m_Shader: {fileID: -6465566751694194690, guid: 83b8c0baf1ceb1c4fa0ca7afde64ee4e, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 391f74214f19c654ca4d0400917fbd6f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -38,23 +38,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BorderFadeAmount: 25
-    - _CutOut: 10
-    - _CutOut_1: 6.1
-    - _Emission: 1.53
-    - _FlowSpeed: -15
-    - _FlowSpeed_1: 1
-    - _FlowSpeed_2: 1
-    - _FlowSpeed_3: 1
-    - _FlowSpeed_4: 1
-    - _FlowSpeed_5: 1
-    - _IsCutOutCenter: 0
-    - _NoiseAngle: 1
-    - _NoiseDensity: 2.87
-    - _NoiseStrength: 0.18
-    - _SecondFlowSpeed: 5
-    - _Size: 10
-    - _TextureSize: 0.1
+    - _BorderFadeAmount: 100
+    - _CenterFadeAmount: 5
+    - _CenterFillAmount: 13.26
+    - _CutOutAmount: 9.29
+    - _FlowSpeed: -4
+    - _NoiseDensity: 5
+    - _NoiseStrength: 0
+    - _Size: 2.53
     m_Colors:
-    - _Color: {r: 2.828427, g: 0, b: 0.54195315, a: 2}
+    - _BorderColor: {r: 1, g: 1, b: 1, a: 1}
+    - _CenterColor: {r: 3.776172, g: 3.618008, b: 0, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.526783, a: 1}
+    - _LineBorderColor: {r: 1, g: 0.629899, b: 0, a: 1}
+    - _LineCenterColor: {r: 1, g: 1, b: 1, a: 1}
+    - _LineColor: {r: 0.010349083, g: 0, b: 1.319508, a: 1}
+    - _MainColor: {r: 0.735849, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

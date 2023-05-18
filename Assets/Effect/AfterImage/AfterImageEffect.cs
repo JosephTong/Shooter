@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AfterImageEffect : MonoBehaviour
 {
+    [Header(" *** IMPORTANT *** : the parent of this object must NOT move")]
     [SerializeField] private AfterImageEffectTarget m_TargetObject = null;
     [SerializeField][Range(1,20)] private int m_AfterImageCount = 5;
     [SerializeField][Range(0.1f,2)] private float m_AfterImageDistance = 0.5f;

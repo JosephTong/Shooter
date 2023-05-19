@@ -2378,10 +2378,10 @@
     "m_Guid": {
         "m_GuidSerialized": "d5acb558-ed4e-42b6-81dc-27d031c56a0a"
     },
-    "m_Name": "MainTexture",
+    "m_Name": "MainTex",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "MainTexture",
-    "m_DefaultReferenceName": "_MainTexture",
+    "m_RefNameGeneratedByDisplayName": "MainTex",
+    "m_DefaultReferenceName": "_MainTex",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,

@@ -12,6 +12,9 @@ namespace ullScreenShockWaveControllerNameSpace
         public float WaveSize = 0.5f;
         public float WaveStrength = 5f;
         public float WaveSpeed = 0.1f;
+        public float XPosNormalized = 0.5f;
+        public float YPosNormalized = 0.5f;
+
     }
 }
 
@@ -36,11 +39,14 @@ public class FullScreenShockWaveController : MonoBehaviour
     [SerializeField][Range(-5f, 5f)] private float m_WaveStrength = 5f;
     [SerializeField][Range(0f, 3f)] private float m_WaveSpeed = 0.1f;*/
     private FullScreenShockWaveConfig m_Config = null;
-    private Material FullScreenShockWave = null;
+    private Material m_FullScreenShockWave = null;
+    private float m_PassedTime = 0;
 
     private void Start()
     {
-        FullScreenShockWave = m_FullScreenSpriteRenderer.material;
+        m_FullScreenShockWave = m_FullScreenSpriteRenderer.material;
+        //public float ScreenRatio = 9f/16f;
+        m_FullScreenShockWave.SetFloat("_ScreenRatio", (float)Screen.width/(float)Screen.height);
 
     }
     private void Update()
@@ -49,22 +55,22 @@ public class FullScreenShockWaveController : MonoBehaviour
         {
             return;
         }
-        if (FullScreenShockWave)
+        if (m_FullScreenShockWave)
         {
-            if (Mathf.Abs(FullScreenShockWave.GetFloat("_NormailzedTime")) > m_Config.WaveSize)
+            if (Mathf.Abs(m_FullScreenShockWave.GetFloat("_NormailzedTime")) > m_Config.WaveSize)
             {
-                FullScreenShockWave.SetFloat("_Thiccness", m_Config.WaveThiccness);
-                FullScreenShockWave.SetFloat("_Strength", m_Config.WaveStrength);
-                FullScreenShockWave.SetFloat("_NormailzedTime", 0);
+                m_FullScreenShockWave.SetFloat("_Thiccness", m_Config.WaveThiccness);
+                m_FullScreenShockWave.SetFloat("_Strength", m_Config.WaveStrength);
+                m_FullScreenShockWave.SetFloat("_NormailzedTime", 0);
             }
             else
             {
-                var normailzedTime = FullScreenShockWave.GetFloat("_NormailzedTime");
-                FullScreenShockWave.SetFloat("_NormailzedTime",
+                var normailzedTime = m_FullScreenShockWave.GetFloat("_NormailzedTime");
+                m_FullScreenShockWave.SetFloat("_NormailzedTime",
                     normailzedTime + m_Config.WaveSpeed * Time.deltaTime);
 
-                float strengthReduction = FullScreenShockWave.GetFloat("_Strength") >= 0 ? -1 : 1;
-                FullScreenShockWave.SetFloat("_Strength",
+                float strengthReduction = m_FullScreenShockWave.GetFloat("_Strength") >= 0 ? -1 : 1;
+                m_FullScreenShockWave.SetFloat("_Strength",
                     Mathf.Lerp(m_Config.WaveStrength, 0, m_StrengthReduceOverTimeCurve.Evaluate(normailzedTime / m_Config.WaveSize)));
 
             }
@@ -76,11 +82,12 @@ public class FullScreenShockWaveController : MonoBehaviour
     public void Init(FullScreenShockWaveConfig config)
     {
         m_Config = config;
-        if (FullScreenShockWave)
+        if (m_FullScreenShockWave)
         {
-            FullScreenShockWave.SetFloat("_Thiccness", config.WaveThiccness);
-            FullScreenShockWave.SetFloat("_Strength", config.WaveStrength);
-            FullScreenShockWave.SetFloat("_NormailzedTime", 0);
+            m_FullScreenShockWave.SetFloat("_Thiccness", config.WaveThiccness);
+            m_FullScreenShockWave.SetFloat("_Strength", config.WaveStrength);
+            m_FullScreenShockWave.SetFloat("_NormailzedTime", 0);
+            m_FullScreenShockWave.SetVector("_CenterPosition", new Vector4(config.XPosNormalized , config.YPosNormalized,0,0));
         }
     }
 

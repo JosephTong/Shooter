@@ -41,7 +41,7 @@ Material:
     - _Density: 4
     - _DotSpeed: 2
     - _DotSpeedSecond: 5
-    - _FlickAmount: 0.5
+    - _FlickAmount: 1
     - _GrowSpeed: 5
     - _SideCutOut: 3
     - _Size: 10

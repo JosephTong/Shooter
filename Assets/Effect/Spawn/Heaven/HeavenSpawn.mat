@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UKFlag
-  m_Shader: {fileID: -6465566751694194690, guid: 41a1c944d73ed3e4991115cce7fc226a, type: 3}
+  m_Name: HeavenSpawn
+  m_Shader: {fileID: -6465566751694194690, guid: e927524722647904598abf6fb3cd03af, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -21,7 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 79ca6d7b1895c7244bf2fe1619724b87, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 1abe7740bcbe12a4280c946b13f2c6ee, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -38,10 +42,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ShadowStrength: 0.744
-    - _Speed: -1.27
-    - _Strength: 0.1
+    - _CloudNormalized: 0
+    - _CloudSize: 0.25
+    - _MainNormalized: 1
+    - _Normalized: 0
+    - _RayDensity: 10
+    - _RayHeight: 0.254
+    - _RayNormalized: 0
+    - _RaySpeed: 1.03
     m_Colors:
-    - _Color: {r: 1.4142135, g: 1.4142135, b: 1.4142135, a: 1}
-    - _ShadowColor: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+    - _RayColor: {r: 2, g: 1.8454561, b: 0, a: 1}
   m_BuildTextureStacks: []

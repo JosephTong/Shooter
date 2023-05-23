@@ -41,12 +41,13 @@ Material:
     - _Density: 5
     - _DotSpeed: 2
     - _DotSpeedSecond: 3
-    - _FlickAmount: 0.618
+    - _FireMoveSpeed: 1
+    - _FlickAmount: 0.456
     - _FlickingAmount: 1.943
     - _GrowSpeed: 5.9
     - _SideCutOut: 2
     - _Size: 10
-    - _TopCutOut: 10
+    - _TopCutOut: 1.68
     m_Colors:
     - _DotColor: {r: 0.25016785, g: 8, b: 0, a: 1}
     - _MainColor: {r: 0, g: 1.3058095, b: 1.8640718, a: 1}

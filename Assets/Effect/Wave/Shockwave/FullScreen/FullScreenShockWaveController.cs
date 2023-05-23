@@ -61,6 +61,7 @@ public class FullScreenShockWaveController : MonoBehaviour
             if (Mathf.Abs(m_FullScreenShockWave.GetFloat("_NormailzedTime")) > m_Config.WaveSize)
             {
                 m_WaveCount++;
+                Debug.LogError("");
                 m_FullScreenShockWave.SetFloat("_Thiccness", m_Config.WaveThiccness);
                 m_FullScreenShockWave.SetFloat("_Strength", m_Config.WaveStrength);
                 m_FullScreenShockWave.SetFloat("_NormailzedTime", 0);

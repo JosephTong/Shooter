@@ -46,10 +46,10 @@ Material:
     - _CloudSize: 0.25
     - _MainNormalized: 1
     - _Normalized: 0
-    - _RayDensity: 10
-    - _RayHeight: 0.254
-    - _RayNormalized: 0
-    - _RaySpeed: 1.03
+    - _RayDensity: 8.58
+    - _RayHeight: 0.321
+    - _RayNormalized: 1
+    - _RaySpeed: 1.04
     m_Colors:
-    - _RayColor: {r: 2, g: 1.8454561, b: 0, a: 1}
+    - _RayColor: {r: 1.0196079, g: 0.94982505, b: 0, a: 1}
   m_BuildTextureStacks: []

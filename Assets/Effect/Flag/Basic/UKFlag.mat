@@ -43,5 +43,6 @@ Material:
     - _Strength: 0.064
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ShadowColor: {r: 0.13725491, g: 0.13725491, b: 0.13725491, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

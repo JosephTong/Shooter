@@ -38,12 +38,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CenterCutout: 8.32
+    - _CenterCutout: 2.59
     - _CenterSize: 1
-    - _ElecticSize: 9.7
-    - _ElecticSpeed: 2.01
+    - _ElecticSize: 17.99
+    - _ElecticSpeed: 1.25
     m_Colors:
-    - _BorderColor: {r: 4, g: 0, b: 0, a: 1}
-    - _CenterColor: {r: 1.8250513, g: 2, b: 0, a: 1}
-    - _ElecticColor: {r: 3.177073, g: 2.4951198, b: 0, a: 1}
+    - _BorderColor: {r: 1.4980392, g: 0, b: 0.060514398, a: 1}
+    - _CenterColor: {r: 1.372549, g: 1.4980392, b: 0, a: 1}
+    - _ElecticColor: {r: 2.9960785, g: 2.3686275, b: 0, a: 1}
   m_BuildTextureStacks: []

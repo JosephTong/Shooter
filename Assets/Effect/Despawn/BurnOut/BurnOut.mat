@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AnimeLineBG
-  m_Shader: {fileID: -6465566751694194690, guid: 83b8c0baf1ceb1c4fa0ca7afde64ee4e, type: 3}
+  m_Name: BurnOut
+  m_Shader: {fileID: -6465566751694194690, guid: b5c32fc0c9c2c85479358e55d357bc86, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -21,11 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTexture:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 1abe7740bcbe12a4280c946b13f2c6ee, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,20 +38,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BorderFadeAmount: 100
-    - _CenterFadeAmount: 5
-    - _CenterFillAmount: 12.33
-    - _CutOutAmount: 9.29
-    - _FlowSpeed: -2
-    - _NoiseDensity: 5
-    - _NoiseStrength: 0
-    - _Size: 2.53
+    - _BorderSize: 0.038
+    - _BurnSize: 0.2
+    - _Density: 35.3
+    - _Normalized: 0
     m_Colors:
-    - _BorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _CenterColor: {r: 2.670157, g: 2.311591, b: 0, a: 1}
-    - _Color: {r: 0, g: 1, b: 0.526783, a: 1}
-    - _LineBorderColor: {r: 1, g: 0.87771446, b: 0, a: 1}
-    - _LineCenterColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LineColor: {r: 0.010349083, g: 0, b: 1.319508, a: 1}
-    - _MainColor: {r: 1, g: 0, b: 0.13482332, a: 1}
+    - _BorderColor: {r: 4, g: 1.5336775, b: 0, a: 1}
+    - _BurnColor: {r: 1, g: 0, b: 0.093779564, a: 1}
+    - _BurnSecondColor: {r: 0, g: 1.4431373, b: 4, a: 1}
   m_BuildTextureStacks: []

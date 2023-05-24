@@ -42,12 +42,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CloudNormalized: 0
+    - _CloudNormalized: 1
     - _CloudSize: 0.25
     - _MainNormalized: 1
     - _Normalized: 0
     - _RayDensity: 8.58
-    - _RayHeight: 0.321
+    - _RayHeight: 0.56
     - _RayNormalized: 1
     - _RaySpeed: 1.04
     m_Colors:

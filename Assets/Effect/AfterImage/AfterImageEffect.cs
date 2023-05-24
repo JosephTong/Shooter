@@ -12,6 +12,15 @@ public class AfterImageEffect : MonoBehaviour
     
     List<AfterImageEffectTarget> m_AllAfterImage = new List<AfterImageEffectTarget>();
 
+    private void Start() {
+        if(m_TargetObject == null)
+            return;
+
+        
+        this.transform.localScale = m_TargetObject.Self.transform.localScale;
+        
+    }
+
     private void FixedUpdate() {
         if(m_TargetObject == null)
             return;

@@ -42,16 +42,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BorderSize: 0.0372
+    - _BorderSize: 0.0292
     - _BurnDensity: 20
     - _BurnSize: 0.152
-    - _FlagMoveStrength: 0.029
+    - _FlagMoveStrength: 0.037
     - _FlagShadowStrength: 1
-    - _FlagSpeed: -1.6
-    - _Normalized: 0.338
+    - _FlagSpeed: -0.76
+    - _Normalized: 0.502
     m_Colors:
-    - _BorderColor: {r: 2.9960785, g: 0.8, b: 0, a: 1}
-    - _BurnColor: {r: 5.3403134, g: 4.0916615, b: 0, a: 1}
+    - _BorderColor: {r: 4, g: 0.7169919, b: 0, a: 1}
+    - _BurnColor: {r: 28.51895, g: 1.4539073, b: 0, a: 1}
     - _FlagColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     - _FlagShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}

@@ -29,8 +29,7 @@ public class FullScreenShockWaveController : MonoBehaviour
         " - In FullScreenShockWave , change layer to FullScreenEffect\n" +
         " - In FullScreenShockWave >> Additional Setting >> Sorting Layer , Change to FullScreenEffect\n" +
         " - Sorting Layer FullScreenEffect MUST be the highest layer which cover ALL other layer\n" +
-        " - In ShockWaveFullScreen(material) , add the render texture in \"RenderTexture\"\n" +
-        " - Try to match the border of FullScreenShockWave to be the same as FullScreenEffectCamera view area\n";
+        " - In ShockWaveFullScreen(material) , add the render texture in \"RenderTexture\"\n";
     [Header(HOW_TO_USE)]
     [SerializeField] private SpriteRenderer m_FullScreenSpriteRenderer;
     [SerializeField] private AnimationCurve m_StrengthReduceOverTimeCurve;
@@ -47,7 +46,20 @@ public class FullScreenShockWaveController : MonoBehaviour
     {
         m_FullScreenShockWave = m_FullScreenSpriteRenderer.material;
         //public float ScreenRatio = 9f/16f;
+        
+                m_FullScreenShockWave.SetFloat("_NormailzedTime", 0);
         m_FullScreenShockWave.SetFloat("_ScreenRatio", (float)Screen.width/(float)Screen.height);
+            
+            
+            transform.localScale = new Vector3(1,1,1);
+            
+            float width = m_FullScreenSpriteRenderer.sprite.bounds.size.x;
+            float height = m_FullScreenSpriteRenderer.sprite.bounds.size.y;
+
+            float worldScreenHeight = Camera.main.orthographicSize * 2.0f;
+            float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+            
+            transform.localScale = new Vector2( worldScreenWidth / width, worldScreenHeight / height);
 
     }
     private void Update()

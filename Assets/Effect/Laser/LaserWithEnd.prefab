@@ -28981,7 +28981,7 @@ MonoBehaviour:
   m_EndBigSpark: {fileID: 3624344201357382068}
   m_EndRoundBigSpark: {fileID: 3624344202169978967}
   m_LineExtraEmission: 2
-  m_Color: {r: 1.0592737, g: 0.82803625, b: 0, a: 1}
+  m_Color: {r: 1.4142135, g: 0.14003569, b: 0.02001242, a: 1}
 --- !u!120 &3624344202195346240
 LineRenderer:
   m_ObjectHideFlags: 0

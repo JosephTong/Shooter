@@ -48,10 +48,10 @@ Material:
     - _FlagMoveStrength: 0.037
     - _FlagShadowStrength: 1
     - _FlagSpeed: -0.76
-    - _Normalized: 0.502
+    - _Normalized: 0.321
     m_Colors:
-    - _BorderColor: {r: 4, g: 0.7169919, b: 0, a: 1}
-    - _BurnColor: {r: 28.51895, g: 1.4539073, b: 0, a: 1}
+    - _BorderColor: {r: 3.9999995, g: 0.9308889, b: 0, a: 1}
+    - _BurnColor: {r: 34.123863, g: 10.062919, b: 0, a: 1}
     - _FlagColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     - _FlagShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}

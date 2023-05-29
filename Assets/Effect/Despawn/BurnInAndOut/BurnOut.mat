@@ -41,7 +41,7 @@ Material:
     - _BorderSize: 0.0187
     - _BurnSize: 0.236
     - _Density: 35.3
-    - _Normalized: 0.25
+    - _Normalized: 1
     m_Colors:
     - _BorderColor: {r: 4, g: 1.5336775, b: 0, a: 1}
     - _BurnColor: {r: 1, g: 0, b: 0.093779564, a: 1}

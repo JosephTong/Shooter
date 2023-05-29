@@ -153,3 +153,4 @@ MonoBehaviour:
     WaveSpeed: 1.65
     XPosNormalized: 0.5
     YPosNormalized: 0.5
+    WaveCount: 10

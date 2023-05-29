@@ -7,6 +7,7 @@ public class LaserWithEndController : MonoBehaviour
     [SerializeField] private Transform m_Start;
     [SerializeField] private Transform m_End;
     [SerializeField] private LineRenderer m_Line;
+    [SerializeField][Range(0f,1f)] private float m_Normalized = 1f;
     [SerializeField][Range(0.1f,1f)] private float m_LineWidth = 0.2f;
     [SerializeField] private ParticleSystem m_StartSmallSpark;
     [SerializeField] private ParticleSystem m_StartBigSpark;
@@ -32,6 +33,8 @@ public class LaserWithEndController : MonoBehaviour
     }
 
     private void SetLineWidth(float width){
+        
+        m_Line.sharedMaterial.SetFloat("_Normalized",m_Normalized);
         m_Line.SetWidth(width,width);
         
         m_StartSmallSpark.startLifetime = width * 0.3f;

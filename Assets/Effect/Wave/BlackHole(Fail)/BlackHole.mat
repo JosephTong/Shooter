@@ -43,12 +43,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _Normalized: 0.605
-    - _Pinch: 10
+    - _Pinch: 0
     - _ScreenRatio: 0.5625
-    - _Size: 0.262
+    - _Size: 0.162
     - _Strength: 0.304
     m_Colors:
-    - _Center: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Center: {r: 0.25, g: 0.25, b: 0, a: 0}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
     - _TargetPos: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

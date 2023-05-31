@@ -17,7 +17,7 @@ public class AfterImageEffect : MonoBehaviour
             return;
 
         
-        this.transform.localScale = m_TargetObject.Self.transform.localScale;
+        this.transform.localScale = m_TargetObject.Self.transform.lossyScale;
         
     }
 
@@ -35,6 +35,7 @@ public class AfterImageEffect : MonoBehaviour
                 newAfterImage.transform.position = targetGameOpbject.transform.position;
                 newAfterImage.transform.rotation = targetGameOpbject.transform.rotation;
                 newAfterImage.transform.localScale = targetGameOpbject.transform.localScale;
+
                 foreach (var item in newAfterImage.GetComponent<AfterImageEffectTarget>().AllRenderer)
                 {
                     if(item.TryGetComponent<Animator>(out var animatorToBeRemove))

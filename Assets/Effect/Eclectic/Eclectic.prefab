@@ -578,5 +578,41 @@ MonoBehaviour:
   m_PosTwo: {fileID: 7239604595576073071}
   m_PosThree: {fileID: 7239604595435482636}
   m_EndPos: {fileID: 7239604595707306240}
-  m_StartCurve: {x: 1, y: 0, z: 0}
-  m_EndCurve: {x: 1, y: 0, z: 0}
+  m_StartCurve: {x: 1, y: 0}
+  m_EndCurve: {x: 1, y: 0}
+  m_VFX: {fileID: 7239604596280219154}
+  m_Normalized: 0
+  m_Thiccness: 0.15
+  m_ThiccnessCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.50827074
+      value: 1.0014777
+      inSlope: 0.005690333
+      outSlope: 0.005690333
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.0041707
+      value: 0.002357483
+      inSlope: -1.9102781
+      outSlope: -1.9102781
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06639375
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

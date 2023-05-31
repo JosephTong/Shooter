@@ -39,10 +39,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _Density: 0.675
-    - _HorizontalSpeed: 2
+    - _HorizontalSpeed: 1.5
     - _Size: 5
-    - _VerticalSpeed: -3
+    - _VerticalSpeed: -2
     m_Colors:
     - _InnerColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutterColor: {r: 0, g: 2, b: 0.18785048, a: 1}
+    - _OutterColor: {r: 0, g: 2.4686356, b: 0.23264647, a: 1}
   m_BuildTextureStacks: []

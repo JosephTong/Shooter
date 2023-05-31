@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4728651115f0bd44a9a2e402844d742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BurnNormalized: 0
+  m_BurnNormalized: 0.415
   m_Self: {fileID: 2695230973191040979}

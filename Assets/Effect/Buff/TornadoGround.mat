@@ -38,17 +38,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Density: 4
+    - _Density: 6.26
     - _DotSpeed: 5
     - _DotSpeedSecond: 5
     - _FireMoveSpeed: 1
-    - _FlickAmount: 1
+    - _FlickAmount: 0.593
     - _GrowSpeed: 10
-    - _SideCutOut: 5
-    - _Size: 10
-    - _TopCutOut: 2.82
+    - _SideCutOut: 2
+    - _Size: 7.93
+    - _TopCutOut: 2
     m_Colors:
-    - _DotColor: {r: 1, g: 1, b: 1, a: 1}
+    - _DotColor: {r: 0, g: 0, b: 0, a: 1}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutterFlameColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

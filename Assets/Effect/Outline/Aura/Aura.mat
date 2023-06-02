@@ -38,8 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _NoiseSpeed: -0.76
+    - _NoiseStrength: 0.154
     - _Speed: -1.41
-    - _Thiccness: 0.0227
+    - _Thiccness: 0.0177
     m_Colors:
     - _OutlineColor: {r: 4, g: 1.3960785, b: 0, a: 1}
     - _SecondOutlineColor: {r: 1, g: 0.047058824, b: 0, a: 1}

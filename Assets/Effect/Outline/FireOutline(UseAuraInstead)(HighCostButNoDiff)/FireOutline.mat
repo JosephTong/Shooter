@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Aura
-  m_Shader: {fileID: -6465566751694194690, guid: 39c3f575b348162449bfc1a450bd23d6, type: 3}
+  m_Name: FireOutline
+  m_Shader: {fileID: -6465566751694194690, guid: 5afcfbf477315bf4a807378e3acd8f1d, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -38,11 +38,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _NoiseSpeed: -1.19
-    - _NoiseStrength: 0.285
-    - _Speed: -1.41
-    - _Thiccness: 0.0129
+    - _NoiseSpeed: -1.26
+    - _NoiseStrength: 0.151
+    - _Thiccness: 0.0397
     m_Colors:
-    - _OutlineColor: {r: 4, g: 1.3960785, b: 0, a: 1}
-    - _SecondOutlineColor: {r: 1, g: 0.047058824, b: 0, a: 1}
+    - _Color: {r: 1, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 4, g: 1.396078, b: 0, a: 1}
+    - _SecondOutlineColor: {r: 1, g: 0.04705882, b: 0, a: 1}
   m_BuildTextureStacks: []

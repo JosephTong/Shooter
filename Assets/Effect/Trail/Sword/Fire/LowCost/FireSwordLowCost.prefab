@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 5591368039098688355}
   - component: {fileID: 2329904425583584373}
   m_Layer: 0
-  m_Name: FireCloud
+  m_Name: SwordBlade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -6,8 +6,8 @@ public class DoubleProjectile : MonoBehaviour
 {
     [SerializeField] private Transform m_Red;
     [SerializeField] private Transform m_Blue;
-    [SerializeField][Range(0.1f, 2f)] private float m_Distance = 0.25f;
-    [SerializeField][Range(0.1f, 20f)] private float m_Speed = 4f;
+    [SerializeField][Range(0.1f, 0.5f)] private float m_Distance = 0.25f;
+    [SerializeField][Range(0.1f, 30f)] private float m_Speed = 10f;
     private float m_TimePass = 0;
 
 

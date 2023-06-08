@@ -30993,6 +30993,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProjectileTrail
       objectReference: {fileID: 0}
+    - target: {fileID: 5709767777200983676, guid: c9db01e4d36afd64b943242030e51245, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5709767777200983678, guid: c9db01e4d36afd64b943242030e51245, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -31699,6 +31703,10 @@ PrefabInstance:
     - target: {fileID: 3797440649675331633, guid: 8488c61ddc43bd645a7a9feebf8c3ad4, type: 3}
       propertyPath: m_Name
       value: DoubleTrailProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3797440649675331633, guid: 8488c61ddc43bd645a7a9feebf8c3ad4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3797440649675331635, guid: 8488c61ddc43bd645a7a9feebf8c3ad4, type: 3}
       propertyPath: m_RootOrder

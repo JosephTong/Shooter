@@ -38,10 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorLerp: 0.329
+    - _ColorLerp: 0.645
     - _Density: 50
-    - _DissolveSpeed: 1
-    - _MainTexSpeed: 1
+    - _DissolveSpeed: 2
+    - _MainTexSpeed: -3
     m_Colors:
     - _Color01: {r: 0, g: 0.94221485, b: 1.4980392, a: 1}
     - _Color02: {r: 0, g: 1.228046, b: 2, a: 1}

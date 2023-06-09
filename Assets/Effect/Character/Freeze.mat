@@ -43,9 +43,11 @@ Material:
     - _MistCutOut: 0
     - _MistFlickAmount: 0
     - _MistFlickSpeed: 0
+    - _OutlineThiccness: 0.0435
     - _Speed: -0.03
     m_Colors:
     - _MistColor: {r: 1.5238923, g: 3.0193005, b: 2.9413445, a: 1}
     - _MistMainColor: {r: 0.1357388, g: 0, b: 1, a: 1}
-    - _MistSecondColor: {r: 0, g: 1.8980392, b: 4, a: 1}
+    - _MistSecondColor: {r: 0, g: 1.427451, b: 2.9960785, a: 1}
+    - _OutlineColor: {r: 1, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

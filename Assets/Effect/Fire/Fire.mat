@@ -46,7 +46,7 @@ Material:
     - _GrowSpeed: 5
     - _SideCutOut: 3
     - _Size: 10
-    - _TopCutOut: 0.99
+    - _TopCutOut: 0.69
     m_Colors:
     - _DotColor: {r: 0, g: 0.016652822, b: 1, a: 1}
     - _MainColor: {r: 2, g: 0, b: 0, a: 1}

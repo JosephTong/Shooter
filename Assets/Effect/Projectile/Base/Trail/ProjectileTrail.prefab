@@ -74,7 +74,7 @@ TrailRenderer:
   m_SortingLayerID: -85286329
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Time: 0.35
+  m_Time: 0.75
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -128,6 +128,6 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0
     generateLightingData: 0
-  m_MinVertexDistance: 0.5
+  m_MinVertexDistance: 0.25
   m_Autodestruct: 0
   m_Emitting: 1

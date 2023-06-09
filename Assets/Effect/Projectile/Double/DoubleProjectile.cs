@@ -14,8 +14,14 @@ public class DoubleProjectile : MonoBehaviour
     private void Update()
     {
         m_TimePass += Time.deltaTime;
-        m_Red.localPosition = new Vector3( m_Distance * Mathf.Sin(m_Speed *m_TimePass), 0, 0);
-        m_Blue.localPosition = new Vector3(-1 * m_Distance * Mathf.Sin(m_Speed *m_TimePass), 0, 0);
+        m_Red.localPosition = new Vector3( 
+            m_Distance * Mathf.Sin(m_Speed *m_TimePass), 
+            m_Distance * Mathf.Cos(m_Speed *m_TimePass),
+            0);
+        m_Blue.localPosition = new Vector3(
+            -1 * m_Distance * Mathf.Sin(m_Speed *m_TimePass),
+            -1 * m_Distance * Mathf.Cos(m_Speed *m_TimePass),
+            0);
     }
 
 }

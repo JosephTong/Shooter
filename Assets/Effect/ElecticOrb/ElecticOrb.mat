@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ProjectileTrail
-  m_Shader: {fileID: -6465566751694194690, guid: a3183397eae400b429f015fc9a71aeee, type: 3}
+  m_Name: ElecticOrb
+  m_Shader: {fileID: -6465566751694194690, guid: 32a18f8e604fef6469e90e4cc22a7eac, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9d81b54341dad9f4ea6164a06a8dc09c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -38,12 +38,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaAmplifier: 3
-    - _ColorLerp: 0.557
-    - _Density: 50
-    - _DissolveSpeed: 1
-    - _MainTexSpeed: 1
+    - _CenterCutout: 2.59
+    - _CenterSize: 1
+    - _ElecticSize: 17.99
+    - _ElecticSpeed: 1.25
     m_Colors:
-    - _Color01: {r: 0, g: 0.007843138, b: 1.4980392, a: 1}
-    - _Color02: {r: 0.27050936, g: 1.4980392, b: 0, a: 1}
+    - _BorderColor: {r: 1.4980392, g: 0, b: 0.060514398, a: 1}
+    - _CenterColor: {r: 1.372549, g: 1.4980392, b: 0, a: 1}
+    - _ElecticColor: {r: 2.9960785, g: 2.3686275, b: 0, a: 1}
   m_BuildTextureStacks: []

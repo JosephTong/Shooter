@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class EclecticController : MonoBehaviour
+public class ElecticController : MonoBehaviour
 {
     [SerializeField] private Transform m_StartPos;
     [SerializeField] private Transform m_PosTwo;

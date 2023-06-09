@@ -50,7 +50,6 @@ public class FullScreenShockWaveController : MonoBehaviour
         m_FullScreenShockWave.SetFloat("_NormailzedTime", 0);
         m_FullScreenShockWave.SetFloat("_ScreenRatio", (float)Screen.width/(float)Screen.height);
             
-            
         transform.localScale = new Vector3(1,1,1);
         
         float width = m_FullScreenSpriteRenderer.sprite.bounds.size.x;

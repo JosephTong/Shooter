@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 7239604596280219164}
   - component: {fileID: 326937677276767305}
   m_Layer: 0
-  m_Name: Eclectic
+  m_Name: Electic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

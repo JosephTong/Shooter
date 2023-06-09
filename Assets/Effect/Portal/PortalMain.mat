@@ -38,9 +38,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Density: 16.8
+    - _Density: 21.5
     - _RotationSpeed: 130
-    - _TwirlStrength: 20.5
+    - _TwirlStrength: 6.8
     m_Colors:
     - _Color: {r: 0.015686275, g: 1.4980392, b: 0, a: 1}
     - _SecondColor: {r: 0, g: 0.7854166, b: 1, a: 1}

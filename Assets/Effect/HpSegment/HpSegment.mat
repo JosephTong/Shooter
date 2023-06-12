@@ -38,12 +38,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Normalized: 0.8
-    - _Radius: 0.3
+    - _BaseRotation: 0
+    - _IsClockWise: 0
+    - _Normalized: 0.66
+    - _Radius: 0.422
     - _Rotation: 0
-    - _SegmentCount: 3.09
-    - _SegmentSpace: 0.2
-    - _Thiccness: 0.5
+    - _SegmentCount: 10
+    - _SegmentRotation: 148
+    - _SegmentSpace: 0.201
+    - _Thiccness: 0.518
     m_Colors:
     - _Color: {r: 0.2335865, g: 1, b: 0, a: 0}
+    - _FillColor: {r: 0.9000511, g: 2, b: 0, a: 1}
+    - _SegmentColor: {r: 1, g: 0, b: 0.1245265, a: 1}
   m_BuildTextureStacks: []

@@ -38,8 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _MoveAmount: 0.1
-    - _MoveSpeed: 2.25
+    - _MoveAmount: 0.25
+    - _MoveSpeed: 0.94
     - _Seed: 1
     - _Thiccness: 0
     m_Colors:

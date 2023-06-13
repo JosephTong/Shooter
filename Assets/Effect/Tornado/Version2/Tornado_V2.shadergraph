@@ -1866,7 +1866,7 @@
     "m_StageCapability": 3,
     "m_Value": {
         "x": 25.0,
-        "y": 2.0
+        "y": 0.0
     },
     "m_DefaultValue": {
         "x": 0.0,
@@ -5470,10 +5470,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -3941.000244140625,
-            "y": -189.99981689453126,
+            "x": -4173.0,
+            "y": -217.00001525878907,
             "width": 207.999755859375,
-            "height": 349.9999084472656
+            "height": 350.0
         }
     },
     "m_Slots": [
@@ -6178,7 +6178,7 @@
     "m_StageCapability": 3,
     "m_Value": {
         "x": 0.5,
-        "y": 0.5
+        "y": 0.6000000238418579
     },
     "m_DefaultValue": {
         "x": 0.0,

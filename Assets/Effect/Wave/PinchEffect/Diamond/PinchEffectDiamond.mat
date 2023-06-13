@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PinchEffect
+  m_Name: PinchEffectDiamond
   m_Shader: {fileID: -6465566751694194690, guid: e3110292ad955d64f87131ce8c8134ad, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -42,11 +42,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Normalized: 0.392
+    - _ColorDarken: 1
+    - _Normalized: 1
     - _Normalized_1: 0.369
     - _Normalized_2: 1
+    - _Saturation: 1
     - _ScreenRatio: 0.5625
-    - _Size: 0.19
+    - _Size: 0.244
     m_Colors:
-    - _TargetPos: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _TargetPos: {r: 0.5, g: 0.8, b: 0, a: 0}
   m_BuildTextureStacks: []

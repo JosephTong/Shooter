@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackHoleController : MonoBehaviour
+public class PinchEffectController : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer m_SpriteRenderer;
     private Material m_Mat = null;
@@ -18,9 +18,9 @@ public class BlackHoleController : MonoBehaviour
         float worldScreenHeight = Camera.main.orthographicSize * 2.0f;
         float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 
-        //float maxLength = Mathf.Max(worldScreenWidth / width, worldScreenHeight / height);
+        float maxLength = Mathf.Max(worldScreenWidth / width, worldScreenHeight / height);
         
-        transform.localScale = new Vector2( worldScreenWidth / width , worldScreenHeight / height );
+        transform.localScale = new Vector2( maxLength , maxLength );
         m_Mat.SetFloat("_ScreenRatio", (float)Screen.width/(float)Screen.height);
     }
 

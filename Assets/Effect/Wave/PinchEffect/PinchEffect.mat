@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BlackHole
-  m_Shader: {fileID: -6465566751694194690, guid: f7c1d328214322a4d88122f5a83e6bda, type: 3}
+  m_Name: PinchEffect
+  m_Shader: {fileID: -6465566751694194690, guid: e3110292ad955d64f87131ce8c8134ad, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -42,14 +42,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Normalized: 0
-    - _Pinch: 0
+    - _Normalized: 0.392
+    - _Normalized_1: 0.369
+    - _Normalized_2: 1
     - _ScreenRatio: 0.5625
-    - _Size: 0.327
-    - _Strength: 0.304
+    - _Size: 0.19
     m_Colors:
-    - _Center: {r: 0.25, g: 0.25, b: 0, a: 0}
-    - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _Pos: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _TargetPos: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

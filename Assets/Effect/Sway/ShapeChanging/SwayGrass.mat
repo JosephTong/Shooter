@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Transition
-  m_Shader: {fileID: -6465566751694194690, guid: 4f2ba2382e7d3d448809a6eb28ace819, type: 3}
+  m_Name: SwayGrass
+  m_Shader: {fileID: -6465566751694194690, guid: 55c62438c344f554e99dc95d87152794, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -38,9 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BorderSize: 0.136
-    - _Normalized: 0.458
+    - _Normalized: 0.821
+    - _Seed: 0.541
+    - _SwaySpeed: 3.24
+    - _SwayStrength: 0.089
     m_Colors:
-    - _BorderColor: {r: 7.129739, g: 1.0825258, b: 0, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Pivot: {r: 0.5, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

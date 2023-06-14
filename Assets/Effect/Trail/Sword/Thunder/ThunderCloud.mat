@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FireSpawn
-  m_Shader: {fileID: -6465566751694194690, guid: 1c672719a7ae08b4997ac95c9f0b09af, type: 3}
+  m_Name: ThunderCloud
+  m_Shader: {fileID: -6465566751694194690, guid: 9a8623d96e13b494e8a9287dc136a09d, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0917e9a79967cee4d8027963a969ee27, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9fad5819e9b1a704e9fa99ea90dc5756, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -38,7 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Normalized: 0.595
+    - _Density: 6.82
+    - _FlowSpeed: 0.5
+    - _FullAmount: 9
+    - _SideWaySpeed: 0
     m_Colors:
-    - _Color: {r: 1, g: 0, b: 0.1333332, a: 1}
+    - _Color: {r: 5.992157, g: 0.9098039, b: 0, a: 1}
   m_BuildTextureStacks: []

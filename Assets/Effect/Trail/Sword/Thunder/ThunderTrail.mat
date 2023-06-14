@@ -38,8 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _NoiseSpeed: 8.09
-    - _NoiseStrength: 0.12
+    - _NoiseSpeed: 8.21
+    - _NoiseStrength: 0.154
     m_Colors:
     - _BaseSpeed: {r: 0, g: -3, b: 0, a: 0}
     - _BorderColor: {r: 4, g: 0.21960784, b: 0, a: 1}

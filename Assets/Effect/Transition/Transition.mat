@@ -38,8 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BorderSize: 0.136
-    - _Normalized: 0.458
+    - _BorderSize: 0.106
+    - _Normalized: 0.446
     m_Colors:
     - _BorderColor: {r: 7.129739, g: 1.0825258, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
